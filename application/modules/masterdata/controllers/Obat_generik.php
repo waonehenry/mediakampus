@@ -13,7 +13,7 @@ class Obat_generik extends MX_Controller {
 	public function index()
 	{
 			$data['page'] = 'masterdata/obat_generik/index';
-			$data['title'] = 'Obat INN';
+			$data['title'] = 'Kelompok INN';
 			$data['role'] = '';
 
 			$this->view($data);
@@ -100,8 +100,8 @@ class Obat_generik extends MX_Controller {
           $no++;
           $row = array();
           $row[] = $no;
-          $row[] = $field->nama_zat;
-          $row[] = 
+          $row[] = $field->generik_object;
+          $row[] = $field->program;
 					// $row[] = '<div class="btn-group pull-right">
 					// 		<button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">Tools
 					// 				<i class="fa fa-angle-down"></i>
