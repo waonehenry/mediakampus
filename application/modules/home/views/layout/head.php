@@ -38,7 +38,13 @@
         <script src="<?= base_url() ?>assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
         <script src="<?= base_url() ?>assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
         <script src="<?= base_url() ?>assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+        <script src="<?= base_url() ?>assets/global/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js" type="text/javascript"></script>
         <!-- END CORE PLUGINS -->
+
+        <!-- Library autoComplete -->
+        <link href="<?= base_url() ?>assets/global/plugins/jquery-autocomplete-v2/jquery.auto-complete.css" rel="stylesheet" type="text/css" />
+        <script src="<?= base_url() ?>assets/global/plugins/jquery-autocomplete-v2/jquery.auto-complete.js" type="text/javascript"></script>
+        <!-- End of Library autoComplete -->
 
         <!-- BEGIN THEME GLOBAL SCRIPTS -->
         <script src="<?= base_url() ?>assets/global/scripts/app.min.js" type="text/javascript"></script>
@@ -46,32 +52,40 @@
         <!-- END THEME GLOBAL SCRIPTS -->
 
         <script>
-        function notif(status, message) {
-            $('.alert').show();
-            $('.custom-alerts').addClass('alert-'+status);
-            $('#message').text(message);
-            setTimeout(function(){
-                $('.alert').hide();
-            }, 4000);
-        }
+            function notif(status, message) {
+                $('.alert').show();
+                $('.custom-alerts').addClass('alert-'+status);
+                $('#message').text(message);
+                setTimeout(function(){
+                    $('.alert').hide();
+                }, 4000);
+            }
 
-        function resetInput(url) {
-            $('.input-text').val('');
-            $('.input-text-checkbox').prop('checked', false);
-            $('.form-input').attr('action', url);
-        }
+            function resetInput(url) {
+                $('.input-text').val('');
+                $('.input-text-checkbox').prop('checked', false);
+                $('.form-input').attr('action', url);
+            }
 
-        function formFocus() {
-            $(".first-focus").focus();
-            $("html, body").animate({ scrollTop: 0 }, "slow");
-        }
+            function formFocus() {
+                $(".first-focus").focus();
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+            }
 
-        function blockWindow() {
-            App.blockUI({boxed:!0}),window.setTimeout(function(){App.unblockUI()},2e3)
-        }
+            function blockWindow() {
+                App.blockUI({boxed:!0}),window.setTimeout(function(){App.unblockUI()},2e3)
+            }
         </script>
     <!-- END HEAD -->
-
+    <style type="text/css">
+      .ui-autocomplete { z-index:20000; width:35%}
+    	.ui-autocomplete{
+    		max-height:200px;
+    		overflow-y:auto;
+    		overflow-x:hidden;
+    	}
+    	* html .ui-autocomplete{height:200px;}
+      </style>
     <body class="page-container-bg-solid">
         <div class="page-wrapper">
             <div class="page-wrapper-row">

@@ -96,8 +96,18 @@ class Pbf_model extends CI_Model {
 
     public function count_all()
     {
-    	$this->db->where('status', '1');
+    		$this->db->where('status', '1');
         $this->db->from($this->table);
         return $this->db->count_all_results();
+    }
+
+		public function get_data_by_like($condition) {
+        $this->db->where($this->table.'.status', '1');
+
+        foreach ($condition as $key => $value) {
+            $this->db->like($key, $value, 'both');
+        }
+
+        return $this->db->get($this->table);
     }
 }

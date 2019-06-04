@@ -133,7 +133,26 @@ class Pbf extends MX_Controller {
 
 	public function search()
 	{
-			// code here
+			$keyword = $this->input->get('term');
+			$condition['name'] = $keyword;
+			$results = $this->Pbf_model->get_data_by_like($condition)->result();
+
+			$data = array();
+			$i = 0;
+			foreach ($results as $row) {
+				$data[$i] = new stdClass();
+				$data[$i]->value = $row->name.' ('.$row->address.')';
+				$data[$i]->label = $row->name.' ('.$row->address.')';
+				$data[$i]->id = $row->id;
+				$i++;
+			}
+			//
+			//
+			// if (sizeof($data) == 0) {
+			// 	$data = array('value'=>'No Result Found','id'=>'');
+			// }
+
+			echo json_encode($data);
 	}
 
 	public function view($data)

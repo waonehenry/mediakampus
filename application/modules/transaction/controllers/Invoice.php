@@ -8,6 +8,7 @@ class Invoice extends MX_Controller {
         parent::__construct();
 				$this->load->model('Invoice_model');
 				$this->user_id = 1;
+				$this->unit_id = 8;
     }
 
 	public function index()
@@ -24,6 +25,8 @@ class Invoice extends MX_Controller {
 			$data = $this->input->post('data');
 			$data['create_time'] = date('Y-m-d H:i:s');
 			$data['user_id'] = $this->user_id;
+			$data['unit_id'] = $this->unit_id;
+			$data['tanggal'] = convertDateMysql($data['tanggal']);
 
 			$result = $this->Invoice_model->insert($data);
 			if ($result)
@@ -44,6 +47,7 @@ class Invoice extends MX_Controller {
 	{
 			$where['id'] = $id;
 			$data = $this->Invoice_model->get_data_by($where)->row_array();
+			$data['tanggal'] = convertInputMask($data['tanggal']);
 
 			echo json_encode($data);
 	}
@@ -53,6 +57,7 @@ class Invoice extends MX_Controller {
 			$data = $this->input->post('data');
 			$data['update_time'] = date('Y-m-d H:i:s');
 			$data['user_id'] = $this->user_id;
+			$data['tanggal'] = convertDateMysql($data['tanggal']);
 
 			$result = $this->Invoice_model->update($data, $id);
 			if ($result)
@@ -102,8 +107,8 @@ class Invoice extends MX_Controller {
           $row[] = $no;
           $row[] = $field->no_faktur;
 					$row[] = $field->no_kontrak;
-					$row[] = $field->tanggal;					
-					$row[] = $field->periode;
+					$row[] = convertInputMask($field->tanggal);
+					$row[] = getPeriod($field->periode);
 					$row[] = $field->pbf;
           $row[] = $field->dana.' '.$field->tahun_anggaran;
 					$row[] = '<div class="btn-group pull-right">

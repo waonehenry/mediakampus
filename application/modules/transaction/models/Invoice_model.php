@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Invoice_model extends CI_Model {
 	private $table = 'tb_penerimaan';
     var $column_order = array(null, 'id'); //set column field database for datatable orderable
-    var $column_search = array('name'); //set column field database for datatable searchable
+    var $column_search = array('pbf', 'no_faktur', 'no_kontrak', 'dana'); //set column field database for datatable searchable
     var $order = array('id' => 'asc'); // default order
 
 	public function insert($data) {

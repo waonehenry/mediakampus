@@ -52,42 +52,56 @@
                                     <form action="<?php echo base_url ('transaction/invoice/store')?>" class="form-horizontal form-input" id="">
                                         <div class="form-body">
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label">No. Kontrak</label>
-                                                <div class="col-md-9">
-                                                    <input type="text" name="data[name]" id="name" autocomplete="off" class="form-control input-type input-text first-focus" required placeholder="Enter text">
+                                                <label class="col-md-3 control-label">No. Faktur/Dok</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" name="data[no_faktur]" id="no_faktur" autocomplete="off" class="form-control input-type input-text first-focus" placeholder="Enter text">
+                                                </div>
+                                                <div class="col-md-1">/</div>
+                                                <div class="col-md-4">
+                                                    <input type="text" name="data[no_kontrak]" id="no_kontrak" autocomplete="off" class="form-control input-type input-text" placeholder="Enter text">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label">Tanggal</label>
-                                                <div class="col-md-9">
-                                                  <textarea name="data[description]" row="3" id="description" class="form-control input-text"></textarea>
+                                                <label class="col-md-3 control-label"><i class="required">*) </i>Tanggal/Periode</label>
+                                                <div class="col-md-4">
+                                                  <input type="text" name="data[tanggal]" id="tanggal" autocomplete="off" class="form-control input-type input-text input-date" required placeholder="Enter text">
+                                                </div>
+                                                <div class="col-md-1">/</div>
+                                                <div class="col-md-4">
+                                                  <input type="text" name="data[periode]" id="periode" autocomplete="off" class="form-control input-type input-text" required placeholder="Enter text">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label">No. Faktur</label>
-                                                <div class="col-md-9">
-                                                  <textarea name="data[description]" row="3" id="description" class="form-control input-text"></textarea>
+                                                <label class="col-md-3 control-label"><i class="required">*) </i>Sumber Dana</label>
+                                                <div class="col-md-4">
+                                                  <select name="data[dana]" id="dana" class="form-control input-text" required>
+                                                    <option value="">--- PILIH ---</option>
+                                                       <?php foreach(dana() as $key => $value): ?>
+                                                        <option value="<?php echo $value['name']; ?>">
+                                                             <?php echo $value['name']; ?>
+                                                        </option>
+                                                      <?php endforeach; ?>
+                                                  </select>
                                                 </div>
+                                                <div class="col-md-5">
+                                    								<select name="data[tahun_anggaran]" id="tahun_anggaran" class="form-control input-text" required>
+                                    									<option value="">--- PILIH ---</option>
+                                    									   <?php foreach(tahun() as $key => $value): ?>
+                                                          <option value="<?php echo $key; ?>">
+                                                               <?php echo $value; ?>
+                                                          </option>
+                                                        <?php endforeach; ?>
+                                    								</select>
+                                							 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">PBF</label>
                                                 <div class="col-md-9">
-                                                  <textarea name="data[description]" row="3" id="description" class="form-control input-text"></textarea>
+                                                    <input type="text" name="data[pbf]" id="pbf" autocomplete="off" class="form-control input-type input-text"  placeholder="Enter text">
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label">Periode</label>
-                                                <div class="col-md-9">
-                                                  <textarea name="data[description]" row="3" id="description" class="form-control input-text"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label">Sumber Dana</label>
-                                                <div class="col-md-9">
-                                                  <textarea name="data[description]" row="3" id="description" class="form-control input-text"></textarea>
-                                                </div>
-                                            </div>                                            
                                         </div>
+                                        <div class="form-group"><i class="required">*) Harus diisi</i></div>
                                         <div class="form-actions">
                                             <div class="row">
                                                 <div class="col-md-offset-3 col-md-9">
@@ -202,8 +216,15 @@ $(document).ready(function() {
                 type: "GET",
                 dataType: "json",
                 success: function(response) {
-                    $("#name").val(response.name);
-                    $("#description").val(response.description);
+                    $("#no_faktur").val(response.no_faktur);
+                    $("#no_kontrak").val(response.no_kontrak);
+                    $("#dana").val(response.dana);
+                    $("#tanggal").val(response.tanggal);
+                    $("#pbf").val(response.pbf);
+                    $("#periode").val(response.periode);
+                    $("#tahun_anggaran").val(response.tahun_anggaran);
+                    $("#no_kontrak").val(response.no_kontrak);
+                    $("#no_kontrak").val(response.no_kontrak);
                     $(".form-input").attr("action", url_update);
                     formFocus();
                 }
@@ -248,6 +269,21 @@ $(document).ready(function() {
                 }
             }
         })
+    })
+
+    $("#pbf").autoComplete({
+        source: function(request, response){
+            $.getJSON("<?= base_url(); ?>masterdata/pbf/search", { term: request }, function(item){
+                response(item);
+            });
+        },
+        renderItem: function (item, search){
+
+            return '<div class="autocomplete-suggestion" data-val="' + item.value + '" data-id="' + item.id + '">' + item.label + '</div>';
+        },
+        onSelect: function(e, term, item){
+            console.log(item.data('id'));
+        }
     })
 });
 </script>
