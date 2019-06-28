@@ -127,7 +127,7 @@
                                                 </li>
                                                 <li class="divider"> </li>
                                                 <li>
-                                                    <a href="page_user_login_1.html">
+                                                    <a href="<?= base_url(); ?>admin/login/logout">
                                                         <i class="icon-key"></i> Log Out </a>
                                                 </li>
                                             </ul>
