@@ -6,12 +6,12 @@ class Dashboard extends MX_Controller {
 	function __construct()
     {
         parent::__construct();
-				if (!$this->session->userdata('login')) redirect('admin/login');
+				// if (!$this->session->userdata('login')) redirect('admin/login');
     }
 
 	public function index()
 	{
-			$data['page'] = 'home/index';
+			$data['page'] = 'home/index_2';
 			$data['title'] = 'Dashboard';
 			$data['role'] = '';
 
@@ -46,9 +46,10 @@ class Dashboard extends MX_Controller {
 
 	public function view($data)
 	{
-			$data['menu'] = $this->menu_management->core();
+			// $data['menu'] = $this->menu_management->core();
 
 			$this->load->view('home/layout/head', $data);
+			$this->load->view('home/layout/menu');
 			$this->load->view($data['page'], $data);
 			$this->load->view('home/layout/foot');
 	}

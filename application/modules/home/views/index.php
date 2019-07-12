@@ -1,386 +1,281 @@
-<!-- BEGIN CONTAINER -->
-<div class="page-container">
-    <!-- BEGIN CONTENT -->
-    <div class="page-content-wrapper">
-        <div class="page-content">
-            <div class="container-fluid">
-                <!-- BEGIN PAGE BREADCRUMBS -->
-                <ul class="page-breadcrumb breadcrumb">
-                    <li>
-                        <a href="index.html">Home</a>
-                        <i class="fa fa-circle"></i>
-                    </li>
-                    <li>
-                        <a href="#">Pages</a>
-                        <i class="fa fa-circle"></i>
-                    </li>
-                    <li>
-                        <span><?= $title ?></span>
-                    </li>
-                </ul>
-                <!-- END PAGE BREADCRUMBS -->
-                <!-- BEGIN PAGE CONTENT INNER -->
-                <div class="page-content-inner">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
-                            <div class="dashboard-stat blue">
-                                <div class="visual">
-                                    <i class="fa fa-briefcase fa-icon-medium"></i>
-                                </div>
-                                <div class="details">
-                                    <div class="number"> $168,492.54 </div>
-                                    <div class="desc"> Lifetime Sales </div>
-                                </div>
-                                <a class="more" href="javascript:;"> View more
-                                    <i class="m-icon-swapright m-icon-white"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                            <div class="dashboard-stat red">
-                                <div class="visual">
-                                    <i class="fa fa-shopping-cart"></i>
-                                </div>
-                                <div class="details">
-                                    <div class="number"> 1,127,390 </div>
-                                    <div class="desc"> Total Orders </div>
-                                </div>
-                                <a class="more" href="javascript:;"> View more
-                                    <i class="m-icon-swapright m-icon-white"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                            <div class="dashboard-stat green">
-                                <div class="visual">
-                                    <i class="fa fa-group fa-icon-medium"></i>
-                                </div>
-                                <div class="details">
-                                    <div class="number"> $670.54 </div>
-                                    <div class="desc"> Average Orders </div>
-                                </div>
-                                <a class="more" href="javascript:;"> View more
-                                    <i class="m-icon-swapright m-icon-white"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <!-- Begin: life time stats -->
-                            <div class="portlet light ">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class="icon-share font-blue"></i>
-                                        <span class="caption-subject font-blue bold uppercase">Overview</span>
-                                        <span class="caption-helper">report overview...</span>
-                                    </div>
-                                    <div class="actions">
-                                        <div class="btn-group">
-                                            <a class="btn green btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Actions
-                                                <i class="fa fa-angle-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu pull-right">
-                                                <li>
-                                                    <a href="javascript:;"> All Project </a>
-                                                </li>
-                                                <li class="divider"> </li>
-                                                <li>
-                                                    <a href="javascript:;"> AirAsia </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;"> Cruise </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;"> HSBC </a>
-                                                </li>
-                                                <li class="divider"> </li>
-                                                <li>
-                                                    <a href="javascript:;"> Pending
-                                                        <span class="badge badge-danger"> 4 </span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;"> Completed
-                                                        <span class="badge badge-success"> 12 </span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;"> Overdue
-                                                        <span class="badge badge-warning"> 9 </span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="portlet-body">
-                                    <div class="tabbable-line">
-                                        <ul class="nav nav-tabs">
-                                            <li class="active">
-                                                <a href="#overview_1" data-toggle="tab"> Top Selling </a>
-                                            </li>
-                                            <li>
-                                                <a href="#overview_2" data-toggle="tab"> Most Viewed </a>
-                                            </li>
-                                            <li>
-                                                <a href="#overview_3" data-toggle="tab"> New Customers </a>
-                                            </li>
-                                            <li class="dropdown">
-                                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> Orders
-                                                    <i class="fa fa-angle-down"></i>
-                                                </a>
-                                                <ul class="dropdown-menu pull-right">
-                                                    <li>
-                                                        <a href="#overview_4" data-toggle="tab">
-                                                            <i class="icon-bell"></i> Latest 10 Orders </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#overview_4" data-toggle="tab">
-                                                            <i class="icon-info"></i> Pending Orders </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#overview_4" data-toggle="tab">
-                                                            <i class="icon-speech"></i> Completed Orders </a>
-                                                    </li>
-                                                    <li class="divider"></li>
-                                                    <li>
-                                                        <a href="#overview_4" data-toggle="tab">
-                                                            <i class="icon-settings"></i> Rejected Orders </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                        <div class="tab-content">
-                                            <div class="tab-pane active" id="overview_1">
-                                                <div class="table-responsive">
-                                                    <table class="table table-striped table-hover table-bordered">
-                                                        <thead>
-                                                            <tr>
-                                                                <th> Product Name </th>
-                                                                <th> Price </th>
-                                                                <th> Sold </th>
-                                                                <th> </th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="javascript:;"> Apple iPhone 4s - 16GB - Black </a>
-                                                                </td>
-                                                                <td> $625.50 </td>
-                                                                <td> 809 </td>
-                                                                <td>
-                                                                    <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                        <i class="fa fa-search"></i> View </a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="javascript:;"> Samsung Galaxy S III SGH-I747 - 16GB </a>
-                                                                </td>
-                                                                <td> $915.50 </td>
-                                                                <td> 6709 </td>
-                                                                <td>
-                                                                    <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                        <i class="fa fa-search"></i> View </a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="javascript:;"> Motorola Droid 4 XT894 - 16GB - Black </a>
-                                                                </td>
-                                                                <td> $878.50 </td>
-                                                                <td> 784 </td>
-                                                                <td>
-                                                                    <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                        <i class="fa fa-search"></i> View </a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="javascript:;"> Samsung Galaxy Note 4 </a>
-                                                                </td>
-                                                                <td> $925.50 </td>
-                                                                <td> 21245 </td>
-                                                                <td>
-                                                                    <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                        <i class="fa fa-search"></i> View </a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="javascript:;"> Regatta Luca 3 in 1 Jacket </a>
-                                                                </td>
-                                                                <td> $25.50 </td>
-                                                                <td> 1245 </td>
-                                                                <td>
-                                                                    <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                        <i class="fa fa-search"></i> View </a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="javascript:;"> Samsung Galaxy Note 3 </a>
-                                                                </td>
-                                                                <td> $925.50 </td>
-                                                                <td> 21245 </td>
-                                                                <td>
-                                                                    <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                        <i class="fa fa-search"></i> View </a>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class="tab-pane" id="overview_2">
-                                                <div class="table-responsive">
-                                                    <table class="table table-striped table-hover table-bordered">
-                                                        <thead>
-                                                            <tr>
-                                                                <th> Product Name </th>
-                                                                <th> Price </th>
-                                                                <th> Views </th>
-                                                                <th> </th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="javascript:;"> Metronic - Responsive Admin + Frontend Theme </a>
-                                                                </td>
-                                                                <td> $20.00 </td>
-                                                                <td> 11190 </td>
-                                                                <td>
-                                                                    <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                        <i class="fa fa-search"></i> View </a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="javascript:;"> Regatta Luca 3 in 1 Jacket </a>
-                                                                </td>
-                                                                <td> $25.50 </td>
-                                                                <td> 1245 </td>
-                                                                <td>
-                                                                    <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                        <i class="fa fa-search"></i> View </a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="javascript:;"> Motorola Droid 4 XT894 - 16GB - Black </a>
-                                                                </td>
-                                                                <td> $878.50 </td>
-                                                                <td> 784 </td>
-                                                                <td>
-                                                                    <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                        <i class="fa fa-search"></i> View </a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="javascript:;"> Apple iPhone 4s - 16GB - Black </a>
-                                                                </td>
-                                                                <td> $625.50 </td>
-                                                                <td> 809 </td>
-                                                                <td>
-                                                                    <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                        <i class="fa fa-search"></i> View </a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="javascript:;"> Samsung Galaxy S III SGH-I747 - 16GB </a>
-                                                                </td>
-                                                                <td> $915.50 </td>
-                                                                <td> 6709 </td>
-                                                                <td>
-                                                                    <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                        <i class="fa fa-search"></i> View </a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="javascript:;"> Motorola Droid 4 XT894 - 16GB - Black </a>
-                                                                </td>
-                                                                <td> $878.50 </td>
-                                                                <td> 784 </td>
-                                                                <td>
-                                                                    <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                        <i class="fa fa-search"></i> View </a>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End: life time stats -->
-                        </div>
-                        <div class="col-md-6">
-                            <!-- Begin: life time stats -->
-                            <!-- BEGIN PORTLET-->
-                            <div class="portlet light ">
-                                <div class="portlet-title tabbable-line">
-                                    <div class="caption">
-                                        <i class="icon-globe font-red"></i>
-                                        <span class="caption-subject font-red bold uppercase">Revenue</span>
-                                    </div>
-                                    <ul class="nav nav-tabs">
-                                        <li class="active">
-                                            <a href="#portlet_ecommerce_tab_1" data-toggle="tab"> Amounts </a>
-                                        </li>
-                                        <li>
-                                            <a href="#portlet_ecommerce_tab_2" id="statistics_orders_tab" data-toggle="tab"> Orders </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="portlet-body">
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="portlet_ecommerce_tab_1">
-                                            <div id="statistics_1" class="chart"> </div>
-                                        </div>
-                                        <div class="tab-pane" id="portlet_ecommerce_tab_2">
-                                            <div id="statistics_2" class="chart"> </div>
-                                        </div>
-                                    </div>
-                                    <div class="well margin-top-20">
-                                        <div class="row">
-                                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                                <span class="label label-success"> Revenue: </span>
-                                                <h3>$1,234,112.20</h3>
-                                            </div>
-                                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                                <span class="label label-info"> Tax: </span>
-                                                <h3>$134,90.10</h3>
-                                            </div>
-                                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                                <span class="label label-danger"> Shipment: </span>
-                                                <h3>$1,134,90.10</h3>
-                                            </div>
-                                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                                <span class="label label-warning"> Orders: </span>
-                                                <h3>235090</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End: life time stats -->
-                        </div>
-                    </div>
-                </div>
-                <!-- END PAGE CONTENT INNER -->
-            </div>
-        </div>
-        <!-- END PAGE CONTENT BODY -->
-        <!-- END CONTENT BODY -->
-    </div>
-    <!-- END CONTENT -->
+<div id="page-wrapper">
+  <div class="header">
+                    <h1 class="page-header">
+                        Dashboard
+                    </h1>
+        <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Dashboard</a></li>
+        <li class="active">Data</li>
+      </ol>
+
 </div>
-<!-- END CONTAINER -->
+        <div id="page-inner">
+
+  <div class="dashboard-cards">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+
+        <div class="card horizontal cardIcon waves-effect waves-dark">
+        <div class="card-image red">
+        <i class="material-icons dp48">import_export</i>
+        </div>
+        <div class="card-stacked red">
+        <div class="card-content">
+        <h3>84,198</h3>
+        </div>
+        <div class="card-action">
+        <strong>REVENUE</strong>
+        </div>
+        </div>
+        </div>
+
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+
+        <div class="card horizontal cardIcon waves-effect waves-dark">
+        <div class="card-image orange">
+        <i class="material-icons dp48">shopping_cart</i>
+        </div>
+        <div class="card-stacked orange">
+        <div class="card-content">
+        <h3>36,540</h3>
+        </div>
+        <div class="card-action">
+        <strong>SALES</strong>
+        </div>
+        </div>
+        </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+
+          <div class="card horizontal cardIcon waves-effect waves-dark">
+        <div class="card-image blue">
+        <i class="material-icons dp48">equalizer</i>
+        </div>
+        <div class="card-stacked blue">
+        <div class="card-content">
+        <h3>24,225</h3>
+        </div>
+        <div class="card-action">
+        <strong>PRODUCTS</strong>
+        </div>
+        </div>
+        </div>
+
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+
+      <div class="card horizontal cardIcon waves-effect waves-dark">
+        <div class="card-image green">
+        <i class="material-icons dp48">supervisor_account</i>
+        </div>
+        <div class="card-stacked green">
+        <div class="card-content">
+        <h3>88,658</h3>
+        </div>
+        <div class="card-action">
+        <strong>VISITS</strong>
+        </div>
+        </div>
+        </div>
+
+                </div>
+            </div>
+     </div>
+    <!-- /. ROW  -->
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-7">
+      <div class="cirStats">
+            <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="card-panel text-center">
+                  <h4>Profit</h4>
+                  <div class="easypiechart" id="easypiechart-blue" data-percent="82" ><span class="percent">82%</span>
+                  </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="card-panel text-center">
+                  <h4>No. of Visits</h4>
+                  <div class="easypiechart" id="easypiechart-red" data-percent="46" ><span class="percent">46%</span>
+                  </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="card-panel text-center">
+                  <h4>Customers</h4>
+                  <div class="easypiechart" id="easypiechart-teal" data-percent="84" ><span class="percent">84%</span>
+                  </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="card-panel text-center">
+                  <h4>Sales</h4>
+                  <div class="easypiechart" id="easypiechart-orange" data-percent="55" ><span class="percent">55%</span>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        </div><!--/.row-->
+        <div class="col-xs-12 col-sm-12 col-md-5">
+             <div class="row">
+              <div class="col-xs-12">
+              <div class="card">
+                <div class="card-image donutpad">
+                  <div id="morris-donut-chart"></div>
+                </div>
+                <div class="card-action">
+                  <b>Donut Chart Example</b>
+                </div>
+              </div>
+            </div>
+           </div>
+        </div><!--/.row-->
+      </div>
+
+
+    <div class="row">
+    <div class="col-md-5">
+        <div class="card">
+        <div class="card-image">
+         <div id="morris-line-chart"></div>
+        </div>
+        <div class="card-action">
+          <b>Line Chart</b>
+        </div>
+        </div>
+
+      </div>
+
+        <div class="col-md-7">
+      <div class="card">
+      <div class="card-image">
+        <div id="morris-bar-chart"></div>
+      </div>
+      <div class="card-action">
+        <b> Bar Chart Example</b>
+      </div>
+      </div>
+      </div>
+
+    </div>
+
+
+
+            <div class="row">
+                <div class="col-xs-12">
+        <div class="card">
+      <div class="card-image">
+        <div id="morris-area-chart"></div>
+      </div>
+      <div class="card-action">
+        <b>Area Chart</b>
+      </div>
+      </div>
+                </div>
+
+            </div>
+    <div class="row">
+    <div class="col-md-12">
+
+      </div>
+    </div>
+            <!-- /. ROW  -->
+
+
+
+
+
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="card"><div class="card-action">
+        <b>Tasks Panel</b>
+      </div>
+      <div class="card-image">
+        <div class="collection">
+          <a href="#!" class="collection-item">Red<span class="new badge red" data-badge-caption="red">4</span></a>
+          <a href="#!" class="collection-item">Blue<span class="new badge blue" data-badge-caption="blue">4</span></a>
+          <a href="#!" class="collection-item"><span class="badge">1</span>Alan</a>
+          <a href="#!" class="collection-item"><span class="new badge">4</span>Alan</a>
+          <a href="#!" class="collection-item">Alan<span class="new badge blue" data-badge-caption="blue">4</span></a>
+          <a href="#!" class="collection-item"><span class="badge">14</span>Alan</a>
+             <a href="#!" class="collection-item">Custom Badge Captions<span class="new badge" data-badge-caption="custom caption">4</span></a>
+          <a href="#!" class="collection-item">Custom Badge Captions<span class="badge" data-badge-caption="custom caption">4</span></a>
+        </div>
+      </div>
+
+      </div>
+
+                </div>
+                <div class="col-md-8 col-sm-12 col-xs-12">
+<div class="card">
+<div class="card-action">
+        <b>User List</b>
+      </div>
+      <div class="card-image">
+        <ul class="collection">
+<li class="collection-item avatar">
+  <i class="material-icons circle green">track_changes</i>
+  <span class="title">Title</span>
+  <p>First Line <br>
+     Second Line
+  </p>
+  <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+</li>
+<li class="collection-item avatar">
+  <i class="material-icons circle">folder</i>
+  <span class="title">Title</span>
+  <p>First Line <br>
+     Second Line
+  </p>
+  <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+</li>
+<li class="collection-item avatar">
+  <i class="material-icons circle green">track_changes</i>
+  <span class="title">Title</span>
+  <p>First Line <br>
+     Second Line
+  </p>
+  <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+</li>
+<li class="collection-item avatar">
+  <i class="material-icons circle red">play_arrow</i>
+  <span class="title">Title</span>
+  <p>First Line <br>
+     Second Line
+  </p>
+  <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+</li>
+</ul>
+       </div>
+      </div>
+
+
+
+                </div>
+            </div>
+            <!-- /. ROW  -->
+     <div class="fixed-action-btn horizontal click-to-toggle">
+<a class="btn-floating btn-large red">
+  <i class="material-icons">menu</i>
+</a>
+<ul>
+  <li><a class="btn-floating red"><i class="material-icons">track_changes</i></a></li>
+  <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+  <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+  <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+</ul>
+</div>
+
+    <footer><p>All right reserved. Template by: <a href="https://webthemez.com/admin-template/">WebThemez.com</a></p>
+
+
+    </footer>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
