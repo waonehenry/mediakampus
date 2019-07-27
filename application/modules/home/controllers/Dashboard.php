@@ -3,46 +3,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dashboard extends MX_Controller {
 
-	function __construct()
+		function __construct()
     {
         parent::__construct();
+				$this->load->model('schedule/Schedule_model');
+				$this->load->model('schedule/Schedule_thesis_model');
 				// if (!$this->session->userdata('login')) redirect('admin/login');
     }
 
 	public function index()
 	{
-			$data['page'] = 'home/index_2';
+			$where = array(
+					'semester' => 1,
+					'course_year' => 2019
+			);
+
+			$data['page'] = 'home/index';
 			$data['title'] = 'Dashboard';
 			$data['role'] = '';
+			$data['course']	= $this->Schedule_model->get_data_by($where);
+			$data['thesis']	= $this->Schedule_thesis_model->get_data();
 
 			$this->view($data);
 	}
 
-	public function store()
-	{
-			// code here
-	}
-
-	public function update($id)
-	{
-			// code here
-	}
-
-	public function delete($id)
-	{
-			// code here
-	}
-
-	//server side list
-	public function list()
-	{
-			//  code here
-	}
-
-	public function search()
-	{
-			// code here
-	}
 
 	public function view($data)
 	{

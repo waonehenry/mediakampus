@@ -155,8 +155,6 @@ function datediff($interval, $date1, $date2) {
 	return $diff;
 }
 
-
-
 function getYMD($date) {
 	//$date = dd/mm/yy
     if(!$date) return '';
@@ -213,26 +211,11 @@ function clean($string) {
 	 	return preg_replace('/\s+/', '', $string); // Removes special chars.
 }
 
-function getProfile(){
-	$CI =& get_instance();
-	$profile = $CI->db->get('tb_institusi')->row_array();
-
-	return $profile;
-}
-
 function getUser($id_user) {
 		$CI =& get_instance();
 		$profile = $CI->db->where('id_user', $id_user)->get('tb_user')->row_array();
 
 		return $profile;
-}
-
-function dana() {
-		$CI =& get_instance();
-		$CI->db->where('status', 1);
-		$budged = $CI->db->get('ref_sumber_dana')->result_array();
-
-		return $budged;
 }
 
 function convertDateMysql($date) {

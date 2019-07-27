@@ -1,19 +1,20 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Program extends MX_Controller {
+class Dosen extends MX_Controller {
 
 	function __construct()
     {
         parent::__construct();
-				$this->load->model('Program_model');
+				$this->load->model('Dosen_model');
 				$this->user_id = 1;
     }
 
 	public function index()
 	{
-			$data['page'] = 'masterdata/program/index';
-			$data['title'] = 'Obat Program';
+			$data['page'] = 'masterdata/dosen/index';
+			$data['title'] = 'Dosen';
+			$data['modul'] = 'Masterdata';
 			$data['role'] = '';
 
 			$this->view($data);
@@ -22,10 +23,9 @@ class Program extends MX_Controller {
 	public function store()
 	{
 			$data = $this->input->post('data');
-			$data['create_time'] = date('Y-m-d H:i:s');
 			$data['user_id'] = $this->user_id;
 
-			$result = $this->Program_model->insert($data);
+			$result = $this->Dosen_model->insert($data);
 			if ($result)
 			{
 				$response['status'] = 'success';
@@ -43,7 +43,7 @@ class Program extends MX_Controller {
 	public function edit($id)
 	{
 			$where['id'] = $id;
-			$data = $this->Program_model->get_data_by($where)->row_array();
+			$data = $this->Dosen_model->get_data_by($where)->row_array();
 
 			echo json_encode($data);
 	}
@@ -51,10 +51,10 @@ class Program extends MX_Controller {
 	public function update($id)
 	{
 			$data = $this->input->post('data');
-			$data['update_time'] = date('Y-m-d H:i:s');
+			$data['updated_at'] = date('Y-m-d H:i:s');
 			$data['user_id'] = $this->user_id;
 
-			$result = $this->Program_model->update($data, $id);
+			$result = $this->Dosen_model->update($data, $id);
 			if ($result)
 			{
 				$response['status'] = 'success';
@@ -72,10 +72,10 @@ class Program extends MX_Controller {
 	public function delete($id)
 	{
 			$data['status'] = '0';
-			$data['delete_time'] = date('Y-m-d H:i:s');
+			$data['deleted_at'] = date('Y-m-d H:i:s');
 			$data['user_id'] = '1';
 
-			$result = $this->Program_model->delete($data, $id);
+			$result = $this->Dosen_model->delete($data, $id);
 			if ($result)
 			{
 				$response['status'] = 'success';
@@ -93,37 +93,38 @@ class Program extends MX_Controller {
 	//server side list
 	public function server_side_list()
   {
-      $list = $this->Program_model->get_datatables();
+      $list = $this->Dosen_model->get_datatables();
       $data = array();
       $no = $_POST['start'];
       foreach ($list as $field) {
           $no++;
           $row = array();
           $row[] = $no;
-          $row[] = $field->nama_program;
-          $row[] = $field->keterangan;
-					// $row[] = '<div class="btn-group pull-right">
-					// 		<button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">Tools
-					// 				<i class="fa fa-angle-down"></i>
-					// 		</button>
-					// 		<ul class="dropdown-menu pull-right">
-					// 				<li>
-					// 						<a href="'.base_url().'masterdata/program/edit/'.$field->id.'" class="btn-edit">
-					// 								<i class="fa fa-pencil"></i> Edit </a>
-					// 				</li>
-					// 				<li>
-					// 						<a href="'.base_url().'masterdata/program/delete/'.$field->id.'" class="btn-delete">
-					// 								<i class="fa fa-trash"></i> Delete </a>
-					// 				</li>
-					// 		</ul>
-					// </div>';
+          $row[] = $field->code;
+					$row[] = $field->name;
+          $row[] = $field->description;
+					$row[] = '<div class="btn-group">
+							<button class="btn green btn-small btn-outline dropdown-toggle" data-toggle="dropdown">Tools
+									<i class="fa fa-angle-down"></i>
+							</button>
+							<ul class="dropdown-menu pull-right">
+									<li>
+											<a href="'.base_url().'masterdata/dosen/edit/'.$field->id.'" class="btn-edit">
+													<i class="fa fa-pencil"></i> Edit </a>
+									</li>
+									<li>
+											<a href="'.base_url().'masterdata/dosen/delete/'.$field->id.'" class="btn-delete">
+													<i class="fa fa-delete"></i> Delete </a>
+									</li>
+							</ul>
+					</div>';
           $data[] = $row;
       }
 
       $output = array(
                       "draw" => $_POST['draw'],
-                      "recordsTotal" => $this->Program_model->count_all(),
-                      "recordsFiltered" => $this->Program_model->count_filtered(),
+                      "recordsTotal" => $this->Dosen_model->count_all(),
+                      "recordsFiltered" => $this->Dosen_model->count_filtered(),
                       "data" => $data,
               );
 
@@ -137,9 +138,10 @@ class Program extends MX_Controller {
 
 	public function view($data)
 	{
-			$data['menu'] = $this->menu_management->core();
+			// $data['menu'] = $this->menu_management->core();
 
 			$this->load->view('home/layout/head', $data);
+			$this->load->view('home/layout/menu');
 			$this->load->view($data['page'], $data);
 			$this->load->view('home/layout/foot');
 	}

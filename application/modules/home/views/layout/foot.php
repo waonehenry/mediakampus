@@ -1,28 +1,53 @@
+          <footer>
+              <p>All right reserved. Template by: <a href="https://webthemez.com/admin-template/">WebThemez.com</a></p>
+          </footer>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
 
-<!-- JS Scripts-->
-<!-- jQuery Js -->
-<script src="<?= base_url(); ?>assets/template/js/jquery-1.10.2.js"></script>
-
-<!-- Bootstrap Js -->
-<script src="<?= base_url(); ?>assets/template/js/bootstrap.min.js"></script>
-
-<script src="<?= base_url(); ?>assets/template/materialize/js/materialize.min.js"></script>
-
-<!-- Metis Menu Js -->
-<script src="<?= base_url(); ?>assets/template/js/jquery.metisMenu.js"></script>
-<!-- Morris Chart Js -->
-<script src="<?= base_url(); ?>assets/template/js/morris/raphael-2.1.0.min.js"></script>
-<script src="<?= base_url(); ?>assets/template/js/morris/morris.js"></script>
+<script src="<?= base_url() ?>assets/global/scripts/datatable.js" type="text/javascript"></script>
+<script src="<?= base_url() ?>assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+<script src="<?= base_url() ?>assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+<script src="<?= base_url() ?>assets/pages/scripts/table-datatables-responsive.min.js" type="text/javascript"></script>
+<script src="<?= base_url() ?>assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
 
 
-<script src="<?= base_url(); ?>assets/template/js/easypiechart.js"></script>
-<script src="<?= base_url(); ?>assets/template/js/easypiechart-data.js"></script>
+<script type="text/javascript">
+function notif(status, message) {
+    $('.alert').show();
+    $('.custom-alerts').addClass('alert-'+status);
+    $('#message').text(message);
+    setTimeout(function(){
+        $('.alert').hide();
+    }, 4000);
+}
 
-<script src="<?= base_url(); ?>assets/template/js/Lightweight-Chart/jquery.chart.js"></script>
+function resetInput(url) {
+    $('.input-text').val('');
+    $('.input-text-select2').val('').trigger('change');
+    $('.input-text-checkbox').prop('checked', false);
+    $('label').removeClass('active');
+    $('.form-input').attr('action', url);
+}
 
-<!-- Custom Js -->
-<script src="<?= base_url(); ?>assets/template/js/custom-scripts.js"></script>
+function formFocus() {
+    $(".first-focus").focus();
+    $("label").addClass('active');
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+}
 
+$(document).ready(function() {
+    formFocus();
+    $('.modal').modal();
+    $(".input-date").inputmask("date", {alias:"dd-mm-yyyy"});
+    $(".select2").select2({
+        allowClear: true
+    });
+})
+</script>
 
 </body>
 
