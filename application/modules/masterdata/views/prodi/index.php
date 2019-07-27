@@ -89,6 +89,10 @@
    </div>
    <script type="text/javascript">
    $(document).ready(function() {
+       $(".modul-masterdata").addClass('active-menu');
+       $(".ul-masterdata").addClass('collapse in');
+       $(".menu-prodi").addClass('active-menu');
+
        var default_url = '<?= base_url()?>masterdata/prodi/store';
        //datatables
        table = $('#table-content').DataTable({

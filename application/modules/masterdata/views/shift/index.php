@@ -100,6 +100,10 @@
    </div>
    <script type="text/javascript">
    $(document).ready(function() {
+       $(".modul-masterdata").addClass('active-menu');
+       $(".ul-masterdata").addClass('collapse in');
+       $(".menu-shift").addClass('active-menu');
+
        var default_url = '<?= base_url()?>masterdata/shift/store';
        //datatables
        table = $('#table-content').DataTable({

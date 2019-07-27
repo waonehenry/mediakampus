@@ -89,6 +89,10 @@
    </div>
    <script type="text/javascript">
    $(document).ready(function() {
+       $(".modul-dosen").addClass('active-menu');
+       $(".ul-dosen").addClass('collapse in');
+       $(".menu-dosen").addClass('active-menu');
+
        var default_url = '<?= base_url()?>masterdata/dosen/store';
        //datatables
        table = $('#table-content').DataTable({

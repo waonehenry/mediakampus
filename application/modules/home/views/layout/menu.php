@@ -16,9 +16,9 @@
                 </ul>
             </li>
 
-            <li class="active">
-                <a href="#" class="active-menu waves-effect waves-dark modul-schedule"><i class="fa fa-qrcode"></i> Schedule <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
+            <li>
+                <a href="#" class="waves-effect waves-dark modul-schedule"><i class="fa fa-qrcode"></i> Schedule <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level ul-course">
                     <li>
                         <a href="<?= base_url(); ?>schedule/schedule" class="menu-course"><i class="fa fa-fw fa-file"></i> Course</a>
                     </li>
@@ -30,7 +30,7 @@
 
             <li>
                 <a href="#" class="waves-effect waves-dark modul-masterdata"><i class="fa fa-table"></i> Masterdata <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
+                <ul class="nav nav-second-level ul-masterdata">
                     <li>
                         <a href="<?= base_url(); ?>masterdata/room" class="menu-room"><i class="fa fa-fw fa-file"></i> Room</a>
                     </li>
@@ -41,7 +41,7 @@
                         <a href="<?= base_url(); ?>masterdata/prodi" class="menu-prodi"><i class="fa fa-fw fa-file"></i> Prodi</a>
                     </li>
                     <li>
-                        <a href="<?= base_url(); ?>masterdata/course" class="menu-course"><i class="fa fa-fw fa-file"></i> Course</a>
+                        <a href="<?= base_url(); ?>masterdata/course" class="menu-course-master"><i class="fa fa-fw fa-file"></i> Course</a>
                     </li>
                     <li>
                         <a href="<?= base_url(); ?>masterdata/shift" class="menu-shift"><i class="fa fa-fw fa-file"></i> Shift</a>
@@ -50,7 +50,7 @@
             </li>
             <li>
                 <a href="#" class="waves-effect waves-dark modul-dosen"><i class="fa fa-edit"></i> Admin Dosen <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
+                <ul class="nav nav-second-level ul-dosen">
                     <li>
                         <a href="<?= base_url(); ?>masterdata/dosen" class="menu-dosen"><i class="fa fa-fw fa-file"></i> Dosen</a>
                     </li>
