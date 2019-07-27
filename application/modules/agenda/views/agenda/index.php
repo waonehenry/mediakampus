@@ -20,45 +20,34 @@
                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
                      <p id="message"></p>
                  </div>
-                 <form class="col s12 form-input" method="post" action="<?= base_url()?>schedule/thesis/store">
-                   <div class="row">
-                     <div class="col s12">
-                        <label for="room">Room</label>
-                        <select id="room" name=data[room_id] required class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <?php foreach ($room->result() as $key): ?>
-                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                     </div>
-                   </div>
-                   <div class="row">
-                     <div class="col s12">
-                        <label for="shift">Shift</label>
-                        <select id="shift" name=data[shift_id] required class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <?php foreach ($shift->result() as $key): ?>
-                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                     </div>
-                   </div>
-                   <div class="row">
-                     <div class="input-field col s12">
-                       <input id="date" type="text" name="data[d_date]" required class="input-text input-date" autocomplete="off">
-                       <label for="date">Date</label>
-                     </div>
-                   </div>
+                 <form class="col s12 form-input" method="post" action="<?= base_url()?>agenda/agenda/store">
                    <div class="row">
                      <div class="input-field col s12">
                        <input id="title" type="text" name="data[title]" required class="input-text" autocomplete="off">
+                       <input type="hidden" value="1" name="data[type]">
                        <label for="title">Title</label>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="input-field col s6">
+                       <input id="date-start" type="text" name="data[date_start]" required class="input-text input-date" autocomplete="off">
+                       <label for="date-start">Date Start</label>
+                     </div>
+                     <div class="input-field col s6">
+                       <input id="date-end" type="text" name="data[date_end]" required class="input-text input-date" autocomplete="off">
+                       <label for="date-end">Date End</label>
                      </div>
                    </div>
                    <div class="row">
        								<div class="input-field col s12">
        								  <textarea id="description" class="materialize-textarea input-text" name="data[description]"></textarea>
        								  <label for="description">Description</label>
+       								</div>
+   							   </div>
+                   <div class="row">
+       								<div class="input-field col s12">
+       								  <textarea id="time-description" class="materialize-textarea input-text" name="data[time_desc]"></textarea>
+       								  <label for="time-description">Time Description</label>
        								</div>
    							   </div>
                    <div class="row">
@@ -83,10 +72,9 @@
                           <thead>
                               <tr>
                                   <th>No.</th>
-                                  <th>Judul</th>
+                                  <th>Agenda</th>
                                   <th>Deskripsi</th>
-                                  <th>Waktu</th>
-                                  <th>Ruang</th>
+                                  <th>Durasi</th>
                                   <th>Act</th>
                               </tr>
                           </thead>
@@ -112,11 +100,11 @@
    </div>
    <script type="text/javascript">
    $(document).ready(function() {
-        $(".ul-schedule").addClass("collapse in");
-        $(".modul-schedule").addClass('active-menu');
-        $(".menu-thesis").addClass('active-menu');
+        $(".ul-agenda").addClass('collapse in');
+        $(".modul-agenda").addClass('active-menu');
+        $(".menu-agenda").addClass('active-menu');
 
-       var default_url = '<?= base_url()?>schedule/thesis/store';
+       var default_url = '<?= base_url()?>agenda/agenda/store';
        //datatables
        table = $('#table-content').DataTable({
            "processing": true, //Feature control the processing indicator.
@@ -125,7 +113,7 @@
 
            // Load data for the table's content from an Ajax source
            "ajax": {
-               "url": "<?php echo site_url('schedule/thesis/server_side_list')?>",
+               "url": "<?php echo site_url('agenda/agenda/server_side_list')?>",
                "type": "POST"
            },
 
@@ -158,9 +146,9 @@
                    success: function(response) {
                        $("#title").val(response.title);
                        $("#description").val(response.description);
-                       $("#date").val(response.d_date);
-                       $("#room").select2("val", response.room_id);
-                       $("#shift").select2("val", response.shift_id);
+                       $("#time-description").val(response.time_desc);
+                       $("#date-start").val(response.date_start);
+                       $("#date-end").val(response.date_end);
                        $(".form-input").attr("action", url_update);
                        formFocus();
                    }

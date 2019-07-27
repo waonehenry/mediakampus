@@ -6,19 +6,19 @@
             </li>
             <li>
                 <a href="#" class="waves-effect waves-dark"><i class="fa fa-desktop"></i> Agenda <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
+                <ul class="nav nav-second-level ul-agenda">
                     <li>
-                        <a href="<?= base_url(); ?>agenda/announcement"><i class="fa fa-fw fa-file"></i> Announcement</a>
+                        <a href="<?= base_url(); ?>agenda/info" class="menu-info"><i class="fa fa-fw fa-file"></i> Information</a>
                     </li>
                     <li>
-                        <a href="<?= base_url(); ?>agenda/event"><i class="fa fa-fw fa-file"></i> Event</a>
+                        <a href="<?= base_url(); ?>agenda/agenda" class="menu-agenda"><i class="fa fa-fw fa-file"></i> Event</a>
                     </li>
                 </ul>
             </li>
 
             <li>
                 <a href="#" class="waves-effect waves-dark modul-schedule"><i class="fa fa-qrcode"></i> Schedule <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level ul-course">
+                <ul class="nav nav-second-level ul-schedule">
                     <li>
                         <a href="<?= base_url(); ?>schedule/schedule" class="menu-course"><i class="fa fa-fw fa-file"></i> Course</a>
                     </li>

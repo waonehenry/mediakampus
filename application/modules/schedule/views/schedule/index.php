@@ -157,6 +157,7 @@
    </div>
    <script type="text/javascript">
    $(document).ready(function() {
+       $(".ul-schedule").addClass("collapse in");
        $(".modul-schedule").addClass('active-menu');
        $(".menu-course").addClass('active-menu');
 
