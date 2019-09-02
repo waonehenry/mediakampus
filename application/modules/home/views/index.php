@@ -21,7 +21,13 @@
                     <div class="collection">
                       <marquee  behavior="scroll" direction="down" scroll="continuous" valign="center" scrolldelay="3" scrollamount="2" onmouseover="this.stop()" onmouseout="this.start()">
                       <?php foreach ($course->result() as $key): ?>
-                          <a href="#!" class="collection-item"><?= $key->course ?> | <?= $key->room ?> | <?= $key->dosen ?> | <?= $key->class ?> <span class="new badge red" data-badge-caption=""><?= $key->start ?>-<?= $key->end ?></span></a>
+                          <?php
+                                $color_badge = "green";
+                                if (empty_course($key->dosen_id, $key->shift_id, date('Y-m-d')) > 0) {
+                                    $color_badge = "red";
+                                }
+                          ?>
+                          <a href="#!" class="collection-item"><?= $key->course ?> | <?= $key->room ?> | <?= $key->dosen ?> | <?= $key->class ?> <span class="new badge <?= $color_badge?>" data-badge-caption=""><?= $key->start ?>-<?= $key->end ?></span></a>
                       <?php endforeach; ?>
                       </marquee>
                     </div>

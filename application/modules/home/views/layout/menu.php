@@ -55,7 +55,7 @@
                         <a href="<?= base_url(); ?>masterdata/dosen" class="menu-dosen"><i class="fa fa-fw fa-file"></i> Dosen</a>
                     </li>
                     <li>
-                        <a href="<?= base_url(); ?>schedule/dosen_restrict" class="menu-holiday"><i class="fa fa-fw fa-file"></i> Holiday</a>
+                        <a href="<?= base_url(); ?>schedule/empty_course" class="menu-empty-course"><i class="fa fa-fw fa-file"></i> Empty Course</a>
                     </li>
                 </ul>
             </li>

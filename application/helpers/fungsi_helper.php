@@ -244,3 +244,13 @@ function getPeriod($period) {
 
 		return $period;
 }
+
+function empty_course($dosen_id, $shift_id, $date) {
+		$CI =& get_instance();
+		$CI->db->where('dosen_id', $dosen_id);
+		$CI->db->where('shift_start', $shift_id);
+		$CI->db->where('date_start', $date);
+		$empty = $CI->db->get('tb_schedule_restriction')->num_rows();
+
+		return $empty;
+}
