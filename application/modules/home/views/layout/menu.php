@@ -2,7 +2,18 @@
     <div class="sidebar-collapse">
         <ul class="nav" id="main-menu">
             <li>
-                <a class="waves-effect waves-dark modul-dashboard" href="<?= base_url(); ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
+                <a class="waves-effect waves-dark modul-dashboard" href="#"><i class="fa fa-dashboard"></i> Dashboard <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level ul-display">
+                    <li>
+                        <a href="<?= base_url(); ?>home/dashboard" class="menu-dashboard-akademik"><i class="fa fa-fw fa-file"></i> Akademik</a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url(); ?>home/dashboard/agenda" class="menu-dashboard-agenda"><i class="fa fa-fw fa-file"></i> Agenda</a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url(); ?>home/dashboard/pasca" class="menu-dashboard-agenda"><i class="fa fa-fw fa-file"></i> Pascasarjana</a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="#" class="waves-effect waves-dark"><i class="fa fa-desktop"></i> Agenda <span class="fa arrow"></span></a>
@@ -46,6 +57,9 @@
                     <li>
                         <a href="<?= base_url(); ?>masterdata/shift" class="menu-shift"><i class="fa fa-fw fa-file"></i> Shift</a>
                     </li>
+                    <li>
+                        <a href="<?= base_url(); ?>masterdata/document" class="menu-document"><i class="fa fa-fw fa-file"></i> Document</a>
+                    </li>
                 </ul>
             </li>
             <li>
@@ -59,7 +73,22 @@
                     </li>
                 </ul>
             </li>
-
+            <li>
+                <a href="#" class="waves-effect waves-dark modul-register"><i class="fa fa-edit"></i> Register <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level ul-register">
+                    <li>
+                        <a href="<?= base_url(); ?>register/thesis" class="menu-register-thesis"><i class="fa fa-fw fa-file"></i> Thesis</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="waves-effect waves-dark modul-user-management"><i class="fa fa-edit"></i> User Management <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level ul-user-management">
+                    <li>
+                        <a href="<?= base_url(); ?>roles/user" class="menu-user"><i class="fa fa-fw fa-file"></i> User</a>
+                    </li>
+                </ul>
+            </li>
 
             <li>
                 <a href="#" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>

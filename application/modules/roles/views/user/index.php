@@ -10,7 +10,7 @@
     </div>
     <div id="page-inner">
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-6">
              <div class="card">
                <div class="card-action" style="border-bottom: 1px solid;">
                    INPUT FORM
@@ -20,11 +20,11 @@
                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
                      <p id="message"></p>
                  </div>
-                 <form class="col s12 form-input" method="post" action="<?= base_url()?>masterdata/course/store">
+                 <form class="col s12 form-input" method="post" action="<?= base_url()?>roles/user/store">
                    <div class="row">
                      <div class="input-field col s12">
                        <input id="code" type="text" name="data[code]" class="input-text first-focus">
-                       <label for="code" class="first-focus-label active">Code</label>
+                       <label for="code" class="first-focus-label active">ID</label>
                      </div>
                    </div>
                    <div class="row">
@@ -34,22 +34,31 @@
                      </div>
                    </div>
                    <div class="row">
-                     <div class="col s12">
-                        <label for="prodi">Prodi</label>
-                        <select id="prodi" name=data[prodi_id] required class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <?php foreach ($prodi->result() as $key): ?>
-                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                     </div>
-                   </div>
-                   <div class="row">
        								<div class="input-field col s12">
        								  <textarea id="description" class="materialize-textarea input-text" name="data[description]"></textarea>
        								  <label for="description">Description</label>
        								</div>
    							   </div>
+                   <div class="row">
+                     <div class="input-field col s12">
+                       <input id="username" type="text" name="data[username]" required class="input-text" autocomplete="off">
+                       <label for="username">Username</label>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="input-field col s12">
+                       <input id="password" type="password" name="data[password]" required class="input-text" autocomplete="off">
+                       <label for="password">Password</label>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="col s12">
+                       <label for="group">Group</label>
+                       <select id="group" name="data[group_id]" required class="form-control">
+                          <option value="1">Administrator</option>
+                       </select>
+                     </div>
+                   </div>
                    <div class="row">
        								<div class="input-field col s12">
        								  <button type="submit" class="btn btn-small btn-submit btn-success">Save</button>
@@ -61,7 +70,7 @@
               </div>
             </div>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-6">
           <div class="card">
               <div class="card-action" style="border-bottom: 1px solid;">
                    Data
@@ -75,7 +84,6 @@
                                   <th>Code</th>
                                   <th>Name</th>
                                   <th>Desc</th>
-                                  <th>Prodi</th>
                                   <th>Act</th>
                               </tr>
                           </thead>
@@ -101,11 +109,11 @@
    </div>
    <script type="text/javascript">
    $(document).ready(function() {
-       $(".modul-masterdata").addClass('active-menu');
-       $(".ul-masterdata").addClass('collapse in');
-       $(".menu-course-master").addClass('active-menu');
+       $(".modul-user-management").addClass('active-menu');
+       $(".ul-user-management").addClass('collapse in');
+       $(".menu-user").addClass('active-menu');
 
-       var default_url = '<?= base_url()?>masterdata/course/store';
+       var default_url = '<?= base_url()?>roles/user/store';
        //datatables
        table = $('#table-content').DataTable({
            "processing": true, //Feature control the processing indicator.
@@ -114,7 +122,7 @@
 
            // Load data for the table's content from an Ajax source
            "ajax": {
-               "url": "<?php echo site_url('masterdata/course/server_side_list')?>",
+               "url": "<?php echo site_url('roles/user/server_side_list')?>",
                "type": "POST"
            },
 
@@ -146,11 +154,29 @@
                    dataType: "json",
                    success: function(response) {
                        $("#name").val(response.name);
+                       $("#username").val(response.username);
                        $("#code").val(response.code);
+                       $("#password").attr('readonly', 'readonly');
                        $("#description").val(response.description);
-                       $("#prodi").select2("val", response.prodi_id);
                        $(".form-input").attr("action", url_update);
                        formFocus();
+                   }
+               })
+           })
+
+           $('.btn-reset-password').on("click", function(e) {
+               e.preventDefault();
+               url = $(this).attr("href");
+               $.ajax({
+                   url: url,
+                   type: "GET",
+                   dataType: "json",
+                   success: function(response) {
+                       notif(response.status, response.message);
+                       if (response.status == 'success') {
+                           resetInput(default_url);
+                           table.ajax.reload();
+                       }
                    }
                })
            })

@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Room_model extends CI_Model {
-	private $table = 'ref_room';
+class User_model extends CI_Model {
+	private $table = 'sys_user';
     var $column_order = array(null, 'id'); //set column field database for datatable orderable
     var $column_search = array('name'); //set column field database for datatable searchable
     var $order = array('id' => 'asc'); // default order
@@ -25,32 +25,23 @@ class Room_model extends CI_Model {
 	}
 
 	public function get_data() {
-		$this->db->select('ref_room.*');
-		$this->db->select('ref_prodi.name as prodi');
-		$this->db->where($this->table.'.status', '1');
-		$this->db->join('ref_prodi', 'ref_prodi.id = ref_room.prodi_id', 'left');
+		$this->db->where('status', '1');
 
 		return $this->db->get($this->table);
 	}
 
 	public function get_data_by($where) {
-		$this->db->select('ref_room.*');
-		$this->db->select('ref_prodi.name as prodi');
-		$this->db->where($this->table.'.status', '1');
-		$this->db->join('ref_prodi', 'ref_prodi.id = ref_room.prodi_id', 'left');
 		foreach ($where as $key => $value) {
 			$this->db->where($key, $value);
 		}
+		$this->db->where('status', '1');
 
 		return $this->db->get($this->table);
 	}
 
 	private function _get_datatables_query()
     {
-				$this->db->select('ref_room.*');
-				$this->db->select('ref_prodi.name as prodi');
-				$this->db->where($this->table.'.status', '1');
-				$this->db->join('ref_prodi', 'ref_prodi.id = ref_room.prodi_id', 'left');
+        $this->db->where('status', '1');
         $this->db->from($this->table);
 
         $i = 0;

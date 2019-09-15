@@ -25,23 +25,32 @@ class Course_model extends CI_Model {
 	}
 
 	public function get_data() {
-		$this->db->where('status', '1');
+		$this->db->select('ref_course.*');
+		$this->db->select('ref_prodi.name as prodi');
+		$this->db->where($this->table.'.status', '1');
+		$this->db->join('ref_prodi', 'ref_prodi.id = ref_course.prodi_id', 'left');
 
 		return $this->db->get($this->table);
 	}
 
 	public function get_data_by($where) {
+		$this->db->select('ref_course.*');
+		$this->db->select('ref_prodi.name as prodi');
+		$this->db->join('ref_prodi', 'ref_prodi.id = ref_course.prodi_id', 'left');
 		foreach ($where as $key => $value) {
 			$this->db->where($key, $value);
 		}
-		$this->db->where('status', '1');
+		$this->db->where($this->table.'.status', '1');
 
 		return $this->db->get($this->table);
 	}
 
 	private function _get_datatables_query()
     {
-        $this->db->where('status', '1');
+				$this->db->select('ref_course.*');
+				$this->db->select('ref_prodi.name as prodi');
+        $this->db->where($this->table.'.status', '1');
+				$this->db->join('ref_prodi', 'ref_prodi.id = ref_course.prodi_id', 'left');
         $this->db->from($this->table);
 
         $i = 0;

@@ -10,7 +10,7 @@
     </div>
     <div id="page-inner">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
              <div class="card">
                <div class="card-action" style="border-bottom: 1px solid;">
                    INPUT FORM
@@ -34,6 +34,17 @@
                      </div>
                    </div>
                    <div class="row">
+                     <div class="col s12">
+                        <label for="prodi">Prodi</label>
+                        <select id="prodi" name=data[prodi_id] required class="form-control select2 input-text-select2">
+                            <option value="">Silakan pilih</option>
+                            <?php foreach ($prodi->result() as $key): ?>
+                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                     </div>
+                   </div>
+                   <div class="row">
        								<div class="input-field col s12">
        								  <textarea id="description" class="materialize-textarea input-text" name="data[description]"></textarea>
        								  <label for="description">Description</label>
@@ -50,7 +61,7 @@
               </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-8">
           <div class="card">
               <div class="card-action" style="border-bottom: 1px solid;">
                    Data
@@ -63,6 +74,7 @@
                                   <th>No.</th>
                                   <th>Code</th>
                                   <th>Name</th>
+                                  <th>Prodi</th>
                                   <th>Desc</th>
                                   <th>Act</th>
                               </tr>
@@ -136,6 +148,7 @@
                        $("#name").val(response.name);
                        $("#code").val(response.code);
                        $("#description").val(response.description);
+                       $("#prodi").select2("val", response.prodi_id);
                        $(".form-input").attr("action", url_update);
                        formFocus();
                    }

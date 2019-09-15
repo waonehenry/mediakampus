@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login_model extends CI_Model {
-		private $table = 'tb_user';
+		private $table = 'sys_user';
 
 		public function get_data_by($where) {
 				foreach ($where as $key => $value) {

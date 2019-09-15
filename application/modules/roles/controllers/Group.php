@@ -137,8 +137,8 @@ class Group extends MX_Controller {
 
 	public function view($data)
 	{
-			$data['menu'] = $this->menu_management->core();
-
+			// $data['menu'] = $this->menu_management->core();
+			$this->load->view('home/layout/menu');
 			$this->load->view('home/layout/head', $data);
 			$this->load->view($data['page'], $data);
 			$this->load->view('home/layout/foot');

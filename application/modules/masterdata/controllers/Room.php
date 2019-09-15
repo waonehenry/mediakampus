@@ -7,6 +7,7 @@ class Room extends MX_Controller {
     {
         parent::__construct();
 				$this->load->model('Room_model');
+				$this->load->model('Prodi_model');
 				$this->user_id = 1;
     }
 
@@ -16,6 +17,7 @@ class Room extends MX_Controller {
 			$data['title'] = 'Room';
 			$data['modul'] = 'Masterdata';
 			$data['role'] = '';
+			$data['prodi'] = $this->Prodi_model->get_data();
 
 			$this->view($data);
 	}
@@ -42,7 +44,7 @@ class Room extends MX_Controller {
 
 	public function edit($id)
 	{
-			$where['id'] = $id;
+			$where['ref_room.id'] = $id;
 			$data = $this->Room_model->get_data_by($where)->row_array();
 
 			echo json_encode($data);
@@ -102,7 +104,8 @@ class Room extends MX_Controller {
           $row[] = $no;
           $row[] = $field->code;
 					$row[] = $field->name;
-          $row[] = $field->description;
+          $row[] = $field->prodi;
+					$row[] = $field->description;
 					$row[] = '<div class="btn-group">
 							<button class="btn green btn-small btn-outline dropdown-toggle" data-toggle="dropdown">Tools
 									<i class="fa fa-angle-down"></i>

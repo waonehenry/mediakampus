@@ -81,7 +81,7 @@ img {vertical-align: middle;}
     </div>
         <div id="page-inner" style="padding-top: 0px ! important;">
           <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="col-md-8 col-sm-12 col-xs-12">
                 <div class="card">
                   <div class="card-action">
                     <b>Jadwal Kuliah Hari Ini</b>
@@ -100,6 +100,32 @@ img {vertical-align: middle;}
                       <?php endforeach; ?>
                       </marquee>
                     </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-12 col-xs-12">
+                <div class="card">
+                  <div class="card-action">
+                    <b>Registrasi Thesis/Disertasi</b>
+                  </div>
+                  <div class="card-image">
+                    <ul class="collection">
+                        <?php if ($register->num_rows() > 0): ?>
+                            <?php foreach ($register->result() as $key): ?>
+                                <li class="collection-item">
+                                  <span class="title"><b><?= $key->name ?></b></span>
+                                  <p><?= $key->document ?><br>
+                                  <p><?= $key->description ?><br>
+                                  <span class="new badge green" data-badge-caption=""><?= $key->created_at ?></span>
+                                  </p>
+                                </li>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                          <li class="collection-item">
+                            <i>Belum ada agenda</i>
+                          </li>
+                        <?php endif; ?>
+                    </ul>
                   </div>
                 </div>
               </div>

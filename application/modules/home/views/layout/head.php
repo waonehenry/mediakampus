@@ -55,15 +55,25 @@
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
-				           <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>Admin</b> <i class="material-icons right">arrow_drop_down</i></a></li>
+			          <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1">
+                      <i class="fa fa-user fa-fw"></i> <b><?= ($this->session->userdata('name') !== null) ? $this->session->userdata('name') : "public" ?></b>
+                      <i class="material-icons right">arrow_drop_down</i>
+                    </a>
+                </li>
             </ul>
         </nav>
 		<!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
-<li><a href="#"><i class="fa fa-user fa-fw"></i> My Profile</a>
-</li>
-<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-</li>
-<li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-</li>
+  <?php if($this->session->userdata('login')): ?>
+      <li>
+        <a href="#"><i class="fa fa-user fa-fw"></i> My Profile</a>
+      </li>
+      <li>
+        <a href="<?= base_url()?>admin/login/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+      </li>
+  <?php else: ?>
+      <li>
+        <a href="<?= base_url()?>admin/login/login"><i class="fa fa-sign-out fa-fw"></i> Login</a>
+      </li>
+  <?php endif; ?>
 </ul>	   <!--/. NAV TOP  -->

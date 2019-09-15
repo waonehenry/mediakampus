@@ -10,7 +10,7 @@
     </div>
     <div id="page-inner">
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-6">
              <div class="card">
                <div class="card-action" style="border-bottom: 1px solid;">
                    INPUT FORM
@@ -20,28 +20,17 @@
                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
                      <p id="message"></p>
                  </div>
-                 <form class="col s12 form-input" method="post" action="<?= base_url()?>masterdata/course/store">
+                 <form class="col s12 form-input" method="post" action="<?= base_url()?>masterdata/document/store">
                    <div class="row">
                      <div class="input-field col s12">
                        <input id="code" type="text" name="data[code]" class="input-text first-focus">
-                       <label for="code" class="first-focus-label active">Code</label>
+                       <label for="code" class="first-focus-label">Code</label>
                      </div>
                    </div>
                    <div class="row">
                      <div class="input-field col s12">
                        <input id="name" type="text" name="data[name]" required class="input-text" autocomplete="off">
                        <label for="name">Name</label>
-                     </div>
-                   </div>
-                   <div class="row">
-                     <div class="col s12">
-                        <label for="prodi">Prodi</label>
-                        <select id="prodi" name=data[prodi_id] required class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <?php foreach ($prodi->result() as $key): ?>
-                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                            <?php endforeach; ?>
-                        </select>
                      </div>
                    </div>
                    <div class="row">
@@ -61,7 +50,7 @@
               </div>
             </div>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-6">
           <div class="card">
               <div class="card-action" style="border-bottom: 1px solid;">
                    Data
@@ -75,7 +64,6 @@
                                   <th>Code</th>
                                   <th>Name</th>
                                   <th>Desc</th>
-                                  <th>Prodi</th>
                                   <th>Act</th>
                               </tr>
                           </thead>
@@ -86,7 +74,7 @@
           </div>
         </div>
    </div>
-   <div class="modal fade" id="modal-delete"  data-backdrop="static" data-keyboard="false" style="height: 272px;">
+   <div class="modal fade" id="modal-delete"  data-backdrop="static" data-keyboard="false">
      <div class="" style="margin-top:100px;">
          <h4 style="text-align:center;">Apakah anda yakin menghapus data ini?</h4>
      </div>
@@ -103,9 +91,9 @@
    $(document).ready(function() {
        $(".modul-masterdata").addClass('active-menu');
        $(".ul-masterdata").addClass('collapse in');
-       $(".menu-course-master").addClass('active-menu');
+       $(".menu-document").addClass('active-menu');
 
-       var default_url = '<?= base_url()?>masterdata/course/store';
+       var default_url = '<?= base_url()?>masterdata/document/store';
        //datatables
        table = $('#table-content').DataTable({
            "processing": true, //Feature control the processing indicator.
@@ -114,7 +102,7 @@
 
            // Load data for the table's content from an Ajax source
            "ajax": {
-               "url": "<?php echo site_url('masterdata/course/server_side_list')?>",
+               "url": "<?php echo site_url('masterdata/document/server_side_list')?>",
                "type": "POST"
            },
 
@@ -148,7 +136,6 @@
                        $("#name").val(response.name);
                        $("#code").val(response.code);
                        $("#description").val(response.description);
-                       $("#prodi").select2("val", response.prodi_id);
                        $(".form-input").attr("action", url_update);
                        formFocus();
                    }

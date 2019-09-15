@@ -31,7 +31,7 @@ class Login extends MX_Controller {
 				} else {
 							// set variables from the form
 							$key['username'] = $this->input->post('username');
-							$key['password'] = md5($this->input->post('password'));
+							$key['password'] = md5('febi2019oke!'.$this->input->post('password'));
 
 							$check = $this->Login_model->get_data_by($key);
 
@@ -64,7 +64,7 @@ class Login extends MX_Controller {
 		public function logout() {
 				$this->session->sess_destroy();
 
-				redirect('admin/login');
+				redirect('home/dashboard');
 		}
 }
 ?>

@@ -10,7 +10,7 @@
     </div>
     <div id="page-inner">
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-6">
              <div class="card">
                <div class="card-action" style="border-bottom: 1px solid;">
                    INPUT FORM
@@ -20,28 +20,21 @@
                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
                      <p id="message"></p>
                  </div>
-                 <form class="col s12 form-input" method="post" action="<?= base_url()?>masterdata/course/store">
-                   <div class="row">
-                     <div class="input-field col s12">
-                       <input id="code" type="text" name="data[code]" class="input-text first-focus">
-                       <label for="code" class="first-focus-label active">Code</label>
-                     </div>
-                   </div>
+                 <form class="col s12 form-input" method="post" action="<?= base_url()?>register/thesis/store">
                    <div class="row">
                      <div class="input-field col s12">
                        <input id="name" type="text" name="data[name]" required class="input-text" autocomplete="off">
-                       <label for="name">Name</label>
+                       <label for="date">Name</label>
                      </div>
                    </div>
                    <div class="row">
                      <div class="col s12">
-                        <label for="prodi">Prodi</label>
-                        <select id="prodi" name=data[prodi_id] required class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <?php foreach ($prodi->result() as $key): ?>
-                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                        <?php foreach ($document->result() as $key): ?>
+                            <p>
+                              <input type="checkbox" class="filled-in input-text-checkbox" id="filled-in-box-<?= $key->id ?>" value="<?= $key->id ?>" name="data_checkbox[document][]"/>
+                              <label for="filled-in-box-<?= $key->id ?>"><?= $key->name ?></label>
+                            </p>
+                        <?php endforeach; ?>
                      </div>
                    </div>
                    <div class="row">
@@ -61,7 +54,7 @@
               </div>
             </div>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-12">
           <div class="card">
               <div class="card-action" style="border-bottom: 1px solid;">
                    Data
@@ -72,10 +65,10 @@
                           <thead>
                               <tr>
                                   <th>No.</th>
-                                  <th>Code</th>
+                                  <th>Date</th>
                                   <th>Name</th>
-                                  <th>Desc</th>
-                                  <th>Prodi</th>
+                                  <th>Document</th>
+                                  <th>Description</th>
                                   <th>Act</th>
                               </tr>
                           </thead>
@@ -101,11 +94,11 @@
    </div>
    <script type="text/javascript">
    $(document).ready(function() {
-       $(".modul-masterdata").addClass('active-menu');
-       $(".ul-masterdata").addClass('collapse in');
-       $(".menu-course-master").addClass('active-menu');
+        $(".ul-register").addClass("collapse in");
+        $(".modul-register").addClass('active-menu');
+        $(".menu-register-thesis").addClass('active-menu');
 
-       var default_url = '<?= base_url()?>masterdata/course/store';
+       var default_url = '<?= base_url()?>schedule/empty_course/store';
        //datatables
        table = $('#table-content').DataTable({
            "processing": true, //Feature control the processing indicator.
@@ -114,7 +107,7 @@
 
            // Load data for the table's content from an Ajax source
            "ajax": {
-               "url": "<?php echo site_url('masterdata/course/server_side_list')?>",
+               "url": "<?php echo site_url('register/thesis/server_side_list')?>",
                "type": "POST"
            },
 
@@ -139,16 +132,20 @@
            $('.btn-edit').on("click", function(e) {
                e.preventDefault();
                url = $(this).attr("href");
-               url_update = url.replace("edit", "update");
+               url_update = url.replace("edit_group", "update_group");
                $.ajax({
                    url: url,
                    type: "GET",
                    dataType: "json",
                    success: function(response) {
-                       $("#name").val(response.name);
-                       $("#code").val(response.code);
-                       $("#description").val(response.description);
-                       $("#prodi").select2("val", response.prodi_id);
+                       $("#description").val(response[0].description);
+                       $("#date").val(response[0].date_start);
+                       $("#dosen").select2("val", response[0].dosen_id);
+                       //
+                       var shifts = response.map(function (sch) {
+                                            $('.input-text-checkbox[value="'+sch.shift_start+'"]').prop('checked', true);
+                                          });
+                       $("#shift").select2("val", response.shift_id);
                        $(".form-input").attr("action", url_update);
                        formFocus();
                    }
@@ -163,9 +160,6 @@
                type: "POST",
                data: $(this).serialize(),
                dataType: "json",
-               // beforeSend: function() {
-               //     blockWindow();
-               // },
                success: function (response) {
                    notif(response.status, response.message);
                    if (response.status == 'success') {
