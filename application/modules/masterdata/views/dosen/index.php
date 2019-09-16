@@ -50,7 +50,7 @@
               </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-12">
           <div class="card">
               <div class="card-action" style="border-bottom: 1px solid;">
                    Data

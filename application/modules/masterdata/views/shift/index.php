@@ -10,7 +10,7 @@
     </div>
     <div id="page-inner">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
              <div class="card">
                <div class="card-action" style="border-bottom: 1px solid;">
                    INPUT FORM
@@ -60,7 +60,7 @@
               </div>
             </div>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-8">
           <div class="card">
               <div class="card-action" style="border-bottom: 1px solid;">
                    Data
