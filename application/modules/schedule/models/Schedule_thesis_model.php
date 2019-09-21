@@ -30,8 +30,12 @@ class Schedule_thesis_model extends CI_Model {
 			$this->db->select('ref_shift.name as shift');
 			$this->db->select('TIME_FORMAT(ref_shift.start_time, "%H:%i") as start', FALSE);
 			$this->db->select('TIME_FORMAT(ref_shift.end_time, "%H:%i") as end', FALSE);
+			$this->db->select('CONCAT("(1)",dos1.name,"(2)",dos2.name,"(3)",dos3.name) as examiner');
 			$this->db->join('ref_room', 'ref_room.id = tb_schedule_thesis.room_id');
 			$this->db->join('ref_shift', 'ref_shift.id = tb_schedule_thesis.shift_id');
+			$this->db->join('tb_dosen as dos1', 'dos1.id = tb_schedule_thesis.dosen_id_1', 'left');
+			$this->db->join('tb_dosen as dos2', 'dos2.id = tb_schedule_thesis.dosen_id_2', 'left');
+			$this->db->join('tb_dosen as dos3', 'dos3.id = tb_schedule_thesis.dosen_id_3', 'left');
 			$this->db->where('tb_schedule_thesis.status', '1');
 
 			return $this->db->get($this->table);
@@ -44,8 +48,12 @@ class Schedule_thesis_model extends CI_Model {
 				$this->db->select('ref_shift.name as shift');
 				$this->db->select('TIME_FORMAT(ref_shift.start_time, "%H:%i") as start', FALSE);
 				$this->db->select('TIME_FORMAT(ref_shift.end_time, "%H:%i") as end', FALSE);
+				$this->db->select('CONCAT("(1)",dos1.name,"(2)",dos2.name,"(3)",dos3.name) as examiner');
 				$this->db->join('ref_room', 'ref_room.id = tb_schedule_thesis.room_id');
 				$this->db->join('ref_shift', 'ref_shift.id = tb_schedule_thesis.shift_id');
+				$this->db->join('tb_dosen as dos1', 'dos1.id = tb_schedule_thesis.dosen_id_1', 'left');
+				$this->db->join('tb_dosen as dos2', 'dos2.id = tb_schedule_thesis.dosen_id_2', 'left');
+				$this->db->join('tb_dosen as dos3', 'dos3.id = tb_schedule_thesis.dosen_id_3', 'left');
 				$this->db->where('tb_schedule_thesis.status', '1');
 				foreach ($where as $key => $value) {
 					$this->db->where($key, $value);
@@ -61,8 +69,12 @@ class Schedule_thesis_model extends CI_Model {
 				$this->db->select('ref_shift.name as shift');
 				$this->db->select('TIME_FORMAT(ref_shift.start_time, "%H:%i") as start', FALSE);
 				$this->db->select('TIME_FORMAT(ref_shift.end_time, "%H:%i") as end', FALSE);
+				$this->db->select('CONCAT("(1)",dos1.name,"(2)",dos2.name,"(3)",dos3.name) as examiner');
 				$this->db->join('ref_room', 'ref_room.id = tb_schedule_thesis.room_id');
 				$this->db->join('ref_shift', 'ref_shift.id = tb_schedule_thesis.shift_id');
+				$this->db->join('tb_dosen as dos1', 'dos1.id = tb_schedule_thesis.dosen_id_1', 'left');
+				$this->db->join('tb_dosen as dos2', 'dos2.id = tb_schedule_thesis.dosen_id_2', 'left');
+				$this->db->join('tb_dosen as dos3', 'dos3.id = tb_schedule_thesis.dosen_id_3', 'left');
 				$this->db->where('tb_schedule_thesis.status', '1');
         $this->db->from($this->table);
 

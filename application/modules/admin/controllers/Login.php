@@ -41,7 +41,7 @@ class Login extends MX_Controller {
 								$data['login'] = TRUE;
 								$this->session->set_userdata($data);
 
-								redirect('home/dashboard');
+								redirect('schedule/schedule');
 
 							} else {
 

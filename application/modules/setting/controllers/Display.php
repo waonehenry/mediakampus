@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Prodi extends MX_Controller {
+class Display extends MX_Controller {
 
 	function __construct()
     {
@@ -11,25 +11,26 @@ class Prodi extends MX_Controller {
 				} else {
 						redirect('admin/login/login');
 				}
-				$this->load->model('Prodi_model');
+				$this->load->model('Apps_display_model');
     }
 
 	public function index()
 	{
-			$data['page'] = 'masterdata/prodi/index';
-			$data['title'] = 'Prodi';
-			$data['modul'] = 'Masterdata';
+			$data['page'] = 'setting/display/index';
+			$data['title'] = 'Display';
+			$data['modul'] = 'Setting';
 			$data['role'] = '';
-
+			$data['profile'] = $this->Apps_display_model->get_data()->row_array();
 			$this->view($data);
 	}
 
 	public function store()
 	{
 			$data = $this->input->post('data');
+			$data['create_time'] = date('Y-m-d H:i:s');
 			$data['user_id'] = $this->user_id;
 
-			$result = $this->Prodi_model->insert($data);
+			$result = $this->Apps_display_model->insert($data);
 			if ($result)
 			{
 				$response['status'] = 'success';
@@ -47,7 +48,7 @@ class Prodi extends MX_Controller {
 	public function edit($id)
 	{
 			$where['id'] = $id;
-			$data = $this->Prodi_model->get_data_by($where)->row_array();
+			$data = $this->Apps_display_model->get_data_by($where)->row_array();
 
 			echo json_encode($data);
 	}
@@ -58,7 +59,7 @@ class Prodi extends MX_Controller {
 			$data['updated_at'] = date('Y-m-d H:i:s');
 			$data['user_id'] = $this->user_id;
 
-			$result = $this->Prodi_model->update($data, $id);
+			$result = $this->Apps_display_model->update($data, $id);
 			if ($result)
 			{
 				$response['status'] = 'success';
@@ -76,10 +77,10 @@ class Prodi extends MX_Controller {
 	public function delete($id)
 	{
 			$data['status'] = '0';
-			$data['deleted_at'] = date('Y-m-d H:i:s');
+			$data['delete_time'] = date('Y-m-d H:i:s');
 			$data['user_id'] = '1';
 
-			$result = $this->Prodi_model->delete($data, $id);
+			$result = $this->Apps_display_model->delete($data, $id);
 			if ($result)
 			{
 				$response['status'] = 'success';
@@ -94,47 +95,6 @@ class Prodi extends MX_Controller {
 			echo json_encode($response);
 	}
 
-	//server side list
-	public function server_side_list()
-  {
-      $list = $this->Prodi_model->get_datatables();
-      $data = array();
-      $no = $_POST['start'];
-      foreach ($list as $field) {
-          $no++;
-          $row = array();
-          $row[] = $no;
-          $row[] = $field->code;
-					$row[] = $field->name;
-          $row[] = $field->description;
-					$row[] = '<div class="btn-group">
-							<button class="btn green btn-small btn-outline dropdown-toggle" data-toggle="dropdown">Tools
-									<i class="fa fa-angle-down"></i>
-							</button>
-							<ul class="dropdown-menu pull-right">
-									<li>
-											<a href="'.base_url().'masterdata/prodi/edit/'.$field->id.'" class="btn-edit">
-													<i class="fa fa-pencil"></i> Edit </a>
-									</li>
-									<li>
-											<a href="'.base_url().'masterdata/prodi/delete/'.$field->id.'" class="btn-delete">
-													<i class="fa fa-delete"></i> Delete </a>
-									</li>
-							</ul>
-					</div>';
-          $data[] = $row;
-      }
-
-      $output = array(
-                      "draw" => $_POST['draw'],
-                      "recordsTotal" => $this->Prodi_model->count_all(),
-                      "recordsFiltered" => $this->Prodi_model->count_filtered(),
-                      "data" => $data,
-              );
-
-      echo json_encode($output);
-  }
-
 	public function search()
 	{
 			// code here
@@ -142,7 +102,7 @@ class Prodi extends MX_Controller {
 
 	public function view($data)
 	{
-			// $data['menu'] = $this->menu_management->core();
+			$data['menu'] = $this->menu_management->core();
 
 			$this->load->view('home/layout/head', $data);
 			$this->load->view('home/layout/menu');

@@ -250,7 +250,7 @@ function empty_course($dosen_id, $shift_id, $date) {
 		$CI->db->where('dosen_id', $dosen_id);
 		$CI->db->where('shift_start', $shift_id);
 		$CI->db->where('date_start', $date);
-		$empty = $CI->db->get('tb_schedule_restriction')->num_rows();
+		$empty = $CI->db->get('tb_schedule_restriction');
 
 		return $empty;
 }

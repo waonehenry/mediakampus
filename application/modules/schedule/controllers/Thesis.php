@@ -5,7 +5,12 @@ class Thesis extends MX_Controller {
 
 	function __construct()
     {
-        parent::__construct();
+				parent::__construct();
+				if ($this->session->userdata('login') == TRUE) {
+							$this->user_id = $this->session->userdata('id');
+				} else {
+						redirect('admin/login/login');
+				}
 				$this->load->model('Schedule_thesis_model');
 				$this->load->model('masterdata/Course_model');
 				$this->load->model('masterdata/Shift_model');
@@ -13,7 +18,6 @@ class Thesis extends MX_Controller {
 				$this->load->model('masterdata/Day_model');
 				$this->load->model('masterdata/Room_model');
 				$this->load->model('masterdata/Student_class_model');
-				$this->user_id = 1;
     }
 
 	public function index()
@@ -22,6 +26,7 @@ class Thesis extends MX_Controller {
 			$data['title'] = 'Thesis';
 			$data['shift'] = $this->Shift_model->get_data();
 			$data['room'] = $this->Room_model->get_data();
+			$data['dosen'] = $this->Dosen_model->get_data();
 			$data['modul'] = 'Thesis Schedule';
 			$data['role'] = '';
 
@@ -113,7 +118,8 @@ class Thesis extends MX_Controller {
           $row[] = $no;
 					$row[] = $field->title;
 					$row[] = $field->description;
-          $row[] = $field->d_date.'|'.$field->shift;
+					$row[] = $field->examiner;
+          $row[] = $field->d_date.'<br>'.$field->shift;
 					$row[] = $field->room;
 					$row[] = '<div class="btn-group">
 							<button class="btn green btn-small btn-outline dropdown-toggle" data-toggle="dropdown">Tools

@@ -87,6 +87,17 @@
                     <li>
                         <a href="<?= base_url(); ?>roles/user" class="menu-user"><i class="fa fa-fw fa-file"></i> User</a>
                     </li>
+                    <li>
+                        <a href="<?= base_url(); ?>roles/modul" class="menu-modul"><i class="fa fa-fw fa-file"></i> Modul</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="waves-effect waves-dark modul-setting"><i class="fa fa-edit"></i> Setting <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level ul-setting">
+                    <li>
+                        <a href="<?= base_url(); ?>setting/display" class="menu-setting"><i class="fa fa-fw fa-file"></i> Display</a>
+                    </li>
                 </ul>
             </li>
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Target Material Design Bootstrap Admin Template</title>
+    <title>Title</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="<?= base_url(); ?>assets/template/materialize/css/materialize.min.css" media="screen,projection" />
     <!-- Bootstrap Styles-->
@@ -41,24 +41,37 @@
 
 <body>
     <div id="wrapper">
-        <nav class="navbar navbar-default top-navbar" role="navigation">
-            <div class="navbar-header">
+        <nav class="navbar navbar-default top-navbar" role="navigation" style="">
+            <div class="navbar-header" style="padding-top: 2px;">
                 <button type="button" class="navbar-toggle waves-effect waves-dark" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand waves-effect waves-dark" href="index.html"><i class="large material-icons">info_outline</i> <strong>KAMPUS</strong></a>
+                <!-- <a class="navbar-brand waves-effect waves-dark" href="index.html"> -->
+                <a class="" href="index.html" style="padding-left: 20px; padding-right: 20px;">
+                  <!-- <i class="large material-icons">info_outline</i> -->
+                  <img src="<?= base_url(); ?>assets/upload/logo/logo-uin-fix.png" width="40px">
+                  <!-- <strong>FEBI UIN SUKA</strong> -->
+                </a>
 
-		            <div id="sideNav" href="" class=""><i class="material-icons dp48" id="toc">toc</i></div>
+		            <div id="sideNav" href="" class="" style="display:none;"><i class="material-icons dp48" id="toc">toc</i></div>
             </div>
-
             <ul class="nav navbar-top-links navbar-right">
 			          <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1">
                       <i class="fa fa-user fa-fw"></i> <b><?= ($this->session->userdata('name') !== null) ? $this->session->userdata('name') : "public" ?></b>
                       <i class="material-icons right">arrow_drop_down</i>
                     </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-top-links navbar-left" style="background: #ff9900 ! important;">
+			          <li>
+                  <a href="#" class="dropdown-button waves-effect waves-dark" style="color: white;">
+                      <strong>
+                        FAKULTAS EKONOMI DAN BISNIS ISLAM
+                      </strong>
+                  </a>
                 </li>
             </ul>
         </nav>

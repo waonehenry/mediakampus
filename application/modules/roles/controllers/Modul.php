@@ -5,15 +5,20 @@ class Modul extends MX_Controller {
 
 	function __construct()
     {
-        parent::__construct();
+				parent::__construct();
+				if ($this->session->userdata('login') == TRUE) {
+							$this->user_id = $this->session->userdata('id');
+				} else {
+						redirect('admin/login/login');
+				}
 				$this->load->model('Modul_model');
-				$this->user_id = 1;
     }
 
 	public function index()
 	{
 			$data['page'] = 'roles/modul/index';
 			$data['title'] = 'Modul';
+			$data['modul'] = 'Roles';
 			$data['role'] = '';
 
 			$this->view($data);
@@ -140,6 +145,7 @@ class Modul extends MX_Controller {
 			$data['menu'] = $this->menu_management->core();
 
 			$this->load->view('home/layout/head', $data);
+			$this->load->view('home/layout/menu');
 			$this->load->view($data['page'], $data);
 			$this->load->view('home/layout/foot');
 	}

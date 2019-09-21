@@ -62,6 +62,39 @@
        								</div>
    							   </div>
                    <div class="row">
+                     <div class="col s12">
+                        <label for="dosen-1">Dosen Penguji 1</label>
+                        <select id="dosen-1" name=data[dosen_id_1] required class="form-control select2 input-text-select2">
+                            <option value="">Silakan pilih</option>
+                            <?php foreach ($dosen->result() as $key): ?>
+                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="col s12">
+                        <label for="dosen-2">Dosen Penguji 2</label>
+                        <select id="dosen-2" name=data[dosen_id_2] required class="form-control select2 input-text-select2">
+                            <option value="">Silakan pilih</option>
+                            <?php foreach ($dosen->result() as $key): ?>
+                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="col s12">
+                        <label for="dosen-3">Dosen Penguji 3</label>
+                        <select id="dosen-3" name=data[dosen_id_3] required class="form-control select2 input-text-select2">
+                            <option value="">Silakan pilih</option>
+                            <?php foreach ($dosen->result() as $key): ?>
+                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                     </div>
+                   </div>
+                   <div class="row">
        								<div class="input-field col s12">
        								  <button type="submit" class="btn btn-small btn-submit btn-success">Save</button>
                         <button type="reset" class="btn btn-small btn-reset btn-default">Reset</button>
@@ -83,10 +116,11 @@
                           <thead>
                               <tr>
                                   <th>No.</th>
-                                  <th>Judul</th>
-                                  <th>Deskripsi</th>
-                                  <th>Waktu</th>
-                                  <th>Ruang</th>
+                                  <th>Title</th>
+                                  <th>Description</th>
+                                  <th>Examiner</th>
+                                  <th width="10%">Time</th>
+                                  <th width="10%">Room</th>
                                   <th>Act</th>
                               </tr>
                           </thead>
@@ -161,6 +195,9 @@
                        $("#date").val(response.d_date);
                        $("#room").select2("val", response.room_id);
                        $("#shift").select2("val", response.shift_id);
+                       $("#dosen-1").select2("val", response.dosen_id_1);
+                       $("#dosen-2").select2("val", response.dosen_id_2);
+                       $("#dosen-3").select2("val", response.dosen_id_3);
                        $(".form-input").attr("action", url_update);
                        formFocus();
                    }

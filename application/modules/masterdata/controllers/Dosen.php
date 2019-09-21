@@ -5,9 +5,13 @@ class Dosen extends MX_Controller {
 
 	function __construct()
     {
-        parent::__construct();
+				parent::__construct();
+				if ($this->session->userdata('login') == TRUE) {
+							$this->user_id = $this->session->userdata('id');
+				} else {
+						redirect('admin/login/login');
+				}
 				$this->load->model('Dosen_model');
-				$this->user_id = 1;
     }
 
 	public function index()

@@ -10,7 +10,6 @@ class Dashboard extends MX_Controller {
 				$this->load->model('schedule/Schedule_thesis_model');
 				$this->load->model('agenda/Agenda_model');
 				$this->load->model('register/Thesis_register_model');
-				// if (!$this->session->userdata('login')) redirect('admin/login');
     }
 
 	public function index()

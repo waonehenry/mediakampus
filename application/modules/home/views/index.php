@@ -1,6 +1,21 @@
 <style>
-* {box-sizing: border-box;}
-body {font-family: Verdana, sans-serif;}
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Verdana, sans-serif;
+}
+
+.row {
+  margin-bottom: 0px ! important;
+  height: 50% ! important;
+}
+
+#page-inner {
+  margin: 0px ! important;
+  padding: 5px 20px ! important;
+}
+
 .mySlides {display: none;}
 img {vertical-align: middle;}
 
@@ -14,7 +29,7 @@ img {vertical-align: middle;}
 /* Caption text */
 .text {
   color: #f2f2f2;
-  font-size: 15px;
+  font-size: 30px;
   padding: 8px 12px;
   position: absolute;
   bottom: 8px;
@@ -25,7 +40,7 @@ img {vertical-align: middle;}
 /* Number text (1/3 etc) */
 .numbertext {
   color: #f2f2f2;
-  font-size: 12px;
+  font-size: 30px;
   padding: 8px 12px;
   position: absolute;
   top: 0;
@@ -53,62 +68,125 @@ img {vertical-align: middle;}
   animation-name: fade;
   animation-duration: 1.5s;
 }
-
-@-webkit-keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
+</style>
+<style>
+.example3 {
+ overflow: hidden;
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ margin: 0;
+ white-space: nowrap;
+ display: inline-block;
+ /* text-align: center; */
+ /* Starting position */
+ -moz-transform:translateY(-100%);
+ -webkit-transform:translateY(-100%);
+ transform:translateY(-100%);
+ /* Apply animation to this element */
+ -moz-animation: example3 16s linear infinite;
+ -webkit-animation: example3 16s linear infinite;
+ animation: example3 16s linear infinite;
+}
+/* Move it (define the animation) */
+@-moz-keyframes example3 {
+ 0%   { -moz-transform: translateY(-100%); }
+ 100% { -moz-transform: translateY(100%); }
+}
+@-webkit-keyframes example3 {
+ 0%   { -webkit-transform: translateY(-100%); }
+ 100% { -webkit-transform: translateY(100%); }
+}
+@keyframes example3 {
+ 0%   {
+ -moz-transform: translateY(-100%); /* Firefox bug fix */
+ -webkit-transform: translateY(-100%); /* Firefox bug fix */
+ transform: translateY(-100%);
+ }
+ 100% {
+ -moz-transform: translateY(100%); /* Firefox bug fix */
+ -webkit-transform: translateY(100%); /* Firefox bug fix */
+ transform: translateY(100%);
+ }
 }
 
-@keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
+.example4 {
+  animation-delay: 8s;
 }
+</style>
 
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .text {font-size: 11px}
-}
-</style><div id="page-wrapper">
+<div id="page-wrapper">
     <div class="header">
-        <!-- <h1 class="page-header">
-            Dashboard
-        </h1> -->
-        <ol class="breadcrumb">
-          <!-- <li><a href="#">Home</a></li>
-          <li><a href="#">Dashboard</a></li>
-          <li class="active">Data</li> -->
-        </ol>
+        <ol class="breadcrumb"></ol>
     </div>
-        <div id="page-inner" style="padding-top: 0px ! important;">
+        <div id="page-inner">
+          <div id="">
           <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="card">
+                <div class="card" style="height: 350px;">
                   <div class="card-action">
                     <b>Jadwal Kuliah Hari Ini</b>
                   </div>
                   <div class="card-image">
-                    <div class="collection">
-                      <marquee  behavior="scroll" direction="down" scroll="continuous" valign="center" scrolldelay="3" scrollamount="2" onmouseover="this.stop()" onmouseout="this.start()">
+                    <div class="collection" style="height: 250px;">
+                      <div class="example3">
                       <?php foreach ($course->result() as $key): ?>
                           <?php
                                 $color_badge = "green";
-                                if (empty_course($key->dosen_id, $key->shift_id, date('Y-m-d')) > 0) {
+                                $message = "";
+                                $empty = empty_course($key->dosen_id, $key->shift_id, date('Y-m-d'));
+                                if ($empty->num_rows() > 0) {
+                                    $temp = $empty->row_array();
                                     $color_badge = "red";
+                                    $message = $temp['description'];
                                 }
                           ?>
-                          <a href="#!" class="collection-item"><?= $key->course ?> | <?= $key->room ?> | <?= $key->dosen ?> | <?= $key->class ?> <span class="new badge <?= $color_badge?>" data-badge-caption=""><?= $key->start ?>-<?= $key->end ?></span></a>
+                          <a href="#!" class="collection-item"><?= $key->course ?> | <?= $key->room ?> | <?= $key->dosen ?> | <?= $key->class ?>
+                            <span class="new badge <?= $color_badge?>" data-badge-caption=""><?= $key->start ?>-<?= $key->end ?></span>
+                            <?php if ($color_badge == "red"): ?>
+                                <span class="badge" data-badge-caption=""><?= $message ?></span>
+                            <?php endif; ?>
+                          </a>
                       <?php endforeach; ?>
-                      </marquee>
+                      </div>
+                      <div class="example3 example4">
+                      <?php foreach ($course->result() as $key): ?>
+                          <?php
+                                $color_badge = "green";
+                                $message = "";
+                                $empty = empty_course($key->dosen_id, $key->shift_id, date('Y-m-d'));
+                                if ($empty->num_rows() > 0) {
+                                    $temp = $empty->row_array();
+                                    $color_badge = "red";
+                                    $message = $temp['description'];
+                                }
+                          ?>
+                          <a href="#!" class="collection-item"><?= $key->course ?> | <?= $key->room ?> | <?= $key->dosen ?> | <?= $key->class ?>
+                            <span class="new badge <?= $color_badge?>" data-badge-caption=""><?= $key->start ?>-<?= $key->end ?></span>
+                            <?php if ($color_badge == "red"): ?>
+                                <span class="badge" data-badge-caption=""><?= $message ?></span>
+                            <?php endif; ?>
+                          </a>
+                      <?php endforeach; ?>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
           </div>
+          </div>
+          <div id="">
           <div class="row">
-            <div class="col-md-4 col-sm-12 col-xs-12">
+            <?php
+                $extend = 8;
+                if ($agenda->num_rows() > 0) {
+                    $extend = 4;
+                }
+            ?>
+            <div class="col-md-<?= $extend ?> col-sm-12 col-xs-12">
               <div class="card">
                 <div class="card-action">
-                  <b>Jadwal Munaqosah Pekan Ini</b>
+                  <b>Jadwal Munaqosah</b>
                 </div>
                 <div class="card-image">
                     <ul class="collection">
@@ -118,7 +196,8 @@ img {vertical-align: middle;}
                         <i class="material-icons circle green">track_changes</i>
                         <span class="title"><?= $key->title ?></span>
                         <p><?= $key->description ?><br>
-                           Ruang: <?= $key->room ?> <span class="new badge red" data-badge-caption=""><?= $key->start ?>-<?= $key->end ?></span>
+                           Ruang: <?= $key->room ?> <span class="new badge red" data-badge-caption=""><?= $key->start ?>-<?= $key->end ?></span><br>
+                           Penguji: <?= $key->examiner ?>
                         </p>
                       </li>
                       <?php endforeach; ?>
@@ -126,60 +205,55 @@ img {vertical-align: middle;}
                     </ul>
                     <div class="slideshow-container">
 
-<div class="mySlides fade">
-  <div class="numbertext">1 / 3</div>
-  <img src="img_nature_wide.jpg" style="width:100%">
-  <div class="text">Caption Text</div>
-</div>
+                        <div class="mySlides fade">
+                          <div class="numbertext">1 / 3</div>
+                          <img src="img_nature_wide.jpg" style="width:100%">
+                          <div class="text">Caption Text</div>
+                        </div>
 
-<div class="mySlides fade">
-  <div class="numbertext">2 / 3</div>
-  <img src="img_snow_wide.jpg" style="width:100%">
-  <div class="text">Caption Two</div>
-</div>
+                        <div class="mySlides fade">
+                          <div class="numbertext">2 / 3</div>
+                          <img src="img_snow_wide.jpg" style="width:100%">
+                          <div class="text">Caption Two</div>
+                        </div>
 
-<div class="mySlides fade">
-  <div class="numbertext">3 / 3</div>
-  <img src="img_mountains_wide.jpg" style="width:100%">
-  <div class="text">Caption Three</div>
-</div>
+                        <div class="mySlides fade">
+                          <div class="numbertext">3 / 3</div>
+                          <img src="img_mountains_wide.jpg" style="width:100%">
+                          <div class="text">Caption Three</div>
+                        </div>
 
-</div>
-<br>
-
-<div style="text-align:center">
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-</div>
+                    </div>
+                    <br>
+                    <div style="text-align:center">
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                    </div>
                 </div>
               </div>
             </div>
+              <?php if ($agenda->num_rows() > 0): ?>
               <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="card">
                   <div class="card-action">
-                    <b>Agenda Bulan Ini</b>
+                    <b>Agenda Kampus</b>
                   </div>
                   <div class="card-image">
                     <ul class="collection">
-                        <?php if ($agenda->num_rows() > 0): ?>
-                            <?php foreach ($agenda->result() as $key): ?>
-                                <li class="collection-item">
-                                  <span class="title"><b><?= $key->title ?></b></span>
-                                  <p><?= $key->description ?><br>
-                                  <span class="new badge green" data-badge-caption=""><?= $key->time_desc ?></span>
-                                  </p>
-                                </li>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                          <li class="collection-item">
-                            <i>Belum ada agenda</i>
-                          </li>
-                        <?php endif; ?>
+                        <?php foreach ($agenda->result() as $key): ?>
+                            <li class="collection-item">
+                              <span class="title"><b><?= $key->title ?></b></span>
+                              <p><?= $key->description ?><br>
+                              <span class="new badge green" data-badge-caption=""><?= $key->time_desc ?></span>
+                              </p>
+                            </li>
+                        <?php endforeach; ?>
                     </ul>
                   </div>
                 </div>
               </div>
+              <?php endif; ?>
               <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="card">
                   <div class="card-action">
@@ -206,23 +280,24 @@ img {vertical-align: middle;}
                 </div>
               </div>
           </div>
+          </div>
           <!-- /. ROW  -->
            <div class="fixed-action-btn horizontal click-to-toggle">
-              <a class="btn-floating btn-large red">
+              <a class="btn-floating btn-large orange">
                 <i class="material-icons">menu</i>
               </a>
               <ul>
                 <li><a class="btn-floating red"><i class="material-icons">track_changes</i></a></li>
                 <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
                 <li><a class="btn-floating green" id="btn-fs"><i class="material-icons">publish</i></a></li>
-                <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+                <li><a class="btn-floating blue" id="btn-admin"><i class="material-icons">attach_file</i></a></li>
               </ul>
             </div>
 
-          <footer><p>All right reserved. Template by: <a href="https://webthemez.com/admin-template/">WebThemez.com</a></p>
+          <!-- <footer style="position: fixed;"><p>All right reserved. Template by: <a href="https://webthemez.com/admin-template/">WebThemez.com</a></p>
 
 
-          </footer>
+          </footer> -->
         </div>
         <!-- /. PAGE INNER  -->
     </div>
@@ -266,6 +341,12 @@ $(document).ready(function(){
         e.preventDefault();
         var elem = document.body; // Make the body go full screen.
         requestFullScreen(elem);
+    })
+
+    $("#btn-admin").on("click", function(e) {
+        e.preventDefault();
+        var url = "<?= base_url() ?>schedule/schedule"; // Make the body go full screen.
+        window.location.href=url;
     })
     // maxWindow();
     // setTimeout(function(){
