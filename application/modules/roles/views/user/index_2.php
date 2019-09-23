@@ -20,39 +20,29 @@
                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
                      <p id="message"></p>
                  </div>
-                 <form class="col s12 form-input" method="post" action="<?= base_url()?>setting/display/update/1">
+                 <form class="col s12 form-input" method="post" action="<?= base_url()?>roles/user/update/<?= $profile['id']?>">
                    <div class="row">
                      <div class="input-field col s12">
-                       <input id="title" type="text" name="data[title]" required class="input-text first-focus" value="<?= $profile['title']?>">
-                       <label for="title" class="first-focus-label active">Title</label>
+                       <input id="username" type="text" name="" required class="" autocomplete="off" value="<?= $profile['username']?>" readonly>
+                       <label for="username">Username</label>
                      </div>
                    </div>
                    <div class="row">
                      <div class="input-field col s12">
-                       <input id="description" type="text" name="data[description]" class="input-text" autocomplete="off" value="<?= $profile['description']?>">
-                       <label for="description">Description</label>
+                       <input id="password" type="password" name="data[password]" required class="input-text" autocomplete="off">
+                       <label for="password">Old Password</label>
                      </div>
                    </div>
                    <div class="row">
                      <div class="input-field col s12">
-                       <input id="schedule-speed" type="number" name="data[marquee_speed]" class="input-text" autocomplete="off" value="<?= $profile['marquee_speed']?>">
-                       <label for="schedule-speed">Schedule Speed</label>
+                       <input id="" type="password" name="data[new_password]" required class="input-text" autocomplete="off">
+                       <label for="password">New Password</label>
                      </div>
                    </div>
                    <div class="row">
                      <div class="input-field col s12">
-                       <input id="running-text-speed" type="number" name="data[marquee_speed_running_text]" class="input-text" autocomplete="off" value="<?= $profile['marquee_speed_running_text']?>">
-                       <label for="running-text-speed">Running Text Speed</label>
-                     </div>
-                   </div>
-                   <div class="row">
-                     <div class="col s12">
-                        <label for="semester">Semester</label>
-                        <select id="semester" name=data[semester] required class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <option value="1">Gasal</option>
-                            <option value="2">Genap</option>
-                        </select>
+                       <input id="" type="password" name="data[confirm_password]" required class="input-text" autocomplete="off">
+                       <label for="password">Confirm New Password</label>
                      </div>
                    </div>
                    <div class="row">
@@ -82,8 +72,8 @@
    </div>
    <script type="text/javascript">
    $(document).ready(function() {
-       $(".ul-setting").addClass('collapse in');
-       $(".menu-setting").addClass('active-menu');
+       $(".ul-user-management").addClass('collapse in');
+       $(".menu-user").addClass('active-menu');
 
        $('.form-input').on("submit", function(e) {
            e.preventDefault();
@@ -95,8 +85,7 @@
                success: function (response) {
                    notif(response.status, response.message);
                    if (response.status == 'success') {
-                       resetInput(default_url);
-                       table.ajax.reload();
+                      window.location.href = '<?= base_url() ?>admin/login/logout';
                    }
                }
            })

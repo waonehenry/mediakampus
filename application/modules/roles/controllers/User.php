@@ -53,11 +53,63 @@ class User extends MX_Controller {
 			echo json_encode($data);
 	}
 
+	public function profile($id)
+	{
+			$where['id'] = $id;
+			$data['profile'] = $this->User_model->get_data_by($where)->row_array();
+
+			$data['page'] = 'roles/user/index_2';
+			$data['title'] = 'Profile';
+			$data['modul'] = 'User';
+
+			$this->view($data);
+	}
+
 	public function update($id)
 	{
 			$data = $this->input->post('data');
 			$data['updated_at'] = date('Y-m-d H:i:s');
 			$data['user_id'] = $this->user_id;
+
+			if (isset($data['new_password'])) {
+					if ($data['new_password'] != $data['confirm_password']) {
+							$response['status'] = 'danger';
+							$response['message'] = 'Sorry! Wrong confrim password.';
+
+							echo json_encode($response);
+							die();
+					} else {
+						 $where['id'] = $id;
+						 $where['password'] = md5('febi2019oke!'.$data['password']);
+
+						 $check = $this->User_model->get_data_by($where);
+						 if ($check->num_rows() > 0) {
+							 	 $password['password'] = md5('febi2019oke!'.$data['new_password']);
+								 $password['updated_at'] = date('Y-m-d H:i:s');
+					 			 $password['user_id'] = $this->user_id;
+								 $result = $this->User_model->update($password, $id);
+								 if ($result)
+								 {
+									 $response['status'] = 'success';
+									 $response['message'] = 'Congrulation! Data has been updated.';
+								 }
+								 else
+								 {
+									 $response['status'] = 'danger';
+									 $response['message'] = 'Sorry! Data has not been updated.';
+								 }
+
+								 echo json_encode($response);
+								 die();
+						 } else {
+								 $response['status'] = 'danger';
+								 $response['message'] = 'Sorry! Old password is not match.';
+
+								 echo json_encode($response);
+								 die();
+						 }
+					}
+			}
 			unset($data['password']);
 
 			$result = $this->User_model->update($data, $id);

@@ -24,6 +24,9 @@
                     <li>
                         <a href="<?= base_url(); ?>agenda/agenda" class="menu-agenda"><i class="fa fa-fw fa-file"></i> Event</a>
                     </li>
+                    <li>
+                        <a href="<?= base_url(); ?>agenda/running_text" class="menu-running-text"><i class="fa fa-fw fa-file"></i> Running Text</a>
+                    </li>
                 </ul>
             </li>
 
@@ -97,34 +100,6 @@
                 <ul class="nav nav-second-level ul-setting">
                     <li>
                         <a href="<?= base_url(); ?>setting/display" class="menu-setting"><i class="fa fa-fw fa-file"></i> Display</a>
-                    </li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="#" class="waves-effect waves-dark"><i class="fa fa-sitemap"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="#">Second Level Link</a>
-                    </li>
-                    <li>
-                        <a href="#">Second Level Link</a>
-                    </li>
-                    <li>
-                        <a href="#">Second Level Link<span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level">
-                            <li>
-                                <a href="#">Third Level Link</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Link</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Link</a>
-                            </li>
-
-                        </ul>
-
                     </li>
                 </ul>
             </li>

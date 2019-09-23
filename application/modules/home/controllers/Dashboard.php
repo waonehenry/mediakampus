@@ -9,6 +9,7 @@ class Dashboard extends MX_Controller {
 				$this->load->model('schedule/Schedule_model');
 				$this->load->model('schedule/Schedule_thesis_model');
 				$this->load->model('agenda/Agenda_model');
+				$this->load->model('agenda/Running_text_model');
 				$this->load->model('register/Thesis_register_model');
     }
 
@@ -17,7 +18,7 @@ class Dashboard extends MX_Controller {
 			$where = array(
 					'semester' => 1,
 					'course_year' => date('Y'),
-					'day' => date('N')
+					'day' => 6 // date('N')
 			);
 
 			$data['page'] = 'home/index';
@@ -25,6 +26,7 @@ class Dashboard extends MX_Controller {
 			$data['role'] = '';
 			$data['course']	= $this->Schedule_model->get_data_by($where);
 			$data['thesis']	= $this->Schedule_thesis_model->get_data();
+			$data['running_text']	= $this->Running_text_model->get_data();
 			$data['agenda']	= $this->Agenda_model->get_data_by(array('type'=>1));
 			$data['info']	= $this->Agenda_model->get_data_by(array('type'=>2));
 			$data['register']	= $this->Thesis_register_model->get_data();

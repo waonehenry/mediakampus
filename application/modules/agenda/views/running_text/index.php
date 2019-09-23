@@ -20,39 +20,11 @@
                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
                      <p id="message"></p>
                  </div>
-                 <form class="col s12 form-input" method="post" action="<?= base_url()?>schedule/thesis/store">
-                   <div class="row">
-                     <div class="col s12">
-                        <label for="room">Room</label>
-                        <select id="room" name=data[room_id] required class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <?php foreach ($room->result() as $key): ?>
-                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                     </div>
-                   </div>
-                   <div class="row">
-                     <div class="col s12">
-                        <label for="shift">Shift</label>
-                        <select id="shift" name=data[shift_id] required class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <?php foreach ($shift->result() as $key): ?>
-                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                     </div>
-                   </div>
+                 <form class="col s12 form-input" method="post" action="<?= base_url()?>agenda/running_text/store">
                    <div class="row">
                      <div class="input-field col s12">
-                       <input id="date" type="text" name="data[d_date]" required class="input-text input-date" autocomplete="off">
-                       <label for="date">Date</label>
-                     </div>
-                   </div>
-                   <div class="row">
-                     <div class="input-field col s12">
-                       <input id="title" type="text" name="data[title]" required class="input-text" autocomplete="off">
-                       <label for="title">Title</label>
+                       <input id="name" type="text" name="data[name]" required class="input-text" autocomplete="off">
+                       <label for="name">Name</label>
                      </div>
                    </div>
                    <div class="row">
@@ -61,50 +33,6 @@
        								  <label for="description">Description</label>
        								</div>
    							   </div>
-                   <div class="row">
-                     <div class="col s12">
-                        <label for="semester">Type</label>
-                        <select id="semester" name=data[type] required class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <option value="1">Munaqosah S1</option>
-                            <option value="2">Munaqosah S2</option>
-                            <option value="3">Seminar Proposal</option>
-                        </select>
-                     </div>
-                   </div>
-                   <div class="row">
-                     <div class="col s12">
-                        <label for="dosen-1">Dosen Penguji 1</label>
-                        <select id="dosen-1" name=data[dosen_id_1] required class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <?php foreach ($dosen->result() as $key): ?>
-                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                     </div>
-                   </div>
-                   <div class="row">
-                     <div class="col s12">
-                        <label for="dosen-2">Dosen Penguji 2</label>
-                        <select id="dosen-2" name=data[dosen_id_2] required class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <?php foreach ($dosen->result() as $key): ?>
-                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                     </div>
-                   </div>
-                   <div class="row">
-                     <div class="col s12">
-                        <label for="dosen-3">Dosen Penguji 3</label>
-                        <select id="dosen-3" name=data[dosen_id_3] required class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <?php foreach ($dosen->result() as $key): ?>
-                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                     </div>
-                   </div>
                    <div class="row">
        								<div class="input-field col s12">
        								  <button type="submit" class="btn btn-small btn-submit btn-success">Save</button>
@@ -116,7 +44,7 @@
               </div>
             </div>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-6">
           <div class="card">
               <div class="card-action" style="border-bottom: 1px solid;">
                    Data
@@ -127,11 +55,8 @@
                           <thead>
                               <tr>
                                   <th>No.</th>
-                                  <th>Title</th>
-                                  <th>Type</th>
-                                  <th>Examiner</th>
-                                  <th width="10%">Time</th>
-                                  <th width="10%">Room</th>
+                                  <th>Name</th>
+                                  <th>Desc</th>
                                   <th>Act</th>
                               </tr>
                           </thead>
@@ -142,7 +67,7 @@
           </div>
         </div>
    </div>
-   <div class="modal fade" id="modal-delete"  data-backdrop="static" data-keyboard="false" style="height: 272px;">
+   <div class="modal fade" id="modal-delete"  data-backdrop="static" data-keyboard="false">
      <div class="" style="margin-top:100px;">
          <h4 style="text-align:center;">Apakah anda yakin menghapus data ini?</h4>
      </div>
@@ -157,11 +82,10 @@
    </div>
    <script type="text/javascript">
    $(document).ready(function() {
-        $(".ul-schedule").addClass("collapse in");
-        $(".modul-schedule").addClass('active-menu');
-        $(".menu-thesis").addClass('active-menu');
+       $(".ul-agenda").addClass('collapse in');
+       $(".menu-running-text").addClass('active-menu');
 
-       var default_url = '<?= base_url()?>schedule/thesis/store';
+       var default_url = '<?= base_url()?>agenda/running_text/store';
        //datatables
        table = $('#table-content').DataTable({
            "processing": true, //Feature control the processing indicator.
@@ -170,7 +94,7 @@
 
            // Load data for the table's content from an Ajax source
            "ajax": {
-               "url": "<?php echo site_url('schedule/thesis/server_side_list')?>",
+               "url": "<?php echo site_url('agenda/running_text/server_side_list')?>",
                "type": "POST"
            },
 
@@ -201,14 +125,9 @@
                    type: "GET",
                    dataType: "json",
                    success: function(response) {
-                       $("#title").val(response.title);
+                       $("#name").val(response.name);
+                       $("#code").val(response.code);
                        $("#description").val(response.description);
-                       $("#date").val(response.d_date);
-                       $("#room").select2("val", response.room_id);
-                       $("#shift").select2("val", response.shift_id);
-                       $("#dosen-1").select2("val", response.dosen_id_1);
-                       $("#dosen-2").select2("val", response.dosen_id_2);
-                       $("#dosen-3").select2("val", response.dosen_id_3);
                        $(".form-input").attr("action", url_update);
                        formFocus();
                    }

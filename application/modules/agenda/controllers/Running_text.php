@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Thesis extends MX_Controller {
+class Running_text extends MX_Controller {
 
 	function __construct()
     {
@@ -11,23 +11,14 @@ class Thesis extends MX_Controller {
 				} else {
 						redirect('admin/login/login');
 				}
-				$this->load->model('Schedule_thesis_model');
-				$this->load->model('masterdata/Course_model');
-				$this->load->model('masterdata/Shift_model');
-				$this->load->model('masterdata/Dosen_model');
-				$this->load->model('masterdata/Day_model');
-				$this->load->model('masterdata/Room_model');
-				$this->load->model('masterdata/Student_class_model');
+				$this->load->model('Running_text_model');
     }
 
 	public function index()
 	{
-			$data['page'] = 'schedule/thesis/index';
-			$data['title'] = 'Thesis';
-			$data['shift'] = $this->Shift_model->get_data();
-			$data['room'] = $this->Room_model->get_data();
-			$data['dosen'] = $this->Dosen_model->get_data();
-			$data['modul'] = 'Thesis Schedule';
+			$data['page'] = 'agenda/running_text/index';
+			$data['title'] = 'Running Text';
+			$data['modul'] = 'Agenda';
 			$data['role'] = '';
 
 			$this->view($data);
@@ -37,9 +28,8 @@ class Thesis extends MX_Controller {
 	{
 			$data = $this->input->post('data');
 			$data['user_id'] = $this->user_id;
-			$data['d_date'] = convertDateMysql($data['d_date']);
 
-			$result = $this->Schedule_thesis_model->insert($data);
+			$result = $this->Running_text_model->insert($data);
 			if ($result)
 			{
 				$response['status'] = 'success';
@@ -56,9 +46,8 @@ class Thesis extends MX_Controller {
 
 	public function edit($id)
 	{
-			$where['tb_schedule_thesis.id'] = $id;
-			$data = $this->Schedule_thesis_model->get_data_by($where)->row_array();
-			$data['d_date'] = convertInputMask($data['d_date']);
+			$where['ref_room.id'] = $id;
+			$data = $this->Running_text_model->get_data_by($where)->row_array();
 
 			echo json_encode($data);
 	}
@@ -68,9 +57,8 @@ class Thesis extends MX_Controller {
 			$data = $this->input->post('data');
 			$data['updated_at'] = date('Y-m-d H:i:s');
 			$data['user_id'] = $this->user_id;
-			$data['d_date'] = convertDateMysql($data['d_date']);
 
-			$result = $this->Schedule_thesis_model->update($data, $id);
+			$result = $this->Running_text_model->update($data, $id);
 			if ($result)
 			{
 				$response['status'] = 'success';
@@ -91,7 +79,7 @@ class Thesis extends MX_Controller {
 			$data['deleted_at'] = date('Y-m-d H:i:s');
 			$data['user_id'] = '1';
 
-			$result = $this->Schedule_thesis_model->delete($data, $id);
+			$result = $this->Running_text_model->delete($data, $id);
 			if ($result)
 			{
 				$response['status'] = 'success';
@@ -109,38 +97,26 @@ class Thesis extends MX_Controller {
 	//server side list
 	public function server_side_list()
   {
-      $list = $this->Schedule_thesis_model->get_datatables();
+      $list = $this->Running_text_model->get_datatables();
       $data = array();
       $no = $_POST['start'];
       foreach ($list as $field) {
-					if ($field->type == 1) {
-							$type = 'Munaqosah S1';
-					} elseif ($field->type == 2) {
-							$type = 'Munaqosah S2';
-					} elseif ($field->type == 3) {
-						 	$type = 'Seminar Proposal';
-					} else {
-							$type = 'undefined';
-					}
           $no++;
           $row = array();
           $row[] = $no;
-					$row[] = $field->title."<br>".$field->description;
-					$row[] = $type;
-					$row[] = $field->examiner;
-          $row[] = $field->d_date.'<br>'.$field->shift;
-					$row[] = $field->room;
+					$row[] = $field->name;
+					$row[] = $field->description;
 					$row[] = '<div class="btn-group">
 							<button class="btn green btn-small btn-outline dropdown-toggle" data-toggle="dropdown">Tools
 									<i class="fa fa-angle-down"></i>
 							</button>
 							<ul class="dropdown-menu pull-right">
 									<li>
-											<a href="'.base_url().'schedule/thesis/edit/'.$field->id.'" class="btn-edit">
+											<a href="'.base_url().'agenda/running_text/edit/'.$field->id.'" class="btn-edit">
 													<i class="fa fa-pencil"></i> Edit </a>
 									</li>
 									<li>
-											<a href="'.base_url().'schedule/thesis/delete/'.$field->id.'" class="btn-delete">
+											<a href="'.base_url().'agenda/running_text/delete/'.$field->id.'" class="btn-delete">
 													<i class="fa fa-delete"></i> Delete </a>
 									</li>
 							</ul>
@@ -150,8 +126,8 @@ class Thesis extends MX_Controller {
 
       $output = array(
                       "draw" => $_POST['draw'],
-                      "recordsTotal" => $this->Schedule_thesis_model->count_all(),
-                      "recordsFiltered" => $this->Schedule_thesis_model->count_filtered(),
+                      "recordsTotal" => $this->Running_text_model->count_all(),
+                      "recordsFiltered" => $this->Running_text_model->count_filtered(),
                       "data" => $data,
               );
 

@@ -79,7 +79,7 @@
 <ul id="dropdown1" class="dropdown-content">
   <?php if($this->session->userdata('login')): ?>
       <li>
-        <a href="#"><i class="fa fa-user fa-fw"></i> My Profile</a>
+        <a href="<?= base_url()?>roles/user/profile/<?= $this->session->userdata('id') ?>"><i class="fa fa-user fa-fw"></i> My Profile</a>
       </li>
       <li>
         <a href="<?= base_url()?>admin/login/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>

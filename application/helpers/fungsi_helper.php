@@ -254,3 +254,10 @@ function empty_course($dosen_id, $shift_id, $date) {
 
 		return $empty;
 }
+
+function setting_display() {
+		$CI =& get_instance();
+		$val = $CI->db->get('apps_display')->row_array();
+
+		return $val;
+}

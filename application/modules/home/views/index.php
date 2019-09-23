@@ -1,11 +1,4 @@
 <style>
-* {
-  box-sizing: border-box;
-}
-body {
-  font-family: Verdana, sans-serif;
-}
-
 .row {
   margin-bottom: 0px ! important;
   height: 50% ! important;
@@ -13,61 +6,9 @@ body {
 
 #page-inner {
   margin: 0px ! important;
-  padding: 5px 20px ! important;
+  padding: 5px 10px ! important;
 }
 
-.mySlides {display: none;}
-img {vertical-align: middle;}
-
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
-}
-
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 30px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 30px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-/* The dots/bullets/indicators */
-.dot {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-/* .active {
-  background-color: #717171;
-} */
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
 </style>
 <style>
 .example3 {
@@ -113,8 +54,107 @@ img {vertical-align: middle;}
 .example4 {
   animation-delay: 8s;
 }
-</style>
 
+.marquee {
+  margin: 0 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  position: absolute;
+  width: 97%;
+  height: 100%;
+}
+
+.marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 18s linear infinite;
+}
+
+.marquee2 span {
+  animation-delay: 9s;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
+</style>
+<style>
+* {box-sizing: border-box;}
+body {font-family: Verdana, sans-serif;}
+.mySlides {display: none;}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Caption text */
+.text {
+  /* color: #f2f2f2; */
+  /* color: red; */
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  /* text-align: center; */
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+</style>
 <div id="page-wrapper">
     <div class="header">
         <ol class="breadcrumb"></ol>
@@ -123,12 +163,12 @@ img {vertical-align: middle;}
           <div id="">
           <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="card" style="height: 350px;">
+                <div class="card" style="height: 450px;">
                   <div class="card-action">
                     <b>Jadwal Kuliah Hari Ini</b>
                   </div>
                   <div class="card-image">
-                    <div class="collection" style="height: 250px;">
+                    <div class="collection" style="height: 350px;">
                       <div class="example3">
                       <?php foreach ($course->result() as $key): ?>
                           <?php
@@ -189,47 +229,40 @@ img {vertical-align: middle;}
                   <b>Jadwal Munaqosah</b>
                 </div>
                 <div class="card-image">
-                    <ul class="collection">
+                    <ul class="collection" style="height: 130px;">
                       <marquee  behavior="scroll" direction="down" scroll="continuous" valign="center" scrolldelay="6" scrollamount="2" onmouseover="this.stop()" onmouseout="this.start()">
                       <?php foreach ($thesis->result() as $key): ?>
-                      <li class="collection-item avatar">
-                        <i class="material-icons circle green">track_changes</i>
+                      <?php
+                        if ($key->type == 1) {
+                            $color_icon = 'orange';
+                            $icon = 'track_changes';
+                            $background = '';
+                        } elseif ($key->type == 2) {
+                            $icon = 'track_changes';
+                            $background = 'red';
+                            $color_icon = 'orange';
+                        } else {
+                            $background = '';
+                            $icon = 'format_quote';
+                            $color_icon = 'yellow';
+                        }
+                      ?>
+                      <li class="collection-item avatar <?= $background ?>">
+                        <i class="material-icons circle <?= $color_icon ?>"><?= $icon ?></i>
                         <span class="title"><?= $key->title ?></span>
                         <p><?= $key->description ?><br>
-                           Ruang: <?= $key->room ?> <span class="new badge red" data-badge-caption=""><?= $key->start ?>-<?= $key->end ?></span><br>
+                           Ruang: <?= $key->room ?> <br>
                            Penguji: <?= $key->examiner ?>
+                           <span class="new badge red" data-badge-caption=""><?= $key->start ?>-<?= $key->end ?></span>
                         </p>
                       </li>
                       <?php endforeach; ?>
                       </marquee>
                     </ul>
-                    <div class="slideshow-container">
-
-                        <div class="mySlides fade">
-                          <div class="numbertext">1 / 3</div>
-                          <img src="img_nature_wide.jpg" style="width:100%">
-                          <div class="text">Caption Text</div>
-                        </div>
-
-                        <div class="mySlides fade">
-                          <div class="numbertext">2 / 3</div>
-                          <img src="img_snow_wide.jpg" style="width:100%">
-                          <div class="text">Caption Two</div>
-                        </div>
-
-                        <div class="mySlides fade">
-                          <div class="numbertext">3 / 3</div>
-                          <img src="img_mountains_wide.jpg" style="width:100%">
-                          <div class="text">Caption Three</div>
-                        </div>
-
-                    </div>
-                    <br>
-                    <div style="text-align:center">
-                      <span class="dot"></span>
-                      <span class="dot"></span>
-                      <span class="dot"></span>
-                    </div>
+                </div>
+                <div class="card-action" style="padding: 5px ! important; border-top: 0px ! important;">
+                  <a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a> Seminar proposal
+                  <a class="btn-floating orange"><i class="material-icons">track_changes</i></a> S1/<b style="color:red;">S2</b>
                 </div>
               </div>
             </div>
@@ -240,16 +273,28 @@ img {vertical-align: middle;}
                     <b>Agenda Kampus</b>
                   </div>
                   <div class="card-image">
-                    <ul class="collection">
+                    <div class="collection">
+                      <div class="slideshow-container">
                         <?php foreach ($agenda->result() as $key): ?>
-                            <li class="collection-item">
+                          <div class="mySlides fade">
+                            <div class="numbertext">1 / 3</div>
+                            <img src="<?= base_url(); ?>assets/upload/logo/logo-uin-fix.png" style="height:150px; width: 1px;">
+                            <div class="text">
                               <span class="title"><b><?= $key->title ?></b></span>
                               <p><?= $key->description ?><br>
                               <span class="new badge green" data-badge-caption=""><?= $key->time_desc ?></span>
                               </p>
-                            </li>
+                            </div>
+                          </div>
                         <?php endforeach; ?>
-                    </ul>
+                        </div>
+                        <br>
+                        <div style="text-align:center">
+                          <?php $no = 1; foreach ($agenda->result() as $key): ?>
+                            <span class="dot"><?= $no ?></span>
+                          <?php $no++; endforeach; ?>
+                        </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -294,10 +339,35 @@ img {vertical-align: middle;}
               </ul>
             </div>
 
-          <!-- <footer style="position: fixed;"><p>All right reserved. Template by: <a href="https://webthemez.com/admin-template/">WebThemez.com</a></p>
-
-
-          </footer> -->
+          <footer>
+            <div class="row" style="margin-right: -30px ! important; margin-left: -30px ! important;">
+              <div class="col-md-12 col-sm-12 col-xs-12" style="margin: 0 ! important;">
+                <div class="card orange">
+                  <div class="card-action" style="padding-bottom: 30px; font-size: 18px; font-weight: lighter;">
+                    <div class="marquee">
+                      <?php if ($running_text->num_rows() > 0): ?>
+                          <span>
+                          <?php foreach ($running_text->result() as $key): ?>
+                                <?= $key->name ?>: <?= $key->description ?> | &nbsp;
+                          <?php endforeach; ?>
+                          </span>
+                      <?php endif; ?>
+                      <span></span>
+                    </div>
+                    <div class="marquee marquee2">
+                      <?php if ($running_text->num_rows() > 0): ?>
+                          <span>
+                          <?php foreach ($running_text->result() as $key): ?>
+                                <?= $key->name ?>: <?= $key->description ?> | &nbsp;
+                          <?php endforeach; ?>
+                          </span>
+                      <?php endif; ?>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </footer>
         </div>
         <!-- /. PAGE INNER  -->
     </div>
@@ -305,6 +375,26 @@ img {vertical-align: middle;}
 </div>
 <!-- /. WRAPPER  -->
 <script type="text/javascript">
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+
 function maxWindow() {
     window.moveTo(0, 0);
 
@@ -336,6 +426,7 @@ function requestFullScreen(element) {
 
 $(document).ready(function(){
     $("#btn-fs").click();
+    $("html, body").animate({ scrollTop: 0 }, "slow");
 
     $("#btn-fs").on("click", function(e) {
         e.preventDefault();
