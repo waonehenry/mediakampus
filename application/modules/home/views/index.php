@@ -163,12 +163,12 @@ img {vertical-align: middle;}
           <div id="">
           <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="card" style="height: 450px;">
+                <div class="card" style="height: 500px;">
                   <div class="card-action">
                     <b>Jadwal Kuliah Hari Ini</b>
                   </div>
                   <div class="card-image">
-                    <div class="collection" style="height: 350px;">
+                    <div class="collection" style="height: 400px;">
                       <div class="example3">
                       <?php foreach ($course->result() as $key): ?>
                           <?php
@@ -229,7 +229,7 @@ img {vertical-align: middle;}
                   <b>Jadwal Munaqosah</b>
                 </div>
                 <div class="card-image">
-                    <ul class="collection" style="height: 130px;">
+                    <ul class="collection" style="height: 280px;">
                       <marquee  behavior="scroll" direction="down" scroll="continuous" valign="center" scrolldelay="6" scrollamount="<?= (setting_display()['marquee_speed']/4) ?>" onmouseover="this.stop()" onmouseout="this.start()">
                       <?php foreach ($thesis->result() as $key): ?>
                       <?php
@@ -302,10 +302,10 @@ img {vertical-align: middle;}
               <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="card">
                   <div class="card-action">
-                    <b>Info Akademik:</b>
+                    <b>Info Akademik</b>
                   </div>
                   <div class="card-image">
-                      <ul class="collection" style="height: 190px;">
+                      <ul class="collection" style="height: 250px;">
                         <?php if ($info->num_rows() > 0): ?>
                             <?php foreach ($info->result() as $key): ?>
                                 <li class="collection-item">
