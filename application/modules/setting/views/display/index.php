@@ -50,8 +50,8 @@
                         <label for="semester">Semester</label>
                         <select id="semester" name=data[semester] required class="form-control select2 input-text-select2">
                             <option value="">Silakan pilih</option>
-                            <option value="1">Gasal</option>
-                            <option value="2">Genap</option>
+                            <option value="1" <?= ($profile['semester'] == 1) ? 'selected="selected"' : "" ?> >Gasal</option>
+                            <option value="2" <?= ($profile['semester'] == 2) ? 'selected="selected"' : "" ?> >Genap</option>
                         </select>
                      </div>
                    </div>

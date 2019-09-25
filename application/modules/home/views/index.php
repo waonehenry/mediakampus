@@ -25,9 +25,9 @@
  -webkit-transform:translateY(-100%);
  transform:translateY(-100%);
  /* Apply animation to this element */
- -moz-animation: example3 16s linear infinite;
- -webkit-animation: example3 16s linear infinite;
- animation: example3 16s linear infinite;
+ -moz-animation: example3 <?= setting_display()['marquee_speed'] ?>s linear infinite;
+ -webkit-animation: example3 <?= setting_display()['marquee_speed'] ?>s linear infinite;
+ animation: example3 <?= setting_display()['marquee_speed'] ?>s linear infinite;
 }
 /* Move it (define the animation) */
 @-moz-keyframes example3 {
@@ -52,7 +52,7 @@
 }
 
 .example4 {
-  animation-delay: 8s;
+  animation-delay: <?= (setting_display()['marquee_speed']/2) ?>s;
 }
 
 .marquee {
@@ -67,11 +67,11 @@
 .marquee span {
   display: inline-block;
   padding-left: 100%;
-  animation: marquee 18s linear infinite;
+  animation: marquee <?= setting_display()['marquee_speed_running_text'] ?>s linear infinite;
 }
 
 .marquee2 span {
-  animation-delay: 9s;
+  animation-delay: <?= (setting_display()['marquee_speed_running_text']/2) ?>s;
 }
 
 @keyframes marquee {
@@ -230,7 +230,7 @@ img {vertical-align: middle;}
                 </div>
                 <div class="card-image">
                     <ul class="collection" style="height: 130px;">
-                      <marquee  behavior="scroll" direction="down" scroll="continuous" valign="center" scrolldelay="6" scrollamount="2" onmouseover="this.stop()" onmouseout="this.start()">
+                      <marquee  behavior="scroll" direction="down" scroll="continuous" valign="center" scrolldelay="6" scrollamount="<?= (setting_display()['marquee_speed']*2) ?>" onmouseover="this.stop()" onmouseout="this.start()">
                       <?php foreach ($thesis->result() as $key): ?>
                       <?php
                         if ($key->type == 1) {
@@ -305,7 +305,7 @@ img {vertical-align: middle;}
                     <b>Info Akademik:</b>
                   </div>
                   <div class="card-image">
-                      <ul class="collection">
+                      <ul class="collection" style="height: 190px;">
                         <?php if ($info->num_rows() > 0): ?>
                             <?php foreach ($info->result() as $key): ?>
                                 <li class="collection-item">
