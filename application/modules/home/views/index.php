@@ -376,7 +376,10 @@ img {vertical-align: middle;}
 <!-- /. WRAPPER  -->
 <script type="text/javascript">
 var slideIndex = 0;
+
+<?php if ($agenda->num_rows() > 0) : ?>
 showSlides();
+<?php endif; ?>
 
 function showSlides() {
   var i;

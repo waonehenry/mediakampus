@@ -4,8 +4,33 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?= setting_display()['title'] ?></title>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="<?= base_url(); ?>assets/template/materialize/css/materialize.min.css" media="screen,projection" />
+	<!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+    <style>
+        /* fallback */
+        @font-face {
+        font-family: 'Material Icons';
+        font-style: normal;
+        font-weight: 400;
+        src: url('../assets/template/fonts/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2') format('woff2');
+        }
+
+        .material-icons {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+        }
+    </style>
+	   <link rel="stylesheet" href="<?= base_url(); ?>assets/template/materialize/css/materialize.min.css" media="screen,projection" />
     <!-- Bootstrap Styles-->
     <link href="<?= base_url(); ?>assets/template/css/bootstrap.css" rel="stylesheet" />
     <!-- FontAwesome Styles-->
@@ -18,9 +43,6 @@
     <link href="<?= base_url() ?>assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
     <!-- Custom Styles-->
     <link href="<?= base_url(); ?>assets/template/css/custom-styles.css" rel="stylesheet" />
-    <!-- Google Fonts-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/template/js/Lightweight-Chart/cssCharts.css">
 
     <!-- jQuery Js -->
     <script src="<?= base_url(); ?>assets/template/js/jquery-1.10.2.js"></script>
@@ -36,7 +58,6 @@
     <!-- Custom Js -->
     <script src="<?= base_url(); ?>assets/template/js/custom-scripts.js"></script>
     <script src="<?= base_url(); ?>assets/global/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js" type="text/javascript"></script>
-
 </head>
 
 <body>
