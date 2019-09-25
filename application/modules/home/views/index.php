@@ -128,7 +128,7 @@ img {vertical-align: middle;}
   transition: background-color 0.6s ease;
 }
 
-.active {
+.active-dot {
   background-color: #717171;
 }
 
@@ -230,7 +230,7 @@ img {vertical-align: middle;}
                 </div>
                 <div class="card-image">
                     <ul class="collection" style="height: 130px;">
-                      <marquee  behavior="scroll" direction="down" scroll="continuous" valign="center" scrolldelay="6" scrollamount="<?= (setting_display()['marquee_speed']*2) ?>" onmouseover="this.stop()" onmouseout="this.start()">
+                      <marquee  behavior="scroll" direction="down" scroll="continuous" valign="center" scrolldelay="6" scrollamount="<?= (setting_display()['marquee_speed']/4) ?>" onmouseover="this.stop()" onmouseout="this.start()">
                       <?php foreach ($thesis->result() as $key): ?>
                       <?php
                         if ($key->type == 1) {
@@ -332,8 +332,8 @@ img {vertical-align: middle;}
                 <i class="material-icons">menu</i>
               </a>
               <ul>
-                <li><a class="btn-floating red"><i class="material-icons">track_changes</i></a></li>
-                <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+                <!-- <li><a class="btn-floating red"><i class="material-icons">track_changes</i></a></li>
+                <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li> -->
                 <li><a class="btn-floating green" id="btn-fs"><i class="material-icons">publish</i></a></li>
                 <li><a class="btn-floating blue" id="btn-admin"><i class="material-icons">attach_file</i></a></li>
               </ul>
@@ -388,10 +388,10 @@ function showSlides() {
   slideIndex++;
   if (slideIndex > slides.length) {slideIndex = 1}
   for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
+    dots[i].className = dots[i].className.replace(" active-dot", "");
   }
   slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
+  dots[slideIndex-1].className += " active-dot";
   setTimeout(showSlides, 2000); // Change image every 2 seconds
 }
 

@@ -16,9 +16,9 @@ class Dashboard extends MX_Controller {
 	public function index()
 	{
 			$where = array(
-					'semester' => 1,
+					'semester' => setting_display()['semester'],
 					'course_year' => date('Y'),
-					'day' => 6 // date('N')
+					'day' => date('N')
 			);
 
 			$data['page'] = 'home/index';
