@@ -42,7 +42,8 @@ function formFocus() {
 $(document).ready(function() {
     formFocus();
     $('.modal').modal();
-    $(".input-date").inputmask("date", {alias:"dd-mm-yyyy"});
+    // $(".input-date").inputmask("date", {alias:"dd-mm-yyyy"});
+    $(".input-date").datetimepicker();
     $(".select2").select2({
         allowClear: true
     });
