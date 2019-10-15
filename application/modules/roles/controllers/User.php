@@ -12,12 +12,19 @@ class User extends MX_Controller {
 						redirect('admin/login/login');
 				}
 				$this->load->model('User_model');
+				$this->load->model('Group_model');
+				$this->load->model('masterdata/State_model');
+				$this->load->model('register/Thesis_register_model');
+				$this->load->model('register/Thesis_register_detail_model');
+				$this->load->model('register/Person_model');
     }
 
 	public function index()
 	{
 			$data['page'] = 'roles/user/index';
 			$data['title'] = 'User';
+			$data['group'] = $this->Group_model->get_data();
+			$data['person'] = $this->Person_model->get_data();
 			$data['modul'] = 'Roles';
 			$data['role'] = '';
 
@@ -47,7 +54,7 @@ class User extends MX_Controller {
 
 	public function edit($id)
 	{
-			$where['id'] = $id;
+			$where['sys_user.id'] = $id;
 			$data = $this->User_model->get_data_by($where)->row_array();
 
 			echo json_encode($data);
@@ -61,6 +68,25 @@ class User extends MX_Controller {
 			$data['page'] = 'roles/user/index_2';
 			$data['title'] = 'Profile';
 			$data['modul'] = 'User';
+
+			$this->view($data);
+	}
+
+	// $id is profile id
+	public function history($id)
+	{
+			$where['id'] = $id;
+			$data['profile'] = $this->Person_model->get_data_by($where)->row_array();
+
+			$thesis_register = $this->Thesis_register_model->get_data_by(array('profile_id' => $id))->row_array();
+			$data['history'] = $this->Thesis_register_detail_model->get_data_by(array('thesis_register_id' => $thesis_register['id']));
+
+			$data['page'] = 'roles/user/index_3';
+			$data['title'] = 'History';
+			$data['modul'] = 'User';
+
+			$progress = round((($this->Thesis_register_detail_model->count_progress($thesis_register['id'])/$this->State_model->count_all()) * 100), 2);
+			$data['progress'] = $progress;
 
 			$this->view($data);
 	}
@@ -179,9 +205,9 @@ class User extends MX_Controller {
           $no++;
           $row = array();
           $row[] = $no;
-					$row[] = $field->name;
+					$row[] = $field->person;
 					$row[] = $field->username;
-          $row[] = $field->description;
+          $row[] = $field->group;
 					$row[] = '<div class="btn-group">
 							<button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">Tools
 									<i class="fa fa-angle-down"></i>
@@ -197,7 +223,7 @@ class User extends MX_Controller {
 									</li>
 									<li>
 											<a href="'.base_url().'roles/user/delete/'.$field->id.'" class="btn-delete">
-													<i class="fa fa-remove"></i> Delete </a>
+													<b>X</b> Delete </a>
 									</li>
 							</ul>
 					</div>';

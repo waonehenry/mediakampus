@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Thesis_register_model extends CI_Model {
-	private $table = 'tb_thesis_register';
+class Thesis_register_detail_model extends CI_Model {
+	private $table = 'tb_thesis_register_detail';
     var $column_order = array(null, 'id'); //set column field database for datatable orderable
     var $column_search = array('name'); //set column field database for datatable searchable
     var $order = array('id' => 'asc'); // default order
@@ -42,22 +42,30 @@ class Thesis_register_model extends CI_Model {
 	}
 
 	public function get_data_by($where) {
+		$this->db->select($this->table.'.*');
+		$this->db->select('ref_state.name as state');
+		$this->db->join('ref_state', 'ref_state.id = '.$this->table.'.state_id');
 		foreach ($where as $key => $value) {
 			$this->db->where($key, $value);
 		}
-		$this->db->where('status', '1');
 
 		return $this->db->get($this->table);
+	}
+
+	public function update_where($data, $where) {
+			foreach ($where as $key => $value) {
+				$this->db->where($key, $value);
+			}
+
+			return $this->db->update($this->table, $data);
 	}
 
 	private function _get_datatables_query()
     {
 				$this->db->select($this->table.'.*');
 				$this->db->select("group_concat(ref_document.name) as document");
-				$this->db->select('tb_person.name as person');
 				$this->db->join('tb_thesis_document', 'tb_thesis_document.register_id = '.$this->table.'.id', 'left');
 				$this->db->join('ref_document', 'ref_document.id = tb_thesis_document.document_id', 'left');
-				$this->db->join('tb_person', 'tb_person.id = '.$this->table.'.profile_id');
         $this->db->where($this->table.'.status', '1');
 				$this->db->group_by($this->table.'.id');
 				$this->db->from($this->table);
@@ -113,7 +121,15 @@ class Thesis_register_model extends CI_Model {
 
     public function count_all()
     {
-    	$this->db->where('status', '1');
+    		$this->db->where('status', '1');
+        $this->db->from($this->table);
+        return $this->db->count_all_results();
+    }
+
+		public function count_progress($thesis_register_id)
+    {
+    		$this->db->where('status', '1');
+				$this->db->where('thesis_register_id', $thesis_register_id);
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }

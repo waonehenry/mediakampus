@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Group_model extends CI_Model {
-	private $table = 'sys_group_nv';
+	private $table = 'sys_group';
     var $column_order = array(null, 'id'); //set column field database for datatable orderable
     var $column_search = array('name'); //set column field database for datatable searchable
     var $order = array('id' => 'asc'); // default order

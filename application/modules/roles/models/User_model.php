@@ -41,9 +41,13 @@ class User_model extends CI_Model {
 
 	private function _get_datatables_query()
     {
-        $this->db->where('status', '1');
+				$this->db->select($this->table.'.*');
+        $this->db->select('tb_person.name as person');
+				$this->db->select('sys_group.name as group');
+				$this->db->where($this->table.'.status', '1');
         $this->db->from($this->table);
-
+				$this->db->join('tb_person', 'tb_person.id = '.$this->table.'.profile_id');
+				$this->db->join('sys_group', 'sys_group.id = '.$this->table.'.group_id');
         $i = 0;
 
         foreach ($this->column_search as $item) // loop column

@@ -11,7 +11,7 @@
                         <a href="<?= base_url(); ?>home/dashboard/agenda" class="menu-dashboard-agenda"><i class="fa fa-fw fa-file"></i> Agenda</a>
                     </li>
                     <li>
-                        <a href="<?= base_url(); ?>home/dashboard/pasca" class="menu-dashboard-agenda"><i class="fa fa-fw fa-file"></i> Pascasarjana</a>
+                        <a href="<?= base_url(); ?>home/pasca" class="menu-dashboard-agenda"><i class="fa fa-fw fa-file"></i> Pascasarjana</a>
                     </li>
                 </ul>
             </li>
@@ -61,6 +61,9 @@
                         <a href="<?= base_url(); ?>masterdata/shift" class="menu-shift"><i class="fa fa-fw fa-file"></i> Shift</a>
                     </li>
                     <li>
+                        <a href="<?= base_url(); ?>masterdata/state" class="menu-state"><i class="fa fa-fw fa-file"></i> State</a>
+                    </li>
+                    <li>
                         <a href="<?= base_url(); ?>masterdata/document" class="menu-document"><i class="fa fa-fw fa-file"></i> Document</a>
                     </li>
                 </ul>
@@ -91,7 +94,13 @@
                         <a href="<?= base_url(); ?>roles/user" class="menu-user"><i class="fa fa-fw fa-file"></i> User</a>
                     </li>
                     <li>
+                        <a href="<?= base_url(); ?>roles/group" class="menu-group"><i class="fa fa-fw fa-file"></i> Group</a>
+                    </li>
+                    <li>
                         <a href="<?= base_url(); ?>roles/modul" class="menu-modul"><i class="fa fa-fw fa-file"></i> Modul</a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url(); ?>roles/menu" class="menu-menu"><i class="fa fa-fw fa-file"></i> Menu</a>
                     </li>
                 </ul>
             </li>

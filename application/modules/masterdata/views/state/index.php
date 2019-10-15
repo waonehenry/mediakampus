@@ -10,7 +10,7 @@
     </div>
     <div id="page-inner">
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-6">
              <div class="card">
                <div class="card-action" style="border-bottom: 1px solid;">
                    INPUT FORM
@@ -20,19 +20,25 @@
                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
                      <p id="message"></p>
                  </div>
-                 <form class="col s12 form-input" method="post" action="<?= base_url()?>roles/group/store">
+                 <form class="col s12 form-input" method="post" action="<?= base_url()?>masterdata/state/store">
+                   <div class="row">
+                     <div class="input-field col s12">
+                       <input id="code" type="text" name="data[code]" class="input-text first-focus">
+                       <label for="code" class="first-focus-label">Code</label>
+                     </div>
+                   </div>
                    <div class="row">
                      <div class="input-field col s12">
                        <input id="name" type="text" name="data[name]" required class="input-text" autocomplete="off">
-                       <label for="name">Nama</label>
+                       <label for="name">Name</label>
                      </div>
                    </div>
                    <div class="row">
-                     <div class="input-field col s12">
-                       <input id="description" type="text" name="data[description]" class="input-text" autocomplete="off">
-                       <label for="description">Description</label>
-                     </div>
-                   </div>
+       								<div class="input-field col s12">
+       								  <textarea id="description" class="materialize-textarea input-text" name="data[description]"></textarea>
+       								  <label for="description">Description</label>
+       								</div>
+   							   </div>
                    <div class="row">
        								<div class="input-field col s12">
        								  <button type="submit" class="btn btn-small btn-submit btn-success">Save</button>
@@ -44,7 +50,7 @@
               </div>
             </div>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-6">
           <div class="card">
               <div class="card-action" style="border-bottom: 1px solid;">
                    Data
@@ -55,6 +61,7 @@
                           <thead>
                               <tr>
                                   <th>No.</th>
+                                  <th>Code</th>
                                   <th>Name</th>
                                   <th>Desc</th>
                                   <th>Act</th>
@@ -67,7 +74,7 @@
           </div>
         </div>
    </div>
-   <div class="modal fade" id="modal-delete"  data-backdrop="static" data-keyboard="false" style="height: 272px;">
+   <div class="modal fade" id="modal-delete"  data-backdrop="static" data-keyboard="false">
      <div class="" style="margin-top:100px;">
          <h4 style="text-align:center;">Apakah anda yakin menghapus data ini?</h4>
      </div>
@@ -82,10 +89,10 @@
    </div>
    <script type="text/javascript">
    $(document).ready(function() {
-       $(".ul-user-management").addClass('collapse in');
-       $(".menu-group").addClass('active-menu');
+       $(".ul-masterdata").addClass('collapse in');
+       $(".menu-state").addClass('active-menu');
 
-       var default_url = '<?= base_url()?>roles/group/store';
+       var default_url = '<?= base_url()?>masterdata/state/store';
        //datatables
        table = $('#table-content').DataTable({
            "processing": true, //Feature control the processing indicator.
@@ -94,7 +101,7 @@
 
            // Load data for the table's content from an Ajax source
            "ajax": {
-               "url": "<?php echo site_url('roles/group/server_side_list')?>",
+               "url": "<?php echo site_url('masterdata/state/server_side_list')?>",
                "type": "POST"
            },
 
@@ -126,6 +133,7 @@
                    dataType: "json",
                    success: function(response) {
                        $("#name").val(response.name);
+                       $("#code").val(response.code);
                        $("#description").val(response.description);
                        $(".form-input").attr("action", url_update);
                        formFocus();

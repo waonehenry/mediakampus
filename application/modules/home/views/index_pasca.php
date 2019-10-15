@@ -1,4 +1,89 @@
 <style>
+.row {
+  margin-bottom: 0px ! important;
+  height: 50% ! important;
+}
+
+#page-inner {
+  margin: 0px ! important;
+  padding: 5px 10px ! important;
+}
+
+</style>
+<style>
+.example3 {
+ overflow: hidden;
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ margin: 0;
+ white-space: nowrap;
+ display: inline-block;
+ /* text-align: center; */
+ /* Starting position */
+ -moz-transform:translateY(-100%);
+ -webkit-transform:translateY(-100%);
+ transform:translateY(-100%);
+ /* Apply animation to this element */
+ -moz-animation: example3 <?= setting_display()['marquee_speed'] ?>s linear infinite;
+ -webkit-animation: example3 <?= setting_display()['marquee_speed'] ?>s linear infinite;
+ animation: example3 <?= setting_display()['marquee_speed'] ?>s linear infinite;
+}
+/* Move it (define the animation) */
+@-moz-keyframes example3 {
+ 0%   { -moz-transform: translateY(-100%); }
+ 100% { -moz-transform: translateY(100%); }
+}
+@-webkit-keyframes example3 {
+ 0%   { -webkit-transform: translateY(-100%); }
+ 100% { -webkit-transform: translateY(100%); }
+}
+@keyframes example3 {
+ 0%   {
+ -moz-transform: translateY(-100%); /* Firefox bug fix */
+ -webkit-transform: translateY(-100%); /* Firefox bug fix */
+ transform: translateY(-100%);
+ }
+ 100% {
+ -moz-transform: translateY(100%); /* Firefox bug fix */
+ -webkit-transform: translateY(100%); /* Firefox bug fix */
+ transform: translateY(100%);
+ }
+}
+
+.example4 {
+  animation-delay: <?= (setting_display()['marquee_speed']/2) ?>s;
+}
+
+.marquee {
+  margin: 0 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  position: absolute;
+  width: 97%;
+  height: 100%;
+}
+
+.marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee <?= setting_display()['marquee_speed_running_text'] ?>s linear infinite;
+}
+
+.marquee2 span {
+  animation-delay: <?= (setting_display()['marquee_speed_running_text']/2) ?>s;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
+</style>
+<style>
 * {box-sizing: border-box;}
 body {font-family: Verdana, sans-serif;}
 .mySlides {display: none;}
@@ -13,13 +98,14 @@ img {vertical-align: middle;}
 
 /* Caption text */
 .text {
-  color: #f2f2f2;
+  /* color: #f2f2f2; */
+  /* color: red; */
   font-size: 15px;
   padding: 8px 12px;
   position: absolute;
   bottom: 8px;
   width: 100%;
-  text-align: center;
+  /* text-align: center; */
 }
 
 /* Number text (1/3 etc) */
@@ -42,9 +128,9 @@ img {vertical-align: middle;}
   transition: background-color 0.6s ease;
 }
 
-/* .active {
+.active-dot {
   background-color: #717171;
-} */
+}
 
 /* Fading animation */
 .fade {
@@ -68,37 +154,61 @@ img {vertical-align: middle;}
 @media only screen and (max-width: 300px) {
   .text {font-size: 11px}
 }
-</style><div id="page-wrapper">
+</style>
+<div id="page-wrapper">
     <div class="header">
-        <!-- <h1 class="page-header">
-            Dashboard
-        </h1> -->
-        <ol class="breadcrumb">
-          <!-- <li><a href="#">Home</a></li>
-          <li><a href="#">Dashboard</a></li>
-          <li class="active">Data</li> -->
-        </ol>
+        <ol class="breadcrumb"></ol>
     </div>
-        <div id="page-inner" style="padding-top: 0px ! important;">
+        <div id="page-inner">
+          <div id="">
           <div class="row">
               <div class="col-md-8 col-sm-12 col-xs-12">
-                <div class="card">
+                <div class="card" style="height: 500px;">
                   <div class="card-action">
                     <b>Jadwal Kuliah Hari Ini</b>
                   </div>
                   <div class="card-image">
-                    <div class="collection">
-                      <marquee  behavior="scroll" direction="down" scroll="continuous" valign="center" scrolldelay="3" scrollamount="2" onmouseover="this.stop()" onmouseout="this.start()">
+                    <div class="collection" style="height: 400px;">
+                      <div class="example3">
                       <?php foreach ($course->result() as $key): ?>
                           <?php
                                 $color_badge = "green";
-                                if (empty_course($key->dosen_id, $key->shift_id, date('Y-m-d')) > 0) {
+                                $message = "";
+                                $empty = empty_course($key->dosen_id, $key->shift_id, date('Y-m-d'));
+                                if ($empty->num_rows() > 0) {
+                                    $temp = $empty->row_array();
                                     $color_badge = "red";
+                                    $message = $temp['description'];
                                 }
                           ?>
-                          <a href="#!" class="collection-item"><?= $key->course ?> | <?= $key->room ?> | <?= $key->dosen ?> | <?= $key->class ?> <span class="new badge <?= $color_badge?>" data-badge-caption=""><?= $key->start ?>-<?= $key->end ?></span></a>
+                          <a href="#!" class="collection-item"><?= $key->course ?> | <?= $key->room ?> | <?= $key->dosen ?> | <?= $key->class ?>
+                            <span class="new badge <?= $color_badge?>" data-badge-caption=""><?= $key->start ?>-<?= $key->end ?></span>
+                            <?php if ($color_badge == "red"): ?>
+                                <span class="badge" data-badge-caption=""><?= $message ?></span>
+                            <?php endif; ?>
+                          </a>
                       <?php endforeach; ?>
-                      </marquee>
+                      </div>
+                      <div class="example3 example4">
+                      <?php foreach ($course->result() as $key): ?>
+                          <?php
+                                $color_badge = "green";
+                                $message = "";
+                                $empty = empty_course($key->dosen_id, $key->shift_id, date('Y-m-d'));
+                                if ($empty->num_rows() > 0) {
+                                    $temp = $empty->row_array();
+                                    $color_badge = "red";
+                                    $message = $temp['description'];
+                                }
+                          ?>
+                          <a href="#!" class="collection-item"><?= $key->course ?> | <?= $key->room ?> | <?= $key->dosen ?> | <?= $key->class ?>
+                            <span class="new badge <?= $color_badge?>" data-badge-caption=""><?= $key->start ?>-<?= $key->end ?></span>
+                            <?php if ($color_badge == "red"): ?>
+                                <span class="badge" data-badge-caption=""><?= $message ?></span>
+                            <?php endif; ?>
+                          </a>
+                      <?php endforeach; ?>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -130,89 +240,98 @@ img {vertical-align: middle;}
                 </div>
               </div>
           </div>
+          </div>
+          <div id="">
           <div class="row">
-            <div class="col-md-4 col-sm-12 col-xs-12">
+            <?php
+                $extend = 8;
+                if ($agenda->num_rows() > 0) {
+                    $extend = 4;
+                }
+            ?>
+            <div class="col-md-<?= $extend ?> col-sm-12 col-xs-12">
               <div class="card">
                 <div class="card-action">
-                  <b>Jadwal Munaqosah Pekan Ini</b>
+                  <b>Jadwal Munaqosah</b>
                 </div>
                 <div class="card-image">
-                    <ul class="collection">
-                      <marquee  behavior="scroll" direction="down" scroll="continuous" valign="center" scrolldelay="6" scrollamount="2" onmouseover="this.stop()" onmouseout="this.start()">
+                    <ul class="collection" style="height: 280px;">
+                      <marquee  behavior="scroll" direction="down" scroll="continuous" valign="center" scrolldelay="6" scrollamount="<?= (setting_display()['marquee_speed']/4) ?>" onmouseover="this.stop()" onmouseout="this.start()">
                       <?php foreach ($thesis->result() as $key): ?>
-                      <li class="collection-item avatar">
-                        <i class="material-icons circle green">track_changes</i>
+                      <?php
+                        if ($key->type == 1) {
+                            $color_icon = 'orange';
+                            $icon = 'track_changes';
+                            $background = '';
+                        } elseif ($key->type == 2) {
+                            $icon = 'track_changes';
+                            $background = 'red';
+                            $color_icon = 'orange';
+                        } else {
+                            $background = '';
+                            $icon = 'format_quote';
+                            $color_icon = 'yellow';
+                        }
+                      ?>
+                      <li class="collection-item avatar <?= $background ?>">
+                        <i class="material-icons circle <?= $color_icon ?>"><?= $icon ?></i>
                         <span class="title"><?= $key->title ?></span>
                         <p><?= $key->description ?><br>
-                           Ruang: <?= $key->room ?> <span class="new badge red" data-badge-caption=""><?= $key->start ?>-<?= $key->end ?></span>
+                           Ruang: <?= $key->room ?> <br>
+                           Penguji: <?= $key->examiner ?>
+                           <span class="new badge red" data-badge-caption=""><?= $key->start ?>-<?= $key->end ?></span>
                         </p>
                       </li>
                       <?php endforeach; ?>
                       </marquee>
                     </ul>
-                    <div class="slideshow-container">
-
-<div class="mySlides fade">
-  <div class="numbertext">1 / 3</div>
-  <img src="img_nature_wide.jpg" style="width:100%">
-  <div class="text">Caption Text</div>
-</div>
-
-<div class="mySlides fade">
-  <div class="numbertext">2 / 3</div>
-  <img src="img_snow_wide.jpg" style="width:100%">
-  <div class="text">Caption Two</div>
-</div>
-
-<div class="mySlides fade">
-  <div class="numbertext">3 / 3</div>
-  <img src="img_mountains_wide.jpg" style="width:100%">
-  <div class="text">Caption Three</div>
-</div>
-
-</div>
-<br>
-
-<div style="text-align:center">
-  <span class="dot"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-</div>
+                </div>
+                <div class="card-action" style="padding: 5px ! important; border-top: 0px ! important;">
+                  <a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a> Seminar proposal
+                  <a class="btn-floating orange"><i class="material-icons">track_changes</i></a> S1/<b style="color:red;">S2</b>
                 </div>
               </div>
             </div>
+              <?php if ($agenda->num_rows() > 0): ?>
               <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="card">
                   <div class="card-action">
-                    <b>Agenda Bulan Ini</b>
+                    <b>Agenda Kampus</b>
                   </div>
                   <div class="card-image">
-                    <ul class="collection">
-                        <?php if ($agenda->num_rows() > 0): ?>
-                            <?php foreach ($agenda->result() as $key): ?>
-                                <li class="collection-item">
-                                  <span class="title"><b><?= $key->title ?></b></span>
-                                  <p><?= $key->description ?><br>
-                                  <span class="new badge green" data-badge-caption=""><?= $key->time_desc ?></span>
-                                  </p>
-                                </li>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                          <li class="collection-item">
-                            <i>Belum ada agenda</i>
-                          </li>
-                        <?php endif; ?>
-                    </ul>
+                    <div class="collection">
+                      <div class="slideshow-container">
+                        <?php foreach ($agenda->result() as $key): ?>
+                          <div class="mySlides fade">
+                            <div class="numbertext">1 / 3</div>
+                            <img src="<?= base_url(); ?>assets/upload/logo/logo-uin-fix.png" style="height:150px; width: 1px;">
+                            <div class="text">
+                              <span class="title"><b><?= $key->title ?></b></span>
+                              <p><?= $key->description ?><br>
+                              <span class="new badge green" data-badge-caption=""><?= $key->time_desc ?></span>
+                              </p>
+                            </div>
+                          </div>
+                        <?php endforeach; ?>
+                        </div>
+                        <br>
+                        <div style="text-align:center">
+                          <?php $no = 1; foreach ($agenda->result() as $key): ?>
+                            <span class="dot"><?= $no ?></span>
+                          <?php $no++; endforeach; ?>
+                        </div>
+                    </div>
                   </div>
                 </div>
               </div>
+              <?php endif; ?>
               <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="card">
                   <div class="card-action">
-                    <b>Info Akademik:</b>
+                    <b>Info Akademik</b>
                   </div>
                   <div class="card-image">
-                      <ul class="collection">
+                      <ul class="collection" style="height: 250px;">
                         <?php if ($info->num_rows() > 0): ?>
                             <?php foreach ($info->result() as $key): ?>
                                 <li class="collection-item">
@@ -232,22 +351,48 @@ img {vertical-align: middle;}
                 </div>
               </div>
           </div>
+          </div>
           <!-- /. ROW  -->
            <div class="fixed-action-btn horizontal click-to-toggle">
-              <a class="btn-floating btn-large red">
+              <a class="btn-floating btn-large orange">
                 <i class="material-icons">menu</i>
               </a>
               <ul>
-                <li><a class="btn-floating red"><i class="material-icons">track_changes</i></a></li>
-                <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+                <!-- <li><a class="btn-floating red"><i class="material-icons">track_changes</i></a></li>
+                <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li> -->
                 <li><a class="btn-floating green" id="btn-fs"><i class="material-icons">publish</i></a></li>
-                <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+                <li><a class="btn-floating blue" id="btn-admin"><i class="material-icons">attach_file</i></a></li>
               </ul>
             </div>
 
-          <footer><p>All right reserved. Template by: <a href="https://webthemez.com/admin-template/">WebThemez.com</a></p>
-
-
+          <footer>
+            <div class="row" style="margin-right: -30px ! important; margin-left: -30px ! important;">
+              <div class="col-md-12 col-sm-12 col-xs-12" style="margin: 0 ! important;">
+                <div class="card orange">
+                  <div class="card-action" style="padding-bottom: 30px; font-size: 18px; font-weight: lighter;">
+                    <div class="marquee">
+                      <?php if ($running_text->num_rows() > 0): ?>
+                          <span>
+                          <?php foreach ($running_text->result() as $key): ?>
+                                <?= $key->name ?>: <?= $key->description ?> | &nbsp;
+                          <?php endforeach; ?>
+                          </span>
+                      <?php endif; ?>
+                      <span></span>
+                    </div>
+                    <div class="marquee marquee2">
+                      <?php if ($running_text->num_rows() > 0): ?>
+                          <span>
+                          <?php foreach ($running_text->result() as $key): ?>
+                                <?= $key->name ?>: <?= $key->description ?> | &nbsp;
+                          <?php endforeach; ?>
+                          </span>
+                      <?php endif; ?>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </footer>
         </div>
         <!-- /. PAGE INNER  -->
@@ -256,6 +401,29 @@ img {vertical-align: middle;}
 </div>
 <!-- /. WRAPPER  -->
 <script type="text/javascript">
+var slideIndex = 0;
+
+<?php if ($agenda->num_rows() > 0) : ?>
+showSlides();
+<?php endif; ?>
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active-dot", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active-dot";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+
 function maxWindow() {
     window.moveTo(0, 0);
 
@@ -287,11 +455,18 @@ function requestFullScreen(element) {
 
 $(document).ready(function(){
     $("#btn-fs").click();
+    $("html, body").animate({ scrollTop: 0 }, "slow");
 
     $("#btn-fs").on("click", function(e) {
         e.preventDefault();
         var elem = document.body; // Make the body go full screen.
         requestFullScreen(elem);
+    })
+
+    $("#btn-admin").on("click", function(e) {
+        e.preventDefault();
+        var url = "<?= base_url() ?>schedule/schedule"; // Make the body go full screen.
+        window.location.href=url;
     })
     // maxWindow();
     // setTimeout(function(){

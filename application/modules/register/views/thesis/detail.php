@@ -10,33 +10,46 @@
     </div>
     <div id="page-inner">
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-6">
+          <div class="card">
+              <div class="card-action" style="border-bottom: 1px solid;">
+                   Data
+              </div>
+              <div class="card-content">
+                  Nama:<br>
+                  NIM:<br>
+                  Prodi:
+              </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
              <div class="card">
                <div class="card-action" style="border-bottom: 1px solid;">
-                   INPUT FORM
+                   History
                </div>
                <div class="card-content">
                  <div class="custom-alerts alert fade in" style="display: none;">
                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
                      <p id="message"></p>
                  </div>
-                 <form class="col s12 form-input" method="post" action="<?= base_url()?>roles/group/store">
+                 <form class="col s12 form-input" method="post" action="<?= base_url()?>register/thesis/verif">
                    <div class="row">
-                     <div class="input-field col s12">
-                       <input id="name" type="text" name="data[name]" required class="input-text" autocomplete="off">
-                       <label for="name">Nama</label>
-                     </div>
-                   </div>
-                   <div class="row">
-                     <div class="input-field col s12">
-                       <input id="description" type="text" name="data[description]" class="input-text" autocomplete="off">
-                       <label for="description">Description</label>
+                     <div class="col s12">
+                        <?php foreach ($state->result() as $key): ?>
+                            <p>
+                              <input type="checkbox" class="filled-in input-text-checkbox" id="filled-in-box-<?= $key->id ?>" value="<?= $key->id ?>" name="data_checkbox[document][]"/>
+                              <label for="filled-in-box-<?= $key->id ?>"><?= $key->name ?></label>
+                            </p>
+                            <div class="input-field col s12">
+             								  <textarea id="description" class="materialize-textarea input-text" name="data[description]"></textarea>
+             								  <label for="description">Description</label>
+             								</div>
+                        <?php endforeach; ?>
                      </div>
                    </div>
                    <div class="row">
        								<div class="input-field col s12">
-       								  <button type="submit" class="btn btn-small btn-submit btn-success">Save</button>
-                        <button type="reset" class="btn btn-small btn-reset btn-default">Reset</button>
+       								  <button type="submit" class="btn btn-small btn-submit btn-success">Update</button>
        								</div>
    							   </div>
                  </form>
@@ -44,30 +57,8 @@
               </div>
             </div>
         </div>
-        <div class="col-lg-8">
-          <div class="card">
-              <div class="card-action" style="border-bottom: 1px solid;">
-                   Data
-              </div>
-              <div class="card-content">
-                  <div class="table-responsive">
-                      <table class="table table-striped table-bordered table-hover" id="table-content">
-                          <thead>
-                              <tr>
-                                  <th>No.</th>
-                                  <th>Name</th>
-                                  <th>Desc</th>
-                                  <th>Act</th>
-                              </tr>
-                          </thead>
-                          <tbody></tbody>
-                      </table>
-                  </div>
-              </div>
-          </div>
-        </div>
    </div>
-   <div class="modal fade" id="modal-delete"  data-backdrop="static" data-keyboard="false" style="height: 272px;">
+   <div class="modal fade" id="modal-delete"  data-backdrop="static" data-keyboard="false">
      <div class="" style="margin-top:100px;">
          <h4 style="text-align:center;">Apakah anda yakin menghapus data ini?</h4>
      </div>
@@ -82,10 +73,11 @@
    </div>
    <script type="text/javascript">
    $(document).ready(function() {
-       $(".ul-user-management").addClass('collapse in');
-       $(".menu-group").addClass('active-menu');
+       $(".ul-register").addClass("collapse in");
+       $(".modul-register").addClass('active-menu');
+       $(".menu-register-thesis").addClass('active-menu');
 
-       var default_url = '<?= base_url()?>roles/group/store';
+       var default_url = '<?= base_url()?>register/thesis/store';
        //datatables
        table = $('#table-content').DataTable({
            "processing": true, //Feature control the processing indicator.
@@ -94,7 +86,7 @@
 
            // Load data for the table's content from an Ajax source
            "ajax": {
-               "url": "<?php echo site_url('roles/group/server_side_list')?>",
+               "url": "<?php echo site_url('register/thesis/server_side_list')?>",
                "type": "POST"
            },
 
@@ -126,6 +118,7 @@
                    dataType: "json",
                    success: function(response) {
                        $("#name").val(response.name);
+                       $("#code").val(response.code);
                        $("#description").val(response.description);
                        $(".form-input").attr("action", url_update);
                        formFocus();

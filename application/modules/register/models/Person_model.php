@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Thesis_register_model extends CI_Model {
-	private $table = 'tb_thesis_register';
+class Person_model extends CI_Model {
+	private $table = 'tb_person';
     var $column_order = array(null, 'id'); //set column field database for datatable orderable
     var $column_search = array('name'); //set column field database for datatable searchable
     var $order = array('id' => 'asc'); // default order
@@ -10,12 +10,6 @@ class Thesis_register_model extends CI_Model {
 	public function insert($data) {
 
 		return $this->db->insert($this->table, $data);
-	}
-
-	public function insertid($data) {
-		$this->db->insert($this->table, $data);
-
-		return $this->db->insert_id();
 	}
 
 	public function update($data, $id) {
@@ -31,12 +25,7 @@ class Thesis_register_model extends CI_Model {
 	}
 
 	public function get_data() {
-		$this->db->select($this->table.'.*');
-		$this->db->select("group_concat(ref_document.name) as document");
-		$this->db->join('tb_thesis_document', 'tb_thesis_document.register_id = '.$this->table.'.id', 'left');
-		$this->db->join('ref_document', 'ref_document.id = tb_thesis_document.document_id', 'left');
-		$this->db->where($this->table.'.status', '1');
-		$this->db->group_by($this->table.'.id');
+		$this->db->where('status', '1');
 
 		return $this->db->get($this->table);
 	}
@@ -52,15 +41,9 @@ class Thesis_register_model extends CI_Model {
 
 	private function _get_datatables_query()
     {
-				$this->db->select($this->table.'.*');
-				$this->db->select("group_concat(ref_document.name) as document");
-				$this->db->select('tb_person.name as person');
-				$this->db->join('tb_thesis_document', 'tb_thesis_document.register_id = '.$this->table.'.id', 'left');
-				$this->db->join('ref_document', 'ref_document.id = tb_thesis_document.document_id', 'left');
-				$this->db->join('tb_person', 'tb_person.id = '.$this->table.'.profile_id');
-        $this->db->where($this->table.'.status', '1');
-				$this->db->group_by($this->table.'.id');
-				$this->db->from($this->table);
+        $this->db->where('status', '1');
+        $this->db->from($this->table);
+
         $i = 0;
 
         foreach ($this->column_search as $item) // loop column

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Modul extends MX_Controller {
+class State extends MX_Controller {
 
 	function __construct()
     {
@@ -11,14 +11,14 @@ class Modul extends MX_Controller {
 				} else {
 						redirect('admin/login/login');
 				}
-				$this->load->model('Modul_model');
+				$this->load->model('State_model');
     }
 
 	public function index()
 	{
-			$data['page'] = 'roles/modul/index';
-			$data['title'] = 'Modul';
-			$data['modul'] = 'Roles';
+			$data['page'] = 'masterdata/state/index';
+			$data['title'] = 'State';
+			$data['modul'] = 'Masterdata';
 			$data['role'] = '';
 
 			$this->view($data);
@@ -27,10 +27,9 @@ class Modul extends MX_Controller {
 	public function store()
 	{
 			$data = $this->input->post('data');
-			$data['create_time'] = date('Y-m-d H:i:s');
 			$data['user_id'] = $this->user_id;
 
-			$result = $this->Modul_model->insert($data);
+			$result = $this->State_model->insert($data);
 			if ($result)
 			{
 				$response['status'] = 'success';
@@ -47,8 +46,8 @@ class Modul extends MX_Controller {
 
 	public function edit($id)
 	{
-			$where['id'] = $id;
-			$data = $this->Modul_model->get_data_by($where)->row_array();
+			$where['ref_state.id'] = $id;
+			$data = $this->State_model->get_data_by($where)->row_array();
 
 			echo json_encode($data);
 	}
@@ -56,10 +55,10 @@ class Modul extends MX_Controller {
 	public function update($id)
 	{
 			$data = $this->input->post('data');
-			$data['update_time'] = date('Y-m-d H:i:s');
+			$data['updated_at'] = date('Y-m-d H:i:s');
 			$data['user_id'] = $this->user_id;
 
-			$result = $this->Modul_model->update($data, $id);
+			$result = $this->State_model->update($data, $id);
 			if ($result)
 			{
 				$response['status'] = 'success';
@@ -77,10 +76,10 @@ class Modul extends MX_Controller {
 	public function delete($id)
 	{
 			$data['status'] = '0';
-			$data['delete_time'] = date('Y-m-d H:i:s');
+			$data['deleted_at'] = date('Y-m-d H:i:s');
 			$data['user_id'] = '1';
 
-			$result = $this->Modul_model->delete($data, $id);
+			$result = $this->State_model->delete($data, $id);
 			if ($result)
 			{
 				$response['status'] = 'success';
@@ -98,27 +97,28 @@ class Modul extends MX_Controller {
 	//server side list
 	public function server_side_list()
   {
-      $list = $this->Modul_model->get_datatables();
+      $list = $this->State_model->get_datatables();
       $data = array();
       $no = $_POST['start'];
       foreach ($list as $field) {
           $no++;
           $row = array();
           $row[] = $no;
-          $row[] = $field->label_modul;
-          $row[] = $field->class;
-					$row[] = '<div class="btn-group pull-right">
-							<button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">Tools
+          $row[] = $field->code;
+					$row[] = $field->name;
+					$row[] = $field->description;
+					$row[] = '<div class="btn-group">
+							<button class="btn green btn-small btn-outline dropdown-toggle" data-toggle="dropdown">Tools
 									<i class="fa fa-angle-down"></i>
 							</button>
 							<ul class="dropdown-menu pull-right">
 									<li>
-											<a href="'.base_url().'roles/modul/edit/'.$field->id.'" class="btn-edit">
+											<a href="'.base_url().'masterdata/state/edit/'.$field->id.'" class="btn-edit">
 													<i class="fa fa-pencil"></i> Edit </a>
 									</li>
 									<li>
-											<a href="'.base_url().'roles/modul/delete/'.$field->id.'" class="btn-delete">
-													<i class="fa fa-trash"></i> Delete </a>
+											<a href="'.base_url().'masterdata/state/delete/'.$field->id.'" class="btn-delete">
+													<b>X</b> Delete </a>
 									</li>
 							</ul>
 					</div>';
@@ -127,8 +127,8 @@ class Modul extends MX_Controller {
 
       $output = array(
                       "draw" => $_POST['draw'],
-                      "recordsTotal" => $this->Modul_model->count_all(),
-                      "recordsFiltered" => $this->Modul_model->count_filtered(),
+                      "recordsTotal" => $this->State_model->count_all(),
+                      "recordsFiltered" => $this->State_model->count_filtered(),
                       "data" => $data,
               );
 
@@ -142,7 +142,8 @@ class Modul extends MX_Controller {
 
 	public function view($data)
 	{
-			$data['menu'] = $this->menu_management->core();
+			// $data['menu'] = $this->menu_management->core();
+
 			$this->load->view('home/layout/head', $data);
 			$this->load->view('home/layout/menu');
 			$this->load->view($data['page'], $data);

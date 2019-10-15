@@ -21,10 +21,21 @@
                      <p id="message"></p>
                  </div>
                  <form class="col s12 form-input" method="post" action="<?= base_url()?>register/thesis/store">
-                   <div class="row">
+                   <!-- <div class="row">
                      <div class="input-field col s12">
                        <input id="name" type="text" name="data[name]" required class="input-text" autocomplete="off">
                        <label for="date">Name</label>
+                     </div>
+                   </div> -->
+                   <div class="row">
+                     <div class="col s12">
+                        <label for="person">Name</label>
+                        <select id="person" name=data[profile_id] required class="form-control select2 input-text-select2">
+                            <option value="">Silakan pilih</option>
+                            <?php foreach ($person->result() as $key): ?>
+                                <option value="<?= $key->id ?>" <?= ($key->id == $profile) ? 'selected="selected"' : "" ?> > <?= $key->name ?></option>
+                            <?php endforeach; ?>
+                        </select>
                      </div>
                    </div>
                    <div class="row">
@@ -148,6 +159,23 @@
                        $("#shift").select2("val", response.shift_id);
                        $(".form-input").attr("action", url_update);
                        formFocus();
+                   }
+               })
+           })
+
+           $('.btn-approve').on("click", function(e) {
+               e.preventDefault();
+               url = $(this).attr("href");
+               $.ajax({
+                   url: url,
+                   type: "GET",
+                   dataType: "json",
+                   success: function(response) {
+                       notif(response.status, response.message);
+                       if (response.status == 'success') {
+                           resetInput(default_url);
+                           table.ajax.reload();
+                       }
                    }
                })
            })

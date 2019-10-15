@@ -4,33 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?= setting_display()['title'] ?></title>
-	<!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
-    <style>
-        /* fallback */
-        @font-face {
-        font-family: 'Material Icons';
-        font-style: normal;
-        font-weight: 400;
-        src: url('../assets/template/fonts/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2') format('woff2');
-        }
-
-        .material-icons {
-        font-family: 'Material Icons';
-        font-weight: normal;
-        font-style: normal;
-        font-size: 24px;
-        line-height: 1;
-        letter-spacing: normal;
-        text-transform: none;
-        display: inline-block;
-        white-space: nowrap;
-        word-wrap: normal;
-        direction: ltr;
-        -webkit-font-feature-settings: 'liga';
-        -webkit-font-smoothing: antialiased;
-        }
-    </style>
-	   <link rel="stylesheet" href="<?= base_url(); ?>assets/template/materialize/css/materialize.min.css" media="screen,projection" />
+    <link href="<?= base_url(); ?>assets/template/css/font-material.css" rel="stylesheet" />
+	  <link rel="stylesheet" href="<?= base_url(); ?>assets/template/materialize/css/materialize.min.css" media="screen,projection" />
     <!-- Bootstrap Styles-->
     <link href="<?= base_url(); ?>assets/template/css/bootstrap.css" rel="stylesheet" />
     <!-- FontAwesome Styles-->
@@ -81,7 +56,7 @@
             </div>
             <ul class="nav navbar-top-links navbar-right">
 			          <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1">
-                      <i class="fa fa-user fa-fw"></i> <b><?= ($this->session->userdata('name') !== null) ? $this->session->userdata('name') : "public" ?></b>
+                      <i class="fa fa-user fa-fw"></i> <b><?= ($this->session->userdata('person') !== null) ? $this->session->userdata('person') : "public" ?></b>
                       <i class="material-icons right">arrow_drop_down</i>
                     </a>
                 </li>
@@ -100,7 +75,10 @@
 <ul id="dropdown1" class="dropdown-content">
   <?php if($this->session->userdata('login')): ?>
       <li>
-        <a href="<?= base_url()?>roles/user/profile/<?= $this->session->userdata('id') ?>"><i class="fa fa-user fa-fw"></i> My Profile</a>
+        <a href="<?= base_url()?>roles/user/profile/<?= $this->session->userdata('id') ?>"><i class="fa fa-user fa-fw"></i> My Account</a>
+      </li>
+      <li>
+        <a href="<?= base_url()?>roles/user/history/<?= $this->session->userdata('profile_id') ?>"><i class="fa fa-user fa-fw"></i> My History</a>
       </li>
       <li>
         <a href="<?= base_url()?>admin/login/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>

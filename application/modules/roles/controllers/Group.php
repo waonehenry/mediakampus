@@ -12,12 +12,16 @@ class Group extends MX_Controller {
 						redirect('admin/login/login');
 				}
 				$this->load->model('Group_model');
+				$this->load->model('Modul_model');
+				$this->load->model('Menu_model');
+				$this->load->model('Role_model');
     }
 
 	public function index()
 	{
 			$data['page'] = 'roles/group/index';
 			$data['title'] = 'Group';
+			$data['modul'] = 'Roles';
 			$data['role'] = '';
 
 			$this->view($data);
@@ -117,7 +121,11 @@ class Group extends MX_Controller {
 									</li>
 									<li>
 											<a href="'.base_url().'roles/group/delete/'.$field->id.'" class="btn-delete">
-													<i class="fa fa-trash"></i> Delete </a>
+													<b>X</b> Delete </a>
+									</li>
+									<li>
+											<a href="'.base_url().'roles/group/role/'.$field->id.'" class="btn-role">
+													<i class="fa fa-list"></i> Role </a>
 									</li>
 							</ul>
 					</div>';
@@ -139,11 +147,25 @@ class Group extends MX_Controller {
 			// code here
 	}
 
+	public function role($group_id)
+	{
+			$data['page'] = 'roles/group/index_2';
+			$data['title'] = 'Detail';
+			$data['modul'] = 'Roles';
+			$data['modul_list'] = $this->Modul_model->get_data();
+			$data['menu_list'] = $this->Menu_model->get_data();
+			$data['roles'] = $this->Role_model->get_data_by(array('group_id' => $group_id));
+			$data['role'] = '';
+			$data['group_id'] = $group_id;
+
+			$this->view($data);
+	}
+
 	public function view($data)
 	{
 			// $data['menu'] = $this->menu_management->core();
-			$this->load->view('home/layout/menu');
 			$this->load->view('home/layout/head', $data);
+			$this->load->view('home/layout/menu');
 			$this->load->view($data['page'], $data);
 			$this->load->view('home/layout/foot');
 	}

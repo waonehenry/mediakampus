@@ -10,7 +10,7 @@
     </div>
     <div id="page-inner">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
              <div class="card">
                <div class="card-action" style="border-bottom: 1px solid;">
                    INPUT FORM
@@ -21,7 +21,7 @@
                      <p id="message"></p>
                  </div>
                  <form class="col s12 form-input" method="post" action="<?= base_url()?>roles/user/store">
-                   <div class="row">
+                   <!-- <div class="row">
                      <div class="input-field col s12">
                        <input id="code" type="text" name="data[code]" class="input-text first-focus">
                        <label for="code" class="first-focus-label active">ID</label>
@@ -31,6 +31,17 @@
                      <div class="input-field col s12">
                        <input id="name" type="text" name="data[name]" required class="input-text" autocomplete="off">
                        <label for="name">Name</label>
+                     </div>
+                   </div> -->
+                   <div class="row">
+                     <div class="col s12">
+                        <label for="person">User</label>
+                        <select id="person" name=data[profile_id] required class="form-control select2 input-text-select2">
+                            <option value="">Silakan pilih</option>
+                            <?php foreach ($person->result() as $key): ?>
+                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
+                            <?php endforeach; ?>
+                        </select>
                      </div>
                    </div>
                    <div class="row">
@@ -54,8 +65,10 @@
                    <div class="row">
                      <div class="col s12">
                        <label for="group">Group</label>
-                       <select id="group" name="data[group_id]" required class="form-control">
-                          <option value="1">Administrator</option>
+                       <select id="group" name="data[group_id]" required class="form-control input-text">
+                          <?php foreach ($group->result() as $key): ?>
+                              <option value="<?= $key->id ?>"><?= $key->name ?></option>
+                          <?php endforeach; ?>
                        </select>
                      </div>
                    </div>
@@ -70,7 +83,7 @@
               </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-8">
           <div class="card">
               <div class="card-action" style="border-bottom: 1px solid;">
                    Data
@@ -81,9 +94,9 @@
                           <thead>
                               <tr>
                                   <th>No.</th>
-                                  <th>Code</th>
                                   <th>Name</th>
-                                  <th>Desc</th>
+                                  <th>Username</th>
+                                  <th>Group</th>
                                   <th>Act</th>
                               </tr>
                           </thead>
@@ -153,8 +166,11 @@
                    type: "GET",
                    dataType: "json",
                    success: function(response) {
-                       $("#name").val(response.name);
-                       $("#username").val(response.username);
+                       // $("#name").val(response.name);
+                       // $("#username").val(response.username);
+                       $("#group").val(response.group_id);
+                       // $("#person").select2("val", response.profile_id);
+                       $("#person").val(response.profile_id).trigger('change');
                        $("#code").val(response.code);
                        $("#password").attr('readonly', 'readonly');
                        $("#description").val(response.description);
