@@ -205,7 +205,7 @@ class Thesis extends MX_Controller {
 			$data['description'] = "Dokumen Lengkap";
 
 			$where['thesis_register_id'] = $id;
-			$where['state_id'] = 2;
+			$where['state_id'] = 1;
 
 			$result = $this->Thesis_register_detail_model->update_where($data, $where);
 			if ($result)

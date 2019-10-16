@@ -261,3 +261,32 @@ function setting_display() {
 
 		return $val;
 }
+
+function date_indo($date){
+    if (($date != null)||($date != '')) {
+        $tanggal = date('d', strtotime($date));
+        $bulan = date('m', strtotime($date));
+        $tahun = date('Y', strtotime($date));
+        $index_bulan = array(
+            '01' => 'Januari',
+            '02' => 'Februari',
+            '03' => 'Maret',
+            '04' => 'April',
+            '05' => 'Mei',
+            '06' => 'Juni',
+            '07' => 'Juli',
+            '08' => 'Agustus',
+            '09' => 'September',
+            '10' => 'Oktober',
+            '11' => 'November',
+            '12' => 'Desember',
+        );
+        $bulan_indo = $index_bulan[$bulan];
+
+        $result = $tanggal ." ". $bulan_indo ." ". $tahun;
+    } else {
+        $result = '(empty)';
+    }
+
+    return $result;
+}

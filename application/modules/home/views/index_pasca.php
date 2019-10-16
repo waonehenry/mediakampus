@@ -223,7 +223,7 @@ img {vertical-align: middle;}
                         <?php if ($register->num_rows() > 0): ?>
                             <?php foreach ($register->result() as $key): ?>
                                 <li class="collection-item">
-                                  <span class="title"><b><?= $key->name ?></b></span>
+                                  <span class="title"><b><?= $key->person ?></b></span>
                                   <p><?= $key->document ?><br>
                                   <p><?= $key->description ?><br>
                                   <span class="new badge green" data-badge-caption=""><?= $key->created_at ?></span>
@@ -252,7 +252,7 @@ img {vertical-align: middle;}
             <div class="col-md-<?= $extend ?> col-sm-12 col-xs-12">
               <div class="card">
                 <div class="card-action">
-                  <b>Jadwal Munaqosah</b>
+                  <b>Jadwal Ujian</b>
                 </div>
                 <div class="card-image">
                     <ul class="collection" style="height: 280px;">
@@ -286,10 +286,10 @@ img {vertical-align: middle;}
                       </marquee>
                     </ul>
                 </div>
-                <div class="card-action" style="padding: 5px ! important; border-top: 0px ! important;">
+                <!-- <div class="card-action" style="padding: 5px ! important; border-top: 0px ! important;">
                   <a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a> Seminar proposal
                   <a class="btn-floating orange"><i class="material-icons">track_changes</i></a> S1/<b style="color:red;">S2</b>
-                </div>
+                </div> -->
               </div>
             </div>
               <?php if ($agenda->num_rows() > 0): ?>

@@ -33,8 +33,10 @@ class Thesis_register_model extends CI_Model {
 	public function get_data() {
 		$this->db->select($this->table.'.*');
 		$this->db->select("group_concat(ref_document.name) as document");
+		$this->db->select('tb_person.name as person');
 		$this->db->join('tb_thesis_document', 'tb_thesis_document.register_id = '.$this->table.'.id', 'left');
 		$this->db->join('ref_document', 'ref_document.id = tb_thesis_document.document_id', 'left');
+		$this->db->join('tb_person', 'tb_person.id = '.$this->table.'.profile_id');
 		$this->db->where($this->table.'.status', '1');
 		$this->db->group_by($this->table.'.id');
 
