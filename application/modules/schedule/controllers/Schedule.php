@@ -132,7 +132,7 @@ class Schedule extends MX_Controller {
 									</li>
 									<li>
 											<a href="'.base_url().'schedule/schedule/delete/'.$field->id.'" class="btn-delete">
-													<i class="fa fa-delete"></i> Delete </a>
+													<b>X</b> Delete </a>
 									</li>
 							</ul>
 					</div>';

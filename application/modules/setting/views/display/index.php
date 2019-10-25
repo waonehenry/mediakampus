@@ -66,6 +66,57 @@
               </div>
             </div>
         </div>
+        <div class="col-lg-6">
+             <div class="card">
+               <div class="card-action" style="border-bottom: 1px solid;">
+                   INPUT FORM DESIGN
+               </div>
+               <div class="card-content">
+                 <form class="col s12 form-input-design" method="post" action="<?= base_url()?>setting/display/update/1">
+                   <div class="row">
+                     <div class="input-field col s12">
+                       <input id="top-section" type="number" name="data[top_section]" class="input-text" autocomplete="off" value="<?= $profile['top_section']?>">
+                       <label for="top-section">Top</label>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="input-field col s12">
+                       <input id="bottom-section" type="number" name="data[bottom_section]" class="input-text" autocomplete="off" value="<?= $profile['bottom_section']?>">
+                       <label for="bottom-section">Bottom</label>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="input-field col s12">
+                       <input id="font-size" type="number" name="data[font_size]" class="input-text" autocomplete="off" value="<?= $profile['font_size']?>">
+                       <label for="font-size">Font Size</label>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="input-field col s12">
+                       <input id="title-font-size" type="number" name="data[title_font_size]" class="input-text" autocomplete="off" value="<?= $profile['title_font_size']?>">
+                       <label for="title-font-size">Title Font Size</label>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="input-field col s1">
+                        Color
+                     </div>
+                     <div class="input-field col s2">
+
+                       <input id="color" type="color" name="data[color]" required class="input-text" value="<?= $profile['color']?>">
+                     </div>
+                     <div class="input-field col s3">
+                        Font Color
+                     </div>
+                     <div class="input-field col s3">
+                       <input id="font-color" type="color" name="data[font_color]" required class="input-text" value="<?= $profile['font_color']?>">
+                     </div>
+                   </div>
+                 </form>
+               <div class="clearBoth"></div>
+              </div>
+            </div>
+        </div>
    </div>
    <div class="modal fade" id="modal-delete"  data-backdrop="static" data-keyboard="false" style="height: 272px;">
      <div class="" style="margin-top:100px;">
@@ -90,7 +141,7 @@
            $.ajax({
                url: $(this).attr('action'),
                type: "POST",
-               data: $(this).serialize(),
+               data: $(this).serialize()+"&"+$('.form-input-design').serialize(),
                dataType: "json",
                success: function (response) {
                    notif(response.status, response.message);
@@ -101,5 +152,22 @@
                }
            })
        })
+
+       // $('.form-input-design').on("submit", function(e) {
+       //     e.preventDefault();
+       //     $.ajax({
+       //         url: $(this).attr('action'),
+       //         type: "POST",
+       //         data: $(this).serialize(),
+       //         dataType: "json",
+       //         success: function (response) {
+       //             notif(response.status, response.message);
+       //             if (response.status == 'success') {
+       //                 resetInput(default_url);
+       //                 table.ajax.reload();
+       //             }
+       //         }
+       //     })
+       // })
    });
    </script>

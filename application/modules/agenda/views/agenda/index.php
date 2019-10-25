@@ -1,3 +1,5 @@
+<link href="<?= base_url(); ?>assets/custom/jquery-te/jquery-te-1.4.0.css" rel="stylesheet" />
+<script src="<?= base_url(); ?>assets/custom/jquery-te/jquery-te-1.4.0.min.js"></script>
 <div id="page-wrapper" style="">
     <div class="header">
         <h1 class="page-header">
@@ -40,7 +42,7 @@
                    </div>
                    <div class="row">
        								<div class="input-field col s12">
-       								  <textarea id="description" class="materialize-textarea input-text" name="data[description]"></textarea>
+       								  <textarea id="description" class="materialize-textarea input-text textarea" name="data[description]"></textarea>
        								  <label for="description">Description</label>
        								</div>
    							   </div>
@@ -104,6 +106,8 @@
         $(".modul-agenda").addClass('active-menu');
         $(".menu-agenda").addClass('active-menu');
 
+        $(".textarea").jqte();
+
        var default_url = '<?= base_url()?>agenda/agenda/store';
        //datatables
        table = $('#table-content').DataTable({
@@ -145,7 +149,7 @@
                    dataType: "json",
                    success: function(response) {
                        $("#title").val(response.title);
-                       $("#description").val(response.description);
+                       $("#description").jqteVal(response.description);
                        $("#time-description").val(response.time_desc);
                        $("#date-start").val(response.date_start);
                        $("#date-end").val(response.date_end);
