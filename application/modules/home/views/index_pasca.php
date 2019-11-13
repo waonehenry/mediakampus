@@ -85,7 +85,10 @@
 </style>
 <style>
 * {box-sizing: border-box;}
-body {font-family: Verdana, sans-serif;}
+body {
+  font-family: Verdana, sans-serif;
+  font-size: <?= (setting_display()['font_size']) ?>px;
+}
 .mySlides {display: none;}
 img {vertical-align: middle;}
 
@@ -163,12 +166,15 @@ img {vertical-align: middle;}
           <div id="">
           <div class="row">
               <div class="col-md-8 col-sm-12 col-xs-12">
-                <div class="card" style="height: 500px;">
-                  <div class="card-action">
+                <div class="card" style="height: <?= (setting_display()['top_section']) ?>px;">
+                  <div class="card-action" style="
+                          background-color: <?= (setting_display()['color']) ?>;
+                          color: <?= (setting_display()['font_color']) ?>;
+                          ">
                     <b>Jadwal Kuliah Hari Ini</b>
                   </div>
                   <div class="card-image">
-                    <div class="collection" style="height: 400px;">
+                    <div class="collection" style="height: <?= (setting_display()['top_section']-100) ?>px;">
                       <div class="example3">
                       <?php foreach ($course->result() as $key): ?>
                           <?php
@@ -215,7 +221,10 @@ img {vertical-align: middle;}
               </div>
               <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="card">
-                  <div class="card-action">
+                  <div class="card-action" style="
+                          background-color: <?= (setting_display()['color']) ?>;
+                          color: <?= (setting_display()['font_color']) ?>;
+                          ">
                     <b>Registrasi Thesis/Disertasi</b>
                   </div>
                   <div class="card-image">
@@ -251,7 +260,10 @@ img {vertical-align: middle;}
             ?>
             <div class="col-md-<?= $extend ?> col-sm-12 col-xs-12">
               <div class="card">
-                <div class="card-action">
+                <div class="card-action" style="
+                        background-color: <?= (setting_display()['color']) ?>;
+                        color: <?= (setting_display()['font_color']) ?>;
+                        ">
                   <b>Jadwal Ujian</b>
                 </div>
                 <div class="card-image">
@@ -295,7 +307,10 @@ img {vertical-align: middle;}
               <?php if ($agenda->num_rows() > 0): ?>
               <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="card">
-                  <div class="card-action">
+                  <div class="card-action" style="
+                          background-color: <?= (setting_display()['color']) ?>;
+                          color: <?= (setting_display()['font_color']) ?>;
+                          ">
                     <b>Agenda Kampus</b>
                   </div>
                   <div class="card-image">
@@ -327,7 +342,10 @@ img {vertical-align: middle;}
               <?php endif; ?>
               <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="card">
-                  <div class="card-action">
+                  <div class="card-action" style="
+                          background-color: <?= (setting_display()['color']) ?>;
+                          color: <?= (setting_display()['font_color']) ?>;
+                          ">
                     <b>Info Akademik</b>
                   </div>
                   <div class="card-image">
