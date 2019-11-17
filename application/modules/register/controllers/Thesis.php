@@ -257,6 +257,10 @@ class Thesis extends MX_Controller {
 											<a href="'.base_url().'register/thesis/delete/'.$field->id.'" class="btn-delete">
 													<b>X</b> Delete </a>
 									</li>
+									<li>
+											<a href="'.base_url().'roles/user/history/'.$field->person_id.'" class="">
+													<b>H</b> History </a>
+									</li>
 							</ul>
 					</div>';
 					// <li>

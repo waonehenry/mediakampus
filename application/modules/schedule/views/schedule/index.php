@@ -96,8 +96,19 @@
                    </div>
                    <div class="row">
                      <div class="col s12">
-                        <label for="dosen">Dosen</label>
+                        <label for="dosen">Dosen Utama</label>
                         <select id="dosen" name=data[dosen_id] required class="form-control select2 input-text-select2">
+                            <option value="">Silakan pilih</option>
+                            <?php foreach ($dosen->result() as $key): ?>
+                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="col s12">
+                        <label for="dosen">Dosen</label>
+                        <select id="dosen-support" name=data[dosen_id_2] class="form-control select2 input-text-select2">
                             <option value="">Silakan pilih</option>
                             <?php foreach ($dosen->result() as $key): ?>
                                 <option value="<?= $key->id ?>"><?= $key->name ?></option>
@@ -204,13 +215,13 @@
                        $("#semester").select2('val', response.semester);
                        // $("#course_year").select2('val', response.course_year);
                        $("#course_year").val(response.course_year);
-                       // alert(response.course_year);
-                       $("#room").select2("val", response.room_id);
-                       $("#class_").select2("val", response.class_id);
-                       $("#dosen").select2("val", response.dosen_id);
-                       $("#shift").select2("val", response.shift_id);
-                       $("#day").select2("val", response.day);
-                       $("#course").select2("val", response.course_id);
+                       $("#room").val(response.room_id).trigger('change');
+                       $("#class_").val(response.class_id).trigger('change');
+                       $("#dosen").val(response.dosen_id).trigger('change');;
+                       $("#dosen-support").val(response.dosen_id_2).trigger('change');
+                       $("#shift").val(response.shift_id).trigger('change');
+                       $("#day").val(response.day).trigger('change');
+                       $("#course").val(response.course_id).trigger('change');
                        $(".form-input").attr("action", url_update);
                        formFocus();
                    }

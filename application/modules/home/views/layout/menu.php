@@ -66,6 +66,9 @@
                     <li>
                         <a href="<?= base_url(); ?>masterdata/document" class="menu-document"><i class="fa fa-fw fa-file"></i> Document</a>
                     </li>
+                    <li>
+                        <a href="<?= base_url(); ?>masterdata/person" class="menu-person"><i class="fa fa-fw fa-file"></i> Person</a>
+                    </li>
                 </ul>
             </li>
             <li>

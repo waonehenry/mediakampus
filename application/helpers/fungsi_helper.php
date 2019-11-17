@@ -290,3 +290,25 @@ function date_indo($date){
 
     return $result;
 }
+
+function get_day($date) {
+		if (($date != null)||($date != '')) {
+				$hari = date('N', strtotime($date));
+				$index_hari = array(
+						'1' => 'Senin',
+						'2' => 'Selasa',
+						'3' => 'Rabu',
+						'4' => 'Kamis',
+						'5' => 'Jumat',
+						'6' => 'Sabtu',
+						'7' => 'Minggu',
+				);
+				$hari_indo = $index_hari[$hari];
+
+				$result = $hari_indo;
+		} else {
+				$result = '(empty)';
+		}
+
+		return $result;
+}

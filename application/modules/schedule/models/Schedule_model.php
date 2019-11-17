@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Schedule_model extends CI_Model {
 		private $table = 'tb_schedule';
     var $column_order = array(null, 'id'); //set column field database for datatable orderable
-    var $column_search = array('name'); //set column field database for datatable searchable
+    var $column_search = array('ref_course.name', 'tb_dosen.name', 'tb_dosen2.name'); //set column field database for datatable searchable
     var $order = array('id' => 'asc'); // default order
 
 		public function insert($data) {
@@ -34,6 +34,7 @@ class Schedule_model extends CI_Model {
 		{
 				$this->db->select('tb_schedule.*');
 				$this->db->select('tb_dosen.name as dosen');
+				$this->db->select('tb_dosen2.name as dosen2');
 				$this->db->select('ref_day.name as day_name');
 				$this->db->select('ref_room.name as room');
 				$this->db->select('ref_class.name as class');
@@ -47,6 +48,7 @@ class Schedule_model extends CI_Model {
 				$this->db->join('ref_shift', 'ref_shift.id = tb_schedule.shift_id');
 				$this->db->join('ref_course', 'ref_course.id = tb_schedule.course_id');
 				$this->db->join('tb_dosen', 'tb_dosen.id = tb_schedule.dosen_id');
+				$this->db->join('tb_dosen as tb_dosen2', 'tb_dosen2.id = tb_schedule.dosen_id_2', 'left');
 				$this->db->where('tb_schedule.status', '1');
 				foreach ($where as $key => $value) {
 					$this->db->where($key, $value);
@@ -59,6 +61,7 @@ class Schedule_model extends CI_Model {
     {
 				$this->db->select('tb_schedule.*');
 				$this->db->select('tb_dosen.name as dosen');
+				$this->db->select('tb_dosen2.name as dosen2');
 				$this->db->select('ref_day.name as day_name');
 				$this->db->select('ref_room.name as room');
 				$this->db->select('ref_class.name as class');
@@ -72,6 +75,7 @@ class Schedule_model extends CI_Model {
 				$this->db->join('ref_shift', 'ref_shift.id = tb_schedule.shift_id');
 				$this->db->join('ref_course', 'ref_course.id = tb_schedule.course_id');
 				$this->db->join('tb_dosen', 'tb_dosen.id = tb_schedule.dosen_id');
+				$this->db->join('tb_dosen as tb_dosen2', 'tb_dosen2.id = tb_schedule.dosen_id_2', 'left');
 				$this->db->where('tb_schedule.status', '1');
         $this->db->from($this->table);
 
