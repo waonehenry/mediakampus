@@ -12,6 +12,8 @@ class Pasca extends MX_Controller {
 				$this->load->model('agenda/Running_text_model');
 				$this->load->model('register/Thesis_register_model');
 				$this->load->model('masterdata/State_model');
+				$this->load->model('masterdata/Room_model');
+				$this->load->model('masterdata/Shift_model');
     }
 
 	public function index()
@@ -57,7 +59,8 @@ class Pasca extends MX_Controller {
 	public function dashboard()
   {
 			$state_type = 'exam';
-      $list = $this->Schedule_thesis_model->get_datatables($state_type);
+			$today = date('Y-m-d');
+      $list = $this->Schedule_thesis_model->get_datatables($state_type, $today);
       $data = array();
       $no = $_POST['start'];
       foreach ($list as $field) {
@@ -75,13 +78,44 @@ class Pasca extends MX_Controller {
 
       $output = array(
                       "draw" => $_POST['draw'],
-                      "recordsTotal" => $this->Schedule_thesis_model->count_all($state_type),
-                      "recordsFiltered" => $this->Schedule_thesis_model->count_filtered($state_type),
+                      "recordsTotal" => $this->Schedule_thesis_model->count_all($state_type, $today),
+                      "recordsFiltered" => $this->Schedule_thesis_model->count_filtered($state_type, $today),
                       "data" => $data,
               );
 
       echo json_encode($output);
   }
+
+	public function coursev2()
+	{
+			$where = array(
+					'semester' => setting_display()['semester'],
+					'course_year' => date('Y'),
+					'day' => date('N')
+			);
+
+			$data['page'] = 'home/index_course';
+			$data['title'] = 'Dashboard';
+			$data['role'] = '';
+			$data['thesis']	= $this->Schedule_thesis_model->get_data();
+			$data['running_text']	= $this->Running_text_model->get_data();
+			$data['register']	= $this->Thesis_register_model->get_data();
+			$data['agenda']	= $this->Agenda_model->get_data_by(array('type'=>1));
+			$data['info']	= $this->Agenda_model->get_data_by(array('type'=>2));
+			$data['count_page'] = ceil($this->Schedule_thesis_model->count_all()/10);
+
+			$sql = 'select tb_schedule.*, ref_course.name as course, tb_dosen.name as dosen
+							from tb_schedule
+							join ref_course on ref_course.id = tb_schedule.course_id
+							join tb_dosen on tb_dosen.id = tb_schedule.dosen_id
+							where tb_schedule.day = 2';
+
+			$data['schedule'] = $this->db->query($sql);
+			$data['room'] = $this->Room_model->get_data();
+			$data['shift'] = $this->Shift_model->get_data();
+
+			$this->view($data);
+	}
 
 	public function view($data)
 	{

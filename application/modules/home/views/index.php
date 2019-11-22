@@ -1,4 +1,8 @@
 <style>
+.card-action-title{
+  padding: 8px ! important;
+}
+
 .row {
   margin-bottom: 0px ! important;
   height: 50% ! important;
@@ -167,7 +171,7 @@ img {vertical-align: middle;}
           <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="card" style="height: <?= (setting_display()['top_section']) ?>px;">
-                  <div class="card-action" style="
+                  <div class="card-action card-action-title" style="
                           background-color: <?= (setting_display()['color']) ?>;
                           color: <?= (setting_display()['font_color']) ?>;
                           ">
@@ -231,7 +235,7 @@ img {vertical-align: middle;}
             ?>
             <div class="col-md-<?= $extend ?> col-sm-12 col-xs-12">
               <div class="card">
-                <div class="card-action" style="
+                <div class="card-action card-action-title" style="
                         background-color: <?= (setting_display()['color']) ?>;
                         color: <?= (setting_display()['font_color']) ?>;
                         ">
@@ -278,7 +282,7 @@ img {vertical-align: middle;}
               <?php if ($agenda->num_rows() > 0): ?>
               <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="card">
-                  <div class="card-action" style="
+                  <div class="card-action card-action-title" style="
                           background-color: <?= (setting_display()['color']) ?>;
                           color: <?= (setting_display()['font_color']) ?>;
                           ">
@@ -313,7 +317,7 @@ img {vertical-align: middle;}
               <?php endif; ?>
               <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="card">
-                  <div class="card-action" style="
+                  <div class="card-action card-action-title" style="
                           background-color: <?= (setting_display()['color']) ?>;
                           color: <?= (setting_display()['font_color']) ?>;
                           ">

@@ -66,7 +66,7 @@ class Schedule_thesis_model extends CI_Model {
 				return $this->db->get($this->table);
 		}
 
-		private function _get_datatables_query($state_type = '')
+		private function _get_datatables_query($state_type = '', $today = '')
     {
 				$this->db->select('tb_schedule_thesis.*');
 				$this->db->select('ref_room.name as room');
@@ -88,6 +88,10 @@ class Schedule_thesis_model extends CI_Model {
 
 				if ($state_type != '') {
 						$this->db->where('ref_state.type', $state_type);
+				}
+
+				if ($today != '') {
+						$this->db->where('tb_schedule_thesis.d_date > ', $today);
 				}
 
         $i = 0;
@@ -124,30 +128,36 @@ class Schedule_thesis_model extends CI_Model {
         }
     }
 
-    function get_datatables($state_type = '')
+    function get_datatables($state_type = '', $today = '')
     {
-        $this->_get_datatables_query($state_type);
+        $this->_get_datatables_query($state_type, $today);
         if($_POST['length'] != -1)
         $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
         return $query->result();
     }
 
-    function count_filtered($state_type = '')
+    function count_filtered($state_type = '', $today = '')
     {
-        $this->_get_datatables_query($state_type);
+        $this->_get_datatables_query($state_type, $today);
         $query = $this->db->get();
         return $query->num_rows();
     }
 
-    public function count_all($state_type = '')
+    public function count_all($state_type = '', $today = '')
     {
 				$this->db->join('ref_state', 'ref_state.id = tb_schedule_thesis.type');
     		$this->db->where($this->table.'.status', '1');
+
 				if ($state_type != '') {
 						$this->db->where('ref_state.type', $state_type);
 				}
-        $this->db->from($this->table);
+
+				if ($today != '') {
+						$this->db->where('tb_schedule_thesis.d_date > ', $today);
+				}
+
+				$this->db->from($this->table);
         return $this->db->count_all_results();
     }
 }
