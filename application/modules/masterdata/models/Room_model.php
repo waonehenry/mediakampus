@@ -24,12 +24,17 @@ class Room_model extends CI_Model {
 		return $this->db->update($this->table, $data);
 	}
 
-	public function get_data() {
+	public function get_data($start = '', $num_rows = '') {
 		$this->db->select('ref_room.*');
 		$this->db->select('ref_prodi.name as prodi');
 		$this->db->where($this->table.'.status', '1');
 		$this->db->join('ref_prodi', 'ref_prodi.id = ref_room.prodi_id', 'left');
 
+		if ($start != '') {
+				$this->db->limit($num_rows, $start);
+		}
+
+		$this->db->order_by('name');
 		return $this->db->get($this->table);
 	}
 
@@ -105,7 +110,7 @@ class Room_model extends CI_Model {
 
     public function count_all()
     {
-    	$this->db->where('status', '1');
+    		$this->db->where('status', '1');
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }

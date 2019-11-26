@@ -1,4 +1,8 @@
 <style>
+.card-action-title{
+  padding: 8px ! important;
+}
+
 .row {
   margin-bottom: 0px ! important;
   height: 50% ! important;
@@ -163,112 +167,56 @@ img {vertical-align: middle;}
         <ol class="breadcrumb"></ol>
     </div>
         <div id="page-inner">
-          <div id="">
           <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="card" style="height: <?= (setting_display()['top_section']) ?>px;">
-                  <div class="card-action" style="
+                <div class="card" style="height: <?= (setting_display()['bottom_section']) ?>px;">
+                  <div class="card-action card-action-title" style="
                           background-color: <?= (setting_display()['color']) ?>;
                           color: <?= (setting_display()['font_color']) ?>;
                           ">
                     <b>Jadwal Kuliah Hari Ini</b>
                   </div>
                   <div class="card-image">
-                    <div class="collection" style="height: <?= (setting_display()['top_section']-100) ?>px;">
-                    <?php
-                        foreach ($schedule->result_array() as $keys => $value) {
-                            $content[$value['shift_id']][$value['room_id']] = $value['course'];
-                        }
-
-                        foreach ($shift->result_array() as $rows => $row) {
-                            foreach ($room->result_array() as $room_rows => $room_row) {
-                                if (isset($content[$row['id']][$room_row['id']])) {
-                                    $matrix[$row['id']][$room_row['id']] = $content[$row['id']][$room_row['id']];
-                                } else {
-                                    $matrix[$row['id']][$room_row['id']] = '(empty)';
-                                }
-                            }
-                        }
-                    ?>
-
-                    <table class="table table-striped table-bordered">
-                        <tr><td>SESI\RUANGAN</td>
-                        <?php foreach ($room->result_array() as $room_rows => $room_row): ?>
-                            <td><?= $room_row['name'] ?></td>
-                        <?php endforeach; ?>
-                        </tr>
-                    <?php foreach ($shift->result_array() as $rows => $row): ?>
-                        <tr><td><?= $row['start_time'] ?>-<?= $row['end_time'] ?></td>
-                        <?php foreach ($room->result_array() as $room_rows => $room_row): ?>
-                              <td><?= $matrix[$row['id']][$room_row['id']] ?></td>
-                        <?php endforeach; ?>
-                        </tr>
-                    <?php endforeach; ?>
-                    </table>
+                    <div class="collection" style="height: <?= (setting_display()['bottom_section']-100) ?>px;">
+                        <!-- load course_table -->
+                        <input type="hidden" id="total-row" value="<?= $count_room ?>">
+                        <div id="course-table"></div>
                     </div>
                   </div>
                 </div>
               </div>
-          </div>
-          </div>
-          <div id="">
-          <div class="row">
-            <?php
-                $extend = 8;
-                if ($agenda->num_rows() > 0) {
-                    $extend = 4;
-                }
-            ?>
-            <div class="col-md-<?= $extend ?> col-sm-12 col-xs-12">
-              <div class="card">
-                <div class="card-action" style="
-                        background-color: <?= (setting_display()['color']) ?>;
-                        color: <?= (setting_display()['font_color']) ?>;
-                        ">
-                  <b>Jadwal Ujian</b>
-                </div>
-                <div class="card-image">
-                    <ul class="collection" style="height: 280px;">
-                      <marquee  behavior="scroll" direction="down" scroll="continuous" valign="center" scrolldelay="6" scrollamount="<?= (setting_display()['marquee_speed']/4) ?>" onmouseover="this.stop()" onmouseout="this.start()">
-                      <?php foreach ($thesis->result() as $key): ?>
-                      <?php
-                        if ($key->type == 1) {
-                            $color_icon = 'orange';
-                            $icon = 'track_changes';
-                            $background = '';
-                        } elseif ($key->type == 2) {
-                            $icon = 'track_changes';
-                            $background = 'red';
-                            $color_icon = 'orange';
-                        } else {
-                            $background = '';
-                            $icon = 'format_quote';
-                            $color_icon = 'yellow';
-                        }
-                      ?>
-                      <li class="collection-item avatar <?= $background ?>">
-                        <i class="material-icons circle <?= $color_icon ?>"><?= $icon ?></i>
-                        <span class="title"><?= $key->title ?></span>
-                        <p><?= $key->description ?><br>
-                           Ruang: <?= $key->room ?> <br>
-                           Penguji: <?= $key->examiner ?>
-                           <span class="new badge red" data-badge-caption=""><?= $key->start ?>-<?= $key->end ?></span>
-                        </p>
-                      </li>
-                      <?php endforeach; ?>
-                      </marquee>
-                    </ul>
-                </div>
-                <!-- <div class="card-action" style="padding: 5px ! important; border-top: 0px ! important;">
-                  <a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a> Seminar proposal
-                  <a class="btn-floating orange"><i class="material-icons">track_changes</i></a> S1/<b style="color:red;">S2</b>
-                </div> -->
-              </div>
-            </div>
-              <?php if ($agenda->num_rows() > 0): ?>
-              <div class="col-md-4 col-sm-12 col-xs-12">
+              <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="card">
-                  <div class="card-action" style="
+                  <div class="card-action card-action-title" style="
+                          background-color: <?= (setting_display()['color']) ?>;
+                          color: <?= (setting_display()['font_color']) ?>;
+                          ">
+                    <b>Info Akademik</b>
+                  </div>
+                  <div class="card-image">
+                      <ul class="collection" style="height: 250px;">
+                        <?php if ($info->num_rows() > 0): ?>
+                            <?php foreach ($info->result() as $key): ?>
+                                <li class="collection-item">
+                                  <span class="title"><b><?= $key->title ?></b></span>
+                                  <p><?= $key->description ?><br>
+                                  <span class="new badge green" data-badge-caption=""><?= $key->time_desc ?></span>
+                                  </p>
+                                </li>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                          <li class="collection-item">
+                            <i>Belum ada info</i>
+                          </li>
+                        <?php endif; ?>
+                      </ul>
+                  </div>
+                </div>
+              </div>
+              <?php if ($agenda->num_rows() > 0): ?>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="card">
+                  <div class="card-action card-action-title" style="
                           background-color: <?= (setting_display()['color']) ?>;
                           color: <?= (setting_display()['font_color']) ?>;
                           ">
@@ -301,35 +249,6 @@ img {vertical-align: middle;}
                 </div>
               </div>
               <?php endif; ?>
-              <div class="col-md-4 col-sm-12 col-xs-12">
-                <div class="card">
-                  <div class="card-action" style="
-                          background-color: <?= (setting_display()['color']) ?>;
-                          color: <?= (setting_display()['font_color']) ?>;
-                          ">
-                    <b>Info Akademik</b>
-                  </div>
-                  <div class="card-image">
-                      <ul class="collection" style="height: 250px;">
-                        <?php if ($info->num_rows() > 0): ?>
-                            <?php foreach ($info->result() as $key): ?>
-                                <li class="collection-item">
-                                  <span class="title"><b><?= $key->title ?></b></span>
-                                  <p><?= $key->description ?><br>
-                                  <span class="new badge green" data-badge-caption=""><?= $key->time_desc ?></span>
-                                  </p>
-                                </li>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                          <li class="collection-item">
-                            <i>Belum ada info</i>
-                          </li>
-                        <?php endif; ?>
-                      </ul>
-                  </div>
-                </div>
-              </div>
-          </div>
           </div>
           <!-- /. ROW  -->
            <div class="fixed-action-btn horizontal click-to-toggle">
@@ -432,6 +351,12 @@ function requestFullScreen(element) {
     }
 }
 
+function reloadCourse(val) {
+    var url = '<?= base_url(); ?>home/pasca/ajax_table/'+val;
+    $.get(url, function(data) {
+        $('#course-table').html(data);
+    })
+}
 $(document).ready(function(){
     $("#btn-fs").click();
     $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -448,9 +373,23 @@ $(document).ready(function(){
         window.location.href=url;
     })
     // maxWindow();
-    // setTimeout(function(){
-    //     window.location.reload();
-    // }, 4000);
+    var page_total = $("#total-row").val();
+    var i = 0;
+    var k = 0;
+    setInterval(function(){
+        console.log(k);
+
+        if (k > page_total) {
+            i = 0;
+            // reloadCourse(i);
+            window.location.href = '<?= base_url() ?>home/pasca';
+        } else {
+            i++;
+            reloadCourse(k);
+        }
+        k = parseInt(i) * parseInt(10);
+    }, 4000);
+
     $("#sideNav").click();
 })
 </script>

@@ -369,9 +369,9 @@ $(document).ready(function(){
     console.log(info);
     setInterval(function(){
         if (i == (page_total-1)) {
-            table.page('first').draw( 'page' );
-            i = 0;
-            // window.location.href = '<?= base_url() ?>';
+            // table.page('first').draw( 'page' );
+            // i = 0;
+            window.location.href = '<?= base_url() ?>home/pasca/coursev2';
         } else {
             table.page('next').draw( 'page' );
             i = i+1;

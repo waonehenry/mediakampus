@@ -13,6 +13,9 @@
                     <li>
                         <a href="<?= base_url(); ?>home/pasca" class="menu-dashboard-agenda"><i class="fa fa-fw fa-file"></i> Pascasarjana</a>
                     </li>
+                    <li>
+                        <a href="<?= base_url(); ?>home/pasca/coursev2" class="menu-dashboard-agenda"><i class="fa fa-fw fa-file"></i> Course</a>
+                    </li>
                 </ul>
             </li>
             <li>

@@ -103,6 +103,7 @@ class Pasca extends MX_Controller {
 			$data['agenda']	= $this->Agenda_model->get_data_by(array('type'=>1));
 			$data['info']	= $this->Agenda_model->get_data_by(array('type'=>2));
 			$data['count_page'] = ceil($this->Schedule_thesis_model->count_all()/10);
+			$data['count_room'] = $this->Room_model->count_all();
 
 			$sql = 'select tb_schedule.*, ref_course.name as course, tb_dosen.name as dosen
 							from tb_schedule
@@ -115,6 +116,26 @@ class Pasca extends MX_Controller {
 			$data['shift'] = $this->Shift_model->get_data();
 
 			$this->view($data);
+	}
+
+	public function ajax_table($start = 0) {
+			$where = array(
+					'semester' => setting_display()['semester'],
+					'course_year' => date('Y'),
+					'day' => date('N')
+			);
+
+			$sql = 'select tb_schedule.*, ref_course.name as course, tb_dosen.name as dosen
+							from tb_schedule
+							join ref_course on ref_course.id = tb_schedule.course_id
+							join tb_dosen on tb_dosen.id = tb_schedule.dosen_id
+							where tb_schedule.day = 2'; //.$where['day'];
+
+			$data['schedule'] = $this->db->query($sql);
+			$data['room'] = $this->Room_model->get_data($start, 10);
+			$data['shift'] = $this->Shift_model->get_data();
+
+			$this->load->view('home/course_table', $data);
 	}
 
 	public function view($data)
