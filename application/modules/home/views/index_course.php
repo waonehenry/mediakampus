@@ -13,6 +13,14 @@
   padding: 5px 10px ! important;
 }
 
+.navbar-side {
+  display: none;
+}
+
+#page-wrapper {
+  margin-left: 0px;
+}
+
 </style>
 <style>
 .example3 {
@@ -185,70 +193,6 @@ img {vertical-align: middle;}
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-sm-12 col-xs-12">
-                <div class="card">
-                  <div class="card-action card-action-title" style="
-                          background-color: <?= (setting_display()['color']) ?>;
-                          color: <?= (setting_display()['font_color']) ?>;
-                          ">
-                    <b>Info Akademik</b>
-                  </div>
-                  <div class="card-image">
-                      <ul class="collection" style="height: 250px;">
-                        <?php if ($info->num_rows() > 0): ?>
-                            <?php foreach ($info->result() as $key): ?>
-                                <li class="collection-item">
-                                  <span class="title"><b><?= $key->title ?></b></span>
-                                  <p><?= $key->description ?><br>
-                                  <span class="new badge green" data-badge-caption=""><?= $key->time_desc ?></span>
-                                  </p>
-                                </li>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                          <li class="collection-item">
-                            <i>Belum ada info</i>
-                          </li>
-                        <?php endif; ?>
-                      </ul>
-                  </div>
-                </div>
-              </div>
-              <?php if ($agenda->num_rows() > 0): ?>
-              <div class="col-md-6 col-sm-12 col-xs-12">
-                <div class="card">
-                  <div class="card-action card-action-title" style="
-                          background-color: <?= (setting_display()['color']) ?>;
-                          color: <?= (setting_display()['font_color']) ?>;
-                          ">
-                    <b>Agenda Kampus</b>
-                  </div>
-                  <div class="card-image">
-                    <div class="collection">
-                      <div class="slideshow-container">
-                        <?php foreach ($agenda->result() as $key): ?>
-                          <div class="mySlides fade">
-                            <div class="numbertext">1 / 3</div>
-                            <img src="<?= base_url(); ?>assets/upload/logo/logo-uin-fix.png" style="height:150px; width: 1px;">
-                            <div class="text">
-                              <span class="title"><b><?= $key->title ?></b></span>
-                              <p><?= $key->description ?><br>
-                              <span class="new badge green" data-badge-caption=""><?= $key->time_desc ?></span>
-                              </p>
-                            </div>
-                          </div>
-                        <?php endforeach; ?>
-                        </div>
-                        <br>
-                        <div style="text-align:center">
-                          <?php $no = 1; foreach ($agenda->result() as $key): ?>
-                            <span class="dot"><?= $no ?></span>
-                          <?php $no++; endforeach; ?>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <?php endif; ?>
           </div>
           <!-- /. ROW  -->
            <div class="fixed-action-btn horizontal click-to-toggle">
@@ -299,29 +243,6 @@ img {vertical-align: middle;}
 </div>
 <!-- /. WRAPPER  -->
 <script type="text/javascript">
-var slideIndex = 0;
-
-<?php if ($agenda->num_rows() > 0) : ?>
-showSlides();
-<?php endif; ?>
-
-function showSlides() {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active-dot", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active-dot";
-  setTimeout(showSlides, 2000); // Change image every 2 seconds
-}
-
 function maxWindow() {
     window.moveTo(0, 0);
 
@@ -390,6 +311,6 @@ $(document).ready(function(){
         k = parseInt(i) * parseInt(10);
     }, 4000);
 
-    $("#sideNav").click();
+    // $("#sideNav").click();
 })
 </script>

@@ -33,6 +33,14 @@
   padding: 5px 10px ! important;
 }
 
+.navbar-side {
+  display: none;
+}
+
+#page-wrapper {
+  margin-left: 0px;
+}
+
 </style>
 <style>
 .example3 {
@@ -378,6 +386,6 @@ $(document).ready(function(){
         }
     }, 4000);
 
-    $("#sideNav").click();
+    // $("#sideNav").click();
 })
 </script>
