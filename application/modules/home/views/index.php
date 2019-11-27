@@ -351,8 +351,8 @@ img {vertical-align: middle;}
                 <i class="material-icons">menu</i>
               </a>
               <ul>
-                <!-- <li><a class="btn-floating red"><i class="material-icons">track_changes</i></a></li>
-                <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li> -->
+                <!-- <li><a class="btn-floating red"><i class="material-icons">track_changes</i></a></li> -->
+                <li><a href="<?= base_url(); ?>home/pasca" class="btn-floating yellow darken-1" id="btn-pasca"><i class="material-icons">format_quote</i></a></li>
                 <li><a class="btn-floating green" id="btn-fs"><i class="material-icons">publish</i></a></li>
                 <li><a class="btn-floating blue" id="btn-admin"><i class="material-icons">attach_file</i></a></li>
               </ul>
