@@ -47,11 +47,10 @@ class Thesis extends MX_Controller {
 					$data['d_date'] = convertDateMysql($data['d_date']);
 			}
 
-			$result = $this->Schedule_thesis_model->insert($data);
-			if ($result)
-			{
-					if (!empty($data['profile_id'])) {
-							$thesis_register = $this->Thesis_register_model->get_data_by(array('profile_id' => $data['profile_id']))->row_array();
+			if (!empty($data['profile_id'])) {
+					$register = $this->Thesis_register_model->get_data_by(array('profile_id' => $data['profile_id']));
+					if ($register->num_rows() > 0) {
+							$thesis_register = $register->row_array();
 							// insert log
 							$log['thesis_register_id'] = $thesis_register['id'];
 							// $log['description'] = "Ujian dilaksanakan pada tanggal ".date_indo($data['d_date']);
@@ -61,15 +60,21 @@ class Thesis extends MX_Controller {
 							$log['user_id'] = $this->user_id;
 
 							$result = $this->Thesis_register_detail_model->insert($log);
+							$response['status'] = 'success';
+							$response['message'] = 'Congrulation! Data has been saved.';
+					} else {
+							$response['status'] = 'danger';
+							$response['message'] = 'Sorry! Data has not been saved. Please register first';
 					}
-
-					$response['status'] = 'success';
-					$response['message'] = 'Congrulation! Data has been saved.';
-			}
-			else
-			{
-				$response['status'] = 'danger';
-				$response['message'] = 'Sorry! Data has not been saved.';
+			} else {
+					$result = $this->Schedule_thesis_model->insert($data);
+					if ($result) {
+							$response['status'] = 'success';
+							$response['message'] = 'Congrulation! Data has been saved.';
+					} else {
+							$response['status'] = 'danger';
+							$response['message'] = 'Sorry! Data has not been saved.';
+					}
 			}
 
 			echo json_encode($response);

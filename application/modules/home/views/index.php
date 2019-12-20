@@ -1,3 +1,4 @@
+<script src="<?= base_url(); ?>assets/custom/marquee/jquery.marquee.js"></script>
 <style>
 .card-action-title{
   padding: 8px ! important;
@@ -12,80 +13,22 @@
   margin: 0px ! important;
   padding: 5px 10px ! important;
 }
-
-</style>
-<style>
-.example3 {
- overflow: hidden;
- position: absolute;
- width: 100%;
- height: 100%;
- margin: 0;
- white-space: nowrap;
- display: inline-block;
- /* text-align: center; */
- /* Starting position */
- -moz-transform:translateY(-100%);
- -webkit-transform:translateY(-100%);
- transform:translateY(-100%);
- /* Apply animation to this element */
- -moz-animation: example3 <?= setting_display()['marquee_speed'] ?>s linear infinite;
- -webkit-animation: example3 <?= setting_display()['marquee_speed'] ?>s linear infinite;
- animation: example3 <?= setting_display()['marquee_speed'] ?>s linear infinite;
-}
-/* Move it (define the animation) */
-@-moz-keyframes example3 {
- 0%   { -moz-transform: translateY(-100%); }
- 100% { -moz-transform: translateY(100%); }
-}
-@-webkit-keyframes example3 {
- 0%   { -webkit-transform: translateY(-100%); }
- 100% { -webkit-transform: translateY(100%); }
-}
-@keyframes example3 {
- 0%   {
- -moz-transform: translateY(-100%); /* Firefox bug fix */
- -webkit-transform: translateY(-100%); /* Firefox bug fix */
- transform: translateY(-100%);
- }
- 100% {
- -moz-transform: translateY(100%); /* Firefox bug fix */
- -webkit-transform: translateY(100%); /* Firefox bug fix */
- transform: translateY(100%);
- }
-}
-
-.example4 {
-  animation-delay: <?= (setting_display()['marquee_speed']/2) ?>s;
-}
-
 .marquee {
-  margin: 0 auto;
-  white-space: nowrap;
-  overflow: hidden;
-  position: absolute;
-  width: 97%;
-  height: 100%;
+    height: 400px;
+    overflow: hidden;
+    border:1px solid #ccc;
+    /* background: black; */
+    color: rgb(202, 255, 195);
 }
 
-.marquee span {
-  display: inline-block;
-  padding-left: 100%;
-  animation: marquee <?= setting_display()['marquee_speed_running_text'] ?>s linear infinite;
+.marquee-munaqosah {
+    height: 300px;
+    overflow: hidden;
+    /* border:1px solid #ccc; */
+    /* background: black; */
+    /* color: rgb(202, 255, 195); */
 }
 
-.marquee2 span {
-  animation-delay: <?= (setting_display()['marquee_speed_running_text']/2) ?>s;
-}
-
-@keyframes marquee {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(-100%, 0);
-  }
-}
 </style>
 <style>
 * {box-sizing: border-box;}
@@ -179,27 +122,7 @@ img {vertical-align: middle;}
                   </div>
                   <div class="card-image">
                     <div class="collection" style="height: <?= (setting_display()['top_section']-100) ?>px;">
-                      <div class="example3">
-                      <?php foreach ($course->result() as $key): ?>
-                          <?php
-                                $color_badge = "green";
-                                $message = "";
-                                $empty = empty_course($key->dosen_id, $key->shift_id, date('Y-m-d'));
-                                if ($empty->num_rows() > 0) {
-                                    $temp = $empty->row_array();
-                                    $color_badge = "red";
-                                    $message = $temp['description'];
-                                }
-                          ?>
-                          <a href="#!" class="collection-item"><?= $key->course ?> | <?= $key->room ?> | <?= $key->dosen ?> | <?= $key->class ?>
-                            <span class="new badge <?= $color_badge?>" data-badge-caption=""><?= $key->start ?>-<?= $key->end ?></span>
-                            <?php if ($color_badge == "red"): ?>
-                                <span class="badge" data-badge-caption=""><?= $message ?></span>
-                            <?php endif; ?>
-                          </a>
-                      <?php endforeach; ?>
-                      </div>
-                      <div class="example3 example4">
+                      <div class='marquee'>
                       <?php foreach ($course->result() as $key): ?>
                           <?php
                                 $color_badge = "green";
@@ -243,14 +166,14 @@ img {vertical-align: middle;}
                 </div>
                 <div class="card-image">
                     <ul class="collection" style="height: 280px;">
-                      <marquee  behavior="scroll" direction="down" scroll="continuous" valign="center" scrolldelay="6" scrollamount="<?= (setting_display()['marquee_speed']/4) ?>" onmouseover="this.stop()" onmouseout="this.start()">
+                      <div class='marquee-munaqosah'>
                       <?php foreach ($thesis->result() as $key): ?>
                       <?php
-                        if ($key->type == 1) {
+                        if ($key->type == 7) {
                             $color_icon = 'orange';
                             $icon = 'track_changes';
                             $background = '';
-                        } elseif ($key->type == 2) {
+                        } elseif ($key->type == 8) {
                             $icon = 'track_changes';
                             $background = 'red';
                             $color_icon = 'orange';
@@ -270,7 +193,7 @@ img {vertical-align: middle;}
                         </p>
                       </li>
                       <?php endforeach; ?>
-                      </marquee>
+                      </div>
                     </ul>
                 </div>
                 <div class="card-action" style="padding: 5px ! important; border-top: 0px ! important;">
@@ -289,7 +212,7 @@ img {vertical-align: middle;}
                     <b>Agenda Kampus</b>
                   </div>
                   <div class="card-image">
-                    <div class="collection">
+                    <div class="collection" style="height: 280px;">
                       <div class="slideshow-container">
                         <?php foreach ($agenda->result() as $key): ?>
                           <div class="mySlides fade">
@@ -324,7 +247,7 @@ img {vertical-align: middle;}
                     <b>Info Akademik</b>
                   </div>
                   <div class="card-image">
-                      <ul class="collection" style="height: 250px;">
+                      <ul class="collection" style="height: 300fpx;">
                         <?php if ($info->num_rows() > 0): ?>
                             <?php foreach ($info->result() as $key): ?>
                                 <li class="collection-item">
@@ -363,7 +286,7 @@ img {vertical-align: middle;}
               <div class="col-md-12 col-sm-12 col-xs-12" style="margin: 0 ! important;">
                 <div class="card orange">
                   <div class="card-action" style="padding-bottom: 30px; font-size: 18px; font-weight: lighter;">
-                    <div class="marquee">
+                    <div class="marquee-runtext">
                       <?php if ($running_text->num_rows() > 0): ?>
                           <span>
                           <?php foreach ($running_text->result() as $key): ?>
@@ -372,15 +295,6 @@ img {vertical-align: middle;}
                           </span>
                       <?php endif; ?>
                       <span></span>
-                    </div>
-                    <div class="marquee marquee2">
-                      <?php if ($running_text->num_rows() > 0): ?>
-                          <span>
-                          <?php foreach ($running_text->result() as $key): ?>
-                                <?= $key->name ?>: <?= $key->description ?> | &nbsp;
-                          <?php endforeach; ?>
-                          </span>
-                      <?php endif; ?>
                     </div>
                   </div>
                 </div>
@@ -452,6 +366,22 @@ function timedRefresh(timeoutPeriod) {
 
 $(document).ready(function(){
     // timedRefresh(10000)
+    $('.marquee').marquee({
+    	direction: 'down',
+      dublicated: true,
+    	speed: <?= setting_display()['marquee_speed'] ?>
+    });
+
+    $('.marquee-runtext').marquee({
+      dublicated: true,
+    	speed: <?= setting_display()['marquee_speed_running_text'] ?>
+    });
+
+    $('.marquee-munaqosah').marquee({
+    	direction: 'down',
+      dublicated: true,
+    	speed: <?= setting_display()['marquee_speed'] ?>
+    });
 
     $("#btn-fs").click();
     $("html, body").animate({ scrollTop: 0 }, "slow");

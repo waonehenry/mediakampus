@@ -10,7 +10,7 @@
     </div>
     <div id="page-inner">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
              <div class="card">
                <div class="card-action" style="border-bottom: 1px solid;">
                    INPUT FORM
@@ -22,103 +22,109 @@
                  </div>
                  <form class="col s12 form-input" method="post" action="<?= base_url()?>schedule/thesis/store">
                    <div class="row">
-                     <div class="col s12">
-                        <label for="person">Name</label>
-                        <select id="person" name=data[profile_id] required class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <?php foreach ($person->result() as $key): ?>
-                                <option value="<?= $key->id ?>"> <?= $key->name ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                     </div>
-                   </div>
-                   <div class="row">
-                     <div class="col s12">
-                        <label for="room">Room</label>
-                        <select id="room" name=data[room_id] class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <?php foreach ($room->result() as $key): ?>
-                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                     </div>
-                   </div>
-                   <div class="row">
-                     <div class="col s12">
-                        <label for="shift">Shift</label>
-                        <select id="shift" name=data[shift_id] class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <?php foreach ($shift->result() as $key): ?>
-                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                     </div>
-                   </div>
-                   <div class="row">
-                     <div class="input-field col s12">
-                       <input id="date" type="text" name="data[d_date]" class="input-text input-date" autocomplete="off">
-                       <label for="date">Date</label>
-                     </div>
-                   </div>
-                   <div class="row">
-                     <div class="input-field col s12">
-                       <input id="title" type="text" name="data[title]" required class="input-text" autocomplete="off">
-                       <label for="title">Title</label>
-                     </div>
-                   </div>
-                   <div class="row">
-       								<div class="input-field col s12">
-       								  <textarea id="description" class="materialize-textarea input-text" name="data[description]"></textarea>
-       								  <label for="description">Description</label>
-       								</div>
-   							   </div>
-                   <div class="row">
-                     <div class="col s12">
-                        <label for="type">Type</label>
-                        <select id="type" name=data[type] required class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <?php foreach ($exam->result() as $key): ?>
-                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                            <?php endforeach; ?>
-                            <!-- <option value="1">Munaqosah S1</option>
-                            <option value="2">Munaqosah S2</option>
-                            <option value="3">Seminar Proposal</option> -->
-                        </select>
-                     </div>
-                   </div>
-                   <div class="row">
-                     <div class="col s12">
-                        <label for="dosen-1">Dosen Penguji 1</label>
-                        <select id="dosen-1" name=data[dosen_id_1] class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <?php foreach ($dosen->result() as $key): ?>
-                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                     </div>
-                   </div>
-                   <div class="row">
-                     <div class="col s12">
-                        <label for="dosen-2">Dosen Penguji 2</label>
-                        <select id="dosen-2" name=data[dosen_id_2] class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <?php foreach ($dosen->result() as $key): ?>
-                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                     </div>
-                   </div>
-                   <div class="row">
-                     <div class="col s12">
-                        <label for="dosen-3">Dosen Penguji 3</label>
-                        <select id="dosen-3" name=data[dosen_id_3] class="form-control select2 input-text-select2">
-                            <option value="">Silakan pilih</option>
-                            <?php foreach ($dosen->result() as $key): ?>
-                                <option value="<?= $key->id ?>"><?= $key->name ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                     </div>
-                   </div>
+                      <div class="col-md-6">
+                          <div class="row">
+                            <div class="col s12">
+                               <label for="person">Name</label>
+                               <select id="person" name=data[profile_id] class="form-control select2 input-text-select2">
+                                   <option value="">Silakan pilih</option>
+                                   <?php foreach ($person->result() as $key): ?>
+                                       <option value="<?= $key->id ?>"> <?= $key->name ?></option>
+                                   <?php endforeach; ?>
+                               </select>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col s12">
+                               <label for="room">Room</label>
+                               <select id="room" name=data[room_id] class="form-control select2 input-text-select2">
+                                   <option value="">Silakan pilih</option>
+                                   <?php foreach ($room->result() as $key): ?>
+                                       <option value="<?= $key->id ?>"><?= $key->name ?></option>
+                                   <?php endforeach; ?>
+                               </select>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col s12">
+                               <label for="shift">Shift</label>
+                               <select id="shift" name=data[shift_id] class="form-control select2 input-text-select2">
+                                   <option value="">Silakan pilih</option>
+                                   <?php foreach ($shift->result() as $key): ?>
+                                       <option value="<?= $key->id ?>"><?= $key->name ?></option>
+                                   <?php endforeach; ?>
+                               </select>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="date" type="text" name="data[d_date]" class="input-text input-date" autocomplete="off">
+                              <label for="date">Date</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col s12">
+                               <label for="type">Type</label>
+                               <select id="type" name=data[type] required class="form-control select2 input-text-select2">
+                                   <option value="">Silakan pilih</option>
+                                   <?php foreach ($exam->result() as $key): ?>
+                                       <option value="<?= $key->id ?>"><?= $key->name ?></option>
+                                   <?php endforeach; ?>
+                                   <!-- <option value="1">Munaqosah S1</option>
+                                   <option value="2">Munaqosah S2</option>
+                                   <option value="3">Seminar Proposal</option> -->
+                               </select>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="row">
+                            <div class="col s12">
+                               <label for="dosen-1">Dosen Penguji 1</label>
+                               <select id="dosen-1" name=data[dosen_id_1] class="form-control select2 input-text-select2">
+                                   <option value="">Silakan pilih</option>
+                                   <?php foreach ($dosen->result() as $key): ?>
+                                       <option value="<?= $key->id ?>"><?= $key->name ?></option>
+                                   <?php endforeach; ?>
+                               </select>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col s12">
+                               <label for="dosen-2">Dosen Penguji 2</label>
+                               <select id="dosen-2" name=data[dosen_id_2] class="form-control select2 input-text-select2">
+                                   <option value="">Silakan pilih</option>
+                                   <?php foreach ($dosen->result() as $key): ?>
+                                       <option value="<?= $key->id ?>"><?= $key->name ?></option>
+                                   <?php endforeach; ?>
+                               </select>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col s12">
+                               <label for="dosen-3">Dosen Penguji 3</label>
+                               <select id="dosen-3" name=data[dosen_id_3] class="form-control select2 input-text-select2">
+                                   <option value="">Silakan pilih</option>
+                                   <?php foreach ($dosen->result() as $key): ?>
+                                       <option value="<?= $key->id ?>"><?= $key->name ?></option>
+                                   <?php endforeach; ?>
+                               </select>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="title" type="text" name="data[title]" required class="input-text" autocomplete="off">
+                              <label for="title">Title</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                              <div class="input-field col s12">
+                                <textarea id="description" class="materialize-textarea input-text" name="data[description]"></textarea>
+                                <label for="description">Description</label>
+                              </div>
+                           </div>
+                      </div>
+                  </div>
                    <div class="row">
        								<div class="input-field col s12">
        								  <button type="submit" class="btn btn-small btn-submit btn-success">Save</button>

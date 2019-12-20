@@ -53,6 +53,7 @@ class Schedule_model extends CI_Model {
 				foreach ($where as $key => $value) {
 					$this->db->where($key, $value);
 				}
+				$this->db->order_by('ref_course.name', 'desc');
 
 				return $this->db->get($this->table);
 		}

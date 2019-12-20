@@ -46,7 +46,7 @@ class Running_text extends MX_Controller {
 
 	public function edit($id)
 	{
-			$where['ref_room.id'] = $id;
+			$where['tb_running_text.id'] = $id;
 			$data = $this->Running_text_model->get_data_by($where)->row_array();
 
 			echo json_encode($data);
