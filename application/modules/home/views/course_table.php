@@ -8,7 +8,7 @@
             if (isset($content[$row['id']][$room_row['id']])) {
                 $matrix[$row['id']][$room_row['id']] = $content[$row['id']][$room_row['id']];
             } else {
-                $matrix[$row['id']][$room_row['id']] = '(empty)';
+                $matrix[$row['id']][$room_row['id']] = '<b style="color: green">(empty)</b>';
             }
         }
     }

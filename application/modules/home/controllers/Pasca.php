@@ -129,7 +129,7 @@ class Pasca extends MX_Controller {
 							from tb_schedule
 							join ref_course on ref_course.id = tb_schedule.course_id
 							join tb_dosen on tb_dosen.id = tb_schedule.dosen_id
-							where tb_schedule.day = 2'; //.$where['day'];
+							where tb_schedule.day = '.$where['day'];
 
 			$data['schedule'] = $this->db->query($sql);
 			$data['room'] = $this->Room_model->get_data($start, 10);

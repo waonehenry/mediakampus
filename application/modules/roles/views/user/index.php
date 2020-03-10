@@ -66,6 +66,7 @@
                      <div class="col s12">
                        <label for="group">Group</label>
                        <select id="group" name="data[group_id]" required class="form-control input-text">
+                          <option value="">Silakan pilih</option>
                           <?php foreach ($group->result() as $key): ?>
                               <option value="<?= $key->id ?>"><?= $key->name ?></option>
                           <?php endforeach; ?>
@@ -167,7 +168,7 @@
                    dataType: "json",
                    success: function(response) {
                        // $("#name").val(response.name);
-                       // $("#username").val(response.username);
+                       $("#username").val(response.username);
                        $("#group").val(response.group_id);
                        // $("#person").select2("val", response.profile_id);
                        $("#person").val(response.profile_id).trigger('change');

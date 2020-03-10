@@ -34,6 +34,27 @@ class Dashboard extends MX_Controller {
 			$this->view($data);
 	}
 
+	public function agenda()
+	{
+			$where = array(
+					'semester' => setting_display()['semester'],
+					'course_year' => date('Y'),
+					'day' => date('N')
+			);
+
+			$data['page'] = 'home/index_agenda';
+			$data['title'] = 'Dashboard';
+			$data['role'] = '';
+			$data['course']	= $this->Schedule_model->get_data_by($where);
+			$data['thesis']	= $this->Schedule_thesis_model->get_data();
+			$data['running_text']	= $this->Running_text_model->get_data();
+			$data['agenda']	= $this->Agenda_model->get_data_by(array('type'=>1));
+			$data['info']	= $this->Agenda_model->get_data_by(array('type'=>2));
+			$data['register']	= $this->Thesis_register_model->get_data();
+
+			$this->view($data);
+	}
+
 	public function pasca()
 	{
 			$where = array(

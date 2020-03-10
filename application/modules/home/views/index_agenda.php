@@ -1,22 +1,7 @@
+<script src="<?= base_url(); ?>assets/custom/marquee/jquery.marquee.js"></script>
 <style>
-.dataTables_length {
-  display: none;
-}
-
-.dataTables_filter {
-  display: none;
-}
-
-.dataTables_info {
-  display: none;
-}
-
-.dataTables_paginate {
-  display: none;
-}
-
-#table-content {
-  width: 0px ! important;
+.card-action-title{
+  padding: 8px ! important;
 }
 
 .card-action-title{
@@ -41,79 +26,22 @@
   margin-left: 0px;
 }
 
-</style>
-<style>
-.example3 {
- overflow: hidden;
- position: absolute;
- width: 100%;
- height: 100%;
- margin: 0;
- white-space: nowrap;
- display: inline-block;
- /* text-align: center; */
- /* Starting position */
- -moz-transform:translateY(-100%);
- -webkit-transform:translateY(-100%);
- transform:translateY(-100%);
- /* Apply animation to this element */
- -moz-animation: example3 <?= setting_display()['marquee_speed'] ?>s linear infinite;
- -webkit-animation: example3 <?= setting_display()['marquee_speed'] ?>s linear infinite;
- animation: example3 <?= setting_display()['marquee_speed'] ?>s linear infinite;
-}
-/* Move it (define the animation) */
-@-moz-keyframes example3 {
- 0%   { -moz-transform: translateY(-100%); }
- 100% { -moz-transform: translateY(100%); }
-}
-@-webkit-keyframes example3 {
- 0%   { -webkit-transform: translateY(-100%); }
- 100% { -webkit-transform: translateY(100%); }
-}
-@keyframes example3 {
- 0%   {
- -moz-transform: translateY(-100%); /* Firefox bug fix */
- -webkit-transform: translateY(-100%); /* Firefox bug fix */
- transform: translateY(-100%);
- }
- 100% {
- -moz-transform: translateY(100%); /* Firefox bug fix */
- -webkit-transform: translateY(100%); /* Firefox bug fix */
- transform: translateY(100%);
- }
-}
-
-.example4 {
-  animation-delay: <?= (setting_display()['marquee_speed']/2) ?>s;
-}
-
 .marquee {
-  margin: 0 auto;
-  white-space: nowrap;
-  overflow: hidden;
-  position: absolute;
-  width: 97%;
-  height: 100%;
+    height: 400px;
+    overflow: hidden;
+    border:1px solid #ccc;
+    /* background: black; */
+    color: rgb(202, 255, 195);
 }
 
-.marquee span {
-  display: inline-block;
-  padding-left: 100%;
-  animation: marquee <?= setting_display()['marquee_speed_running_text'] ?>s linear infinite;
+.marquee-munaqosah {
+    height: 300px;
+    overflow: hidden;
+    /* border:1px solid #ccc; */
+    /* background: black; */
+    /* color: rgb(202, 255, 195); */
 }
 
-.marquee2 span {
-  animation-delay: <?= (setting_display()['marquee_speed_running_text']/2) ?>s;
-}
-
-@keyframes marquee {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(-100%, 0);
-  }
-}
 </style>
 <style>
 * {box-sizing: border-box;}
@@ -127,6 +55,7 @@ img {vertical-align: middle;}
 /* Slideshow container */
 .slideshow-container {
   max-width: 1000px;
+  height: 500px;
   position: relative;
   margin: auto;
 }
@@ -195,63 +124,73 @@ img {vertical-align: middle;}
         <ol class="breadcrumb"></ol>
     </div>
         <div id="page-inner">
+          <div id="">
           <div class="row">
-              <div class="col-md-8 col-sm-12 col-xs-12">
-                <div class="card" style="height: <?= (setting_display()['top_section']) ?>px;">
-                  <div class="card-action card-action-title" id="" style="
-                          background-color: <?= (setting_display()['color']) ?>;
-                          color: <?= (setting_display()['font_color']) ?>;
-                          ">
-                    <b>Jadwal Ujian</b>
-                  </div>
-                  <div class="card-image">
-                      <input type="hidden" id="count-page" value="<?= $count_page ?>">
-                      <table class="table table-striped table-bordered" id="table-content">
-                          <thead>
-                              <tr>
-                                  <th>No.</th>
-                                  <th>Name</th>
-                                  <th>Type</th>
-                                  <th>Date</th>
-                                  <th>Time</th>
-                              </tr>
-                          </thead>
-                          <tbody></tbody>
-                      </table>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-12 col-xs-12">
+              <?php if ($agenda->num_rows() > 0): ?>
+              <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="card" style="height: <?= (setting_display()['top_section']) ?>px;">
                   <div class="card-action card-action-title" style="
                           background-color: <?= (setting_display()['color']) ?>;
                           color: <?= (setting_display()['font_color']) ?>;
                           ">
-                    <b>Registrasi Thesis/Disertasi</b>
+                    <b>Agenda Kampus</b>
                   </div>
                   <div class="card-image">
-                    <ul class="collection">
-                        <?php if ($register->num_rows() > 0): ?>
-                            <marquee  behavior="scroll" direction="down" scroll="continuous" valign="center" scrolldelay="6" scrollamount="<?= (setting_display()['marquee_speed']/4) ?>" onmouseover="this.stop()" onmouseout="this.start()">
-                            <?php foreach ($register->result() as $key): ?>
-                                <li class="collection-item">
-                                  <span class="title"><b><?= $key->person ?></b></span>
-                                  <p><?= $key->document ?><br>
-                                  <p><?= $key->description ?><br>
-                                  <span class="new badge green" data-badge-caption=""><?= $key->created_at ?></span>
-                                  </p>
-                                </li>
-                            <?php endforeach; ?>
-                            </marquee>
-                        <?php else: ?>
-                          <li class="collection-item">
-                            <i>Belum ada agenda</i>
-                          </li>
-                        <?php endif; ?>
-                    </ul>
+                    <div class="collection" style="height: <?= (setting_display()['top_section']) ?>px;">
+                      <div class="slideshow-container">
+                        <?php foreach ($agenda->result() as $key): ?>
+                          <div class="mySlides fade">
+                            <!-- <div class="numbertext">1 / 3</div> -->
+                            <!-- <img src="<?= base_url(); ?>assets/upload/logo/logo-uin-fix.png" style="height:150px; width: 1px;"> -->
+                            <div class="text">
+                              <span class="title"><b><?= $key->title ?></b></span>
+                              <p><?= $key->description ?><br>
+                              <span class="new badge green" data-badge-caption=""><?= $key->time_desc ?></span>
+                              </p>
+                            </div>
+                          </div>
+                        <?php endforeach; ?>
+                        </div>
+                        <br>
+                        <div style="text-align:center">
+                          <?php $no = 1; foreach ($agenda->result() as $key): ?>
+                            <span class="dot"><?= $no ?></span>
+                          <?php $no++; endforeach; ?>
+                        </div>
+                    </div>
                   </div>
                 </div>
               </div>
+              <?php endif; ?>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="card" style="height: <?= (setting_display()['top_section']) ?>px;">
+                  <div class="card-action card-action-title" style="
+                          background-color: <?= (setting_display()['color']) ?>;
+                          color: <?= (setting_display()['font_color']) ?>;
+                          ">
+                    <b>Info Akademik</b>
+                  </div>
+                  <div class="card-image">
+                      <ul class="collection" style="<?= (setting_display()['top_section']) ?>px;">
+                        <?php if ($info->num_rows() > 0): ?>
+                            <?php foreach ($info->result() as $key): ?>
+                                <li class="collection-item">
+                                  <span class="title"><b><?= $key->title ?></b></span>
+                                  <p><?= $key->description ?><br>
+                                  <span class="new badge green" data-badge-caption=""><?= $key->time_desc ?></span>
+                                  </p>
+                                </li>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                          <li class="collection-item">
+                            <i>Belum ada info</i>
+                          </li>
+                        <?php endif; ?>
+                      </ul>
+                  </div>
+                </div>
+              </div>
+          </div>
           </div>
           <!-- /. ROW  -->
            <div class="fixed-action-btn horizontal click-to-toggle">
@@ -259,8 +198,8 @@ img {vertical-align: middle;}
                 <i class="material-icons">menu</i>
               </a>
               <ul>
-                <!-- <li><a class="btn-floating red"><i class="material-icons">track_changes</i></a></li>
-                <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li> -->
+                <!-- <li><a class="btn-floating red"><i class="material-icons">track_changes</i></a></li> -->
+                <li><a href="<?= base_url(); ?>home/pasca" class="btn-floating yellow darken-1" id="btn-pasca"><i class="material-icons">format_quote</i></a></li>
                 <li><a class="btn-floating green" id="btn-fs"><i class="material-icons">publish</i></a></li>
                 <li><a class="btn-floating blue" id="btn-admin"><i class="material-icons">attach_file</i></a></li>
               </ul>
@@ -271,7 +210,7 @@ img {vertical-align: middle;}
               <div class="col-md-12 col-sm-12 col-xs-12" style="margin: 0 ! important;">
                 <div class="card orange">
                   <div class="card-action" style="padding-bottom: 30px; font-size: 18px; font-weight: lighter;">
-                    <div class="marquee">
+                    <div class="marquee-runtext">
                       <?php if ($running_text->num_rows() > 0): ?>
                           <span>
                           <?php foreach ($running_text->result() as $key): ?>
@@ -280,15 +219,6 @@ img {vertical-align: middle;}
                           </span>
                       <?php endif; ?>
                       <span></span>
-                    </div>
-                    <div class="marquee marquee2">
-                      <?php if ($running_text->num_rows() > 0): ?>
-                          <span>
-                          <?php foreach ($running_text->result() as $key): ?>
-                                <?= $key->name ?>: <?= $key->description ?> | &nbsp;
-                          <?php endforeach; ?>
-                          </span>
-                      <?php endif; ?>
                     </div>
                   </div>
                 </div>
@@ -301,8 +231,31 @@ img {vertical-align: middle;}
     <!-- /. PAGE WRAPPER  -->
 </div>
 <!-- /. WRAPPER  -->
-
 <script type="text/javascript">
+var slideIndex = 0;
+
+<?php if ($agenda->num_rows() > 0) : ?>
+showSlides();
+<?php endif; ?>
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active-dot", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active-dot";
+  // setTimeout(showSlides, 2000); // Change image every 2 seconds
+  setInterval(showSlides, 5000);
+}
+
 function maxWindow() {
     window.moveTo(0, 0);
 
@@ -332,7 +285,29 @@ function requestFullScreen(element) {
     }
 }
 
+function timedRefresh(timeoutPeriod) {
+    setTimeout("location.reload(true);",timeoutPeriod);
+}
+
 $(document).ready(function(){
+    // timedRefresh(10000)
+    $('.marquee').marquee({
+    	direction: 'down',
+      dublicated: true,
+    	speed: <?= setting_display()['marquee_speed'] ?>
+    });
+
+    $('.marquee-runtext').marquee({
+      dublicated: true,
+    	speed: <?= setting_display()['marquee_speed_running_text'] ?>
+    });
+
+    $('.marquee-munaqosah').marquee({
+    	direction: 'down',
+      dublicated: true,
+    	speed: <?= setting_display()['marquee_speed'] ?>
+    });
+
     $("#btn-fs").click();
     $("html, body").animate({ scrollTop: 0 }, "slow");
 
@@ -348,46 +323,6 @@ $(document).ready(function(){
         window.location.href=url;
     })
 
-    //datatables
-    table = $('#table-content').DataTable({
-        "processing": true, //Feature control the processing indicator.
-        "serverSide": true, //Feature control DataTables' server-side processing mode.
-        "pageLength": 10,
-        "order": [], //Initial no order.
-        // "dom": '<"top"<"left"l>pf<"clear">>rt<"bottom"ip<"clear">>',
-        // Load data for the table's content from an Ajax source
-        "ajax": {
-            "url": "<?php echo site_url('home/pasca/dashboard')?>",
-            "type": "POST"
-        },
-
-        //Set column definition initialisation properties.
-        "columnDefs": [
-        {
-            "targets": [ 0 ], //first column / numbering column
-            "orderable": false, //set not orderable
-        },
-        ],
-
-    });
-    // maxWindow();
-    i = 0;
-    var info = table.page.info();
-    var page_total = $("#count-page").val();
-    console.log(info);
-    setInterval(function(){
-        if (i == (page_total-1)) {
-            table.page('first').draw( 'page' );
-            i = 0;
-            // window.location.href = '<?= base_url() ?>home/pasca/coursev2';
-        } else {
-            table.page('next').draw( 'page' );
-            i = i+1;
-        }
-    }, 4000);
-
-    setInterval(function(){
-        window.location.href = '<?= base_url() ?>home/pasca/coursev2';
-    }, 900000);
+    $("#sideNav").click();
 })
 </script>

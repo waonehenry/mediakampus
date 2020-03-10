@@ -302,8 +302,8 @@ $(document).ready(function(){
 
         if (k > page_total) {
             i = 0;
-            // reloadCourse(i);
-            window.location.href = '<?= base_url() ?>home/pasca';
+            reloadCourse(i);
+            // window.location.href = '<?= base_url() ?>home/pasca';
         } else {
             i++;
             reloadCourse(k);
@@ -311,6 +311,8 @@ $(document).ready(function(){
         k = parseInt(i) * parseInt(10);
     }, 4000);
 
-    // $("#sideNav").click();
+    setInterval(function(){
+        window.location.href = '<?= base_url() ?>home/pasca';
+    }, 900000);
 })
 </script>

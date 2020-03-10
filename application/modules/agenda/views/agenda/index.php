@@ -174,6 +174,7 @@
                    notif(response.status, response.message);
                    if (response.status == 'success') {
                        resetInput(default_url);
+                       $('.textarea').jqteVal("");
                        table.ajax.reload();
                    }
                }
@@ -192,6 +193,7 @@
                    notif(response.status, response.message);
                    if (response.status == 'success') {
                        resetInput(default_url);
+                       $('.textarea').jqteVal("");
                        table.ajax.reload();
                    }
                }

@@ -31,7 +31,7 @@ function resetInput(url) {
     $('.input-text-checkbox').prop('checked', false);
     $('label').removeClass('active');
     $('.form-input').attr('action', url);
-    $('.textarea').jqteVal("");
+    // $('.textarea').jqteVal("");
 }
 
 function formFocus() {

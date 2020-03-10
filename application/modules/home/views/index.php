@@ -1,4 +1,8 @@
 <script src="<?= base_url(); ?>assets/custom/marquee/jquery.marquee.js"></script>
+<link rel="stylesheet" href="<?= base_url(); ?>assets/custom/owlcarousel/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="<?= base_url(); ?>assets/custom/owlcarousel/assets/owl.theme.default.min.css">
+
+<script src="<?= base_url(); ?>assets/custom/owlcarousel/owl.carousel.js"></script>
 <style>
 .card-action-title{
   padding: 8px ! important;
@@ -211,14 +215,14 @@ img {vertical-align: middle;}
                           ">
                     <b>Agenda Kampus</b>
                   </div>
-                  <div class="card-image">
+                  <div class="card-image" style="">
                     <div class="collection" style="height: 280px;">
-                      <div class="slideshow-container">
+                      <!-- <div class="slideshow-container"> -->
+                      <div class="owl-carousel owl-theme">
                         <?php foreach ($agenda->result() as $key): ?>
-                          <div class="mySlides fade">
-                            <div class="numbertext">1 / 3</div>
-                            <img src="<?= base_url(); ?>assets/upload/logo/logo-uin-fix.png" style="height:150px; width: 1px;">
-                            <div class="text">
+                          <!-- <div class="mySlides fade"> -->
+                          <div class="item" style="padding: 20px; margin-right: 0px;">
+                            <div class="">
                               <span class="title"><b><?= $key->title ?></b></span>
                               <p><?= $key->description ?><br>
                               <span class="new badge green" data-badge-caption=""><?= $key->time_desc ?></span>
@@ -235,6 +239,7 @@ img {vertical-align: middle;}
                         </div>
                     </div>
                   </div>
+                  <a class="button secondary play" style="display: none;">Play</a>
                 </div>
               </div>
               <?php endif; ?>
@@ -247,8 +252,9 @@ img {vertical-align: middle;}
                     <b>Info Akademik</b>
                   </div>
                   <div class="card-image">
-                      <ul class="collection" style="height: 300fpx;">
+                      <ul class="collection" style="height: 300px;">
                         <?php if ($info->num_rows() > 0): ?>
+                            <div class="item" style="">
                             <?php foreach ($info->result() as $key): ?>
                                 <li class="collection-item">
                                   <span class="title"><b><?= $key->title ?></b></span>
@@ -257,6 +263,7 @@ img {vertical-align: middle;}
                                   </p>
                                 </li>
                             <?php endforeach; ?>
+                          </div>
                         <?php else: ?>
                           <li class="collection-item">
                             <i>Belum ada info</i>
@@ -311,7 +318,7 @@ img {vertical-align: middle;}
 var slideIndex = 0;
 
 <?php if ($agenda->num_rows() > 0) : ?>
-showSlides();
+// showSlides();
 <?php endif; ?>
 
 function showSlides() {
@@ -402,5 +409,20 @@ $(document).ready(function(){
     //     window.location.reload();
     // }, 4000);
     $("#sideNav").click();
+    $(".play").click();
+
+    var owl = $('.owl-carousel');
+    owl.owlCarousel({
+      items: 1,
+      loop: true,
+      margin: 80,
+      autoplay: true,
+      autoplayTimeout: 3000,
+      autoplayHoverPause: true
+      // smartSpeed: 1000
+    });
+    $('.play').on('click', function() {
+      owl.trigger('play.owl.autoplay', [500])
+    })
 })
 </script>
